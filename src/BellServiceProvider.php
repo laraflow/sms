@@ -2,9 +2,9 @@
 
 namespace Fintech\Bell;
 
-use Illuminate\Support\ServiceProvider;
-use Fintech\Bell\Commands\InstallCommand;
 use Fintech\Bell\Commands\BellCommand;
+use Fintech\Bell\Commands\InstallCommand;
+use Illuminate\Support\ServiceProvider;
 
 class BellServiceProvider extends ServiceProvider
 {
