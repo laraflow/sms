@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Fintech\Bell;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\Facades\Config;
@@ -13,7 +13,7 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function register(): void
     {
-        foreach (Config::get('fintech.Skeleton.repositories', []) as $interface => $binding) {
+        foreach (Config::get('fintech.Bell.repositories', []) as $interface => $binding) {
             $this->app->bind($interface, function ($app) use ($binding) {
                 return $app->make($binding);
             });
@@ -27,6 +27,6 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function provides(): array
     {
-        return array_keys(Config::get('fintech.Skeleton.repositories', []));
+        return array_keys(Config::get('fintech.Bell.repositories', []));
     }
 }

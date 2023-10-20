@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Fintech\Bell;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        $root_prefix = Config::get('skeleton.root_prefix', '');
+        $root_prefix = Config::get('bell.root_prefix', '');
 
         $this->routes(function () use (&$root_prefix) {
             Route::prefix("{$root_prefix}api")

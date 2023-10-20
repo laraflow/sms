@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 if (Config::get('fintech.bell.enabled')) {
-    Route::prefix('skeleton')->group(function () {
+    Route::prefix('bell')->group(function () {
 
         //DO NOT REMOVE THIS LINE//
     });

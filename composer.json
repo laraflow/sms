@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "fintech/bell",
+    "description": "This is my package bell",
     "keywords": [
-        ":vendor_name",
+        "fintech",
         "laravel",
-        ":package_slug"
+        "bell"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/fintech/bell",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Mohammad Hafijul Islam",
+            "email": "hafijul233@gmail.com",
             "role": "Developer"
         }
     ],
@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/"
+            "Fintech\\Bell\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Fintech\\Bell\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -60,10 +60,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Fintech\\Bell\\BellServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "Bell": "Fintech\\Bell\\Facades\\Bell"
             }
         }
     },

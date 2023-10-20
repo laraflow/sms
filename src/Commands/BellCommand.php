@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Fintech\Bell\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class BellCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'bell';
 
     public $description = 'My command';
 
