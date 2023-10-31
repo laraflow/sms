@@ -13,7 +13,7 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function register(): void
     {
-        foreach (Config::get('fintech.Bell.repositories', []) as $interface => $binding) {
+        foreach (Config::get('fintech.bell.repositories', []) as $interface => $binding) {
             $this->app->bind($interface, function ($app) use ($binding) {
                 return $app->make($binding);
             });
@@ -27,6 +27,6 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function provides(): array
     {
-        return array_keys(Config::get('fintech.Bell.repositories', []));
+        return array_keys(Config::get('fintech.bell.repositories', []));
     }
 }
