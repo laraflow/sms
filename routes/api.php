@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 if (Config::get('fintech.bell.enabled')) {
-    Route::prefix('bell')->group(function () {
+    Route::prefix('bell')->name('bell.')
+        ->middleware(config('fintech.auth.middleware'))
+        ->group(function () {
 
         //DO NOT REMOVE THIS LINE//
     });
