@@ -18,6 +18,6 @@ if (Config::get('fintech.bell.enabled')) {
         ->middleware(config('fintech.auth.middleware'))
         ->group(function () {
 
-        //DO NOT REMOVE THIS LINE//
-    });
+            //DO NOT REMOVE THIS LINE//
+        });
 }
