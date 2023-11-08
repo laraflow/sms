@@ -17,14 +17,10 @@ class ClickSend extends SmsDriver
         $this->config = config("fintech.bell.sms.clicksend.{$mode}", [
             'url' => null,
             'username' => null,
-            'password' => null
+            'password' => null,
         ]);
     }
 
-    /**
-     * @param SmsMessage $message
-     * @return void
-     */
     public function send(SmsMessage $message): void
     {
         $this->validate($message);
@@ -41,6 +37,6 @@ class ClickSend extends SmsDriver
             ->withBasicAuth($this->config['username'], $this->config['password'])
             ->post($this->config['url'], $payload)->json();
 
-        logger("SMS Response", [$response]);
+        logger('SMS Response', [$response]);
     }
 }

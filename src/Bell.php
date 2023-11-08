@@ -14,7 +14,7 @@ class Bell
         $active = config('fintech.bell.sms.default');
 
         if ($active == null) {
-            throw new BellException("No SMS driver configured as default");
+            throw new BellException('No SMS driver configured as default');
         }
 
         $driver = config("fintech.bell.sms.{$active}.driver");

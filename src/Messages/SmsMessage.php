@@ -20,16 +20,15 @@ class SmsMessage
 
     public function to($receiver)
     {
-        $this->receiver = (string)$receiver;
+        $this->receiver = (string) $receiver;
 
         return $this;
     }
 
     public function message($content)
     {
-        $this->content = (string)$content;
+        $this->content = (string) $content;
 
         return $this;
     }
-
 }
