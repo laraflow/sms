@@ -24,14 +24,54 @@ return [
 
     'root_prefix' => 'test/',
 
-    //** Model Config Point Do not Remove **//
+    /*
+    |--------------------------------------------------------------------------
+    | Notification Channels Vendor Configuration
+    |--------------------------------------------------------------------------
+    |
+    | This value will be added to all your routes from this package
+    | Example: APP_URL/{root_prefix}/api/bell/action
+    |
+    | Note: while adding prefix add closing ending slash '/'
+    */
+    'sms' => [
+        'mode' => 'sandbox',
+        'default' => 'clicksend',
+        'clicksend' => [
+            'driver' => \Fintech\Bell\Drivers\Sms\ClickSend::class,
+            'live' => [
+                'url' => 'https://rest.clicksend.com/v3/sms/send',
+                'username' => null,
+                'password' => null,
+                'from' => null,
+            ],
+            'sandbox' => [
+                'driver' => \Fintech\Bell\Drivers\Sms\ClickSend::class,
+                'url' => 'https://rest.clicksend.com/v3/sms/send',
+                'username' => 'masud@clavisint.com',
+//                'password' => 'Masudalam@13119214',
+                'password' => 'D08ECA95-5C9B-B77B-D6B9-47AF3CED3F5E',
+                'from' => null,
+            ],
+        ],
+    ],
+    'push' => [
+        'mode' => 'sandbox',
+        'default' => 'clicksend',
+        'live' => [
 
+        ],
+        'sandbox' => [
+
+        ]
+    ],
+    //** Model Config Point Do not Remove **//
     /*
     |--------------------------------------------------------------------------
     | Repositories
     |--------------------------------------------------------------------------
     |
-    | This value will be used across systems where a repositoy instance is needed
+    | This value will be used across systems where a repository instance is needed
     */
 
     'repositories' => [

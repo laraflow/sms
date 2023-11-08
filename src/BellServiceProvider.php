@@ -26,7 +26,6 @@ class BellServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
 
-        $this->extendNotificationChannels();
     }
 
     /**
@@ -58,18 +57,18 @@ class BellServiceProvider extends ServiceProvider
                 BellCommand::class,
             ]);
         }
+
+        $this->extendNotificationChannels();
     }
 
     private function extendNotificationChannels()
     {
-        Notification::resolved(function (ChannelManager $service) {
-            $service->extend('sms', function ($app) {
-                return $app->make(SmsChannel::class);
-            });
+        Notification::extend('sms', function ($app) {
+            return $app->make(SmsChannel::class);
+        });
 
-            $service->extend('push', function ($app) {
-                return $app->make(PushChannel::class);
-            });
+        Notification::extend('push', function ($app) {
+            return $app->make(PushChannel::class);
         });
     }
 }
