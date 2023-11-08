@@ -32,8 +32,4 @@ class SmsMessage
         return $this;
     }
 
-    public function send()
-    {
-
-    }
 }
