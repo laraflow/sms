@@ -35,4 +35,7 @@
             <directory suffix=".php">./src</directory>
         </include>
     </source>
+    <php>
+        <env name="PACKAGE_BELL_ENABLED" value="true"/>
+    </php>
 </phpunit>
