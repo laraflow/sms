@@ -19,8 +19,8 @@ if (Config::get('fintech.bell.enabled')) {
         ->group(function () {
 
             Route::apiResource('triggers', \Fintech\Bell\Http\Controllers\TriggerController::class);
-    Route::post('triggers/{trigger}/restore', [\Fintech\Bell\Http\Controllers\TriggerController::class, 'restore'])->name('triggers.restore');
+            Route::post('triggers/{trigger}/restore', [\Fintech\Bell\Http\Controllers\TriggerController::class, 'restore'])->name('triggers.restore');
 
-    //DO NOT REMOVE THIS LINE//
+            //DO NOT REMOVE THIS LINE//
         });
 }

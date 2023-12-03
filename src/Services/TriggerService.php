@@ -2,26 +2,22 @@
 
 namespace Fintech\Bell\Services;
 
-
 use Fintech\Bell\Interfaces\TriggerRepository;
 
 /**
  * Class TriggerService
- * @package Fintech\Bell\Services
- *
  */
 class TriggerService
 {
     /**
      * TriggerService constructor.
-     * @param TriggerRepository $triggerRepository
      */
-    public function __construct(TriggerRepository $triggerRepository) {
+    public function __construct(TriggerRepository $triggerRepository)
+    {
         $this->triggerRepository = $triggerRepository;
     }
 
     /**
-     * @param array $filters
      * @return mixed
      */
     public function list(array $filters = [])

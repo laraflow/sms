@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static SmsDriver sms()
- *
  * @method static \Fintech\Bell\Services\TriggerService trigger()
  * // Crud Service Method Point Do not Remove //
  *
