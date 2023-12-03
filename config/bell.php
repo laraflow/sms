@@ -65,6 +65,16 @@ return [
 
         ],
     ],
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Trigger Model
+    |--------------------------------------------------------------------------
+    |
+    | This value will be used to across system where model is needed
+    */
+    'trigger_model' => \Fintech\Bell\Models\Trigger::class,
+
     //** Model Config Point Do not Remove **//
     /*
     |--------------------------------------------------------------------------
@@ -75,6 +85,8 @@ return [
     */
 
     'repositories' => [
+        \Fintech\Bell\Interfaces\TriggerRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerRepository::class,
+
         //** Repository Binding Config Point Do not Remove **//
     ],
 

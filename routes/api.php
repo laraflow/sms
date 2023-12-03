@@ -18,6 +18,9 @@ if (Config::get('fintech.bell.enabled')) {
         ->middleware(config('fintech.auth.middleware'))
         ->group(function () {
 
-            //DO NOT REMOVE THIS LINE//
+            Route::apiResource('triggers', \Fintech\Bell\Http\Controllers\TriggerController::class);
+    Route::post('triggers/{trigger}/restore', [\Fintech\Bell\Http\Controllers\TriggerController::class, 'restore'])->name('triggers.restore');
+
+    //DO NOT REMOVE THIS LINE//
         });
 }

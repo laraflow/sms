@@ -22,5 +22,14 @@ class Bell
         return app($driver);
     }
 
+    /**
+     * @return \Fintech\Bell\Services\TriggerService
+     */
+    public function trigger()
+    {
+        return app(\Fintech\Bell\Services\TriggerService::class);
+    }
+
     //** Crud Service Method Point Do not Remove **//
+
 }
