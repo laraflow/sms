@@ -30,7 +30,7 @@ class Twilio extends SmsDriver
 
         $payload = [
             'To' => $message->getReceiver(),
-            'Body' => $message->getContent()
+            'Body' => $message->getContent(),
         ];
 
         $url = str_replace('$TWILIO_ACCOUNT_SID$', $this->config['username'], $this->config['url']);

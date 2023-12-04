@@ -31,7 +31,7 @@ class Telnyx extends SmsDriver
         $payload = [
             'to' => $message->getReceiver(),
             'text' => $message->getContent(),
-            'type' => 'SMS'
+            'type' => 'SMS',
         ];
 
         $response = Http::withoutVerifying()
