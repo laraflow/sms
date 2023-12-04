@@ -33,8 +33,8 @@ class Infobip extends SmsDriver
             'messages' => [[
                 'destinations' => [['to' => $message->getReceiver()]],
                 'from' => $this->config['from'],
-                'text' => $message->getContent()
-            ]]
+                'text' => $message->getContent(),
+            ]],
         ];
 
         $response = Http::withoutVerifying()

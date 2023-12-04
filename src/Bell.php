@@ -38,7 +38,6 @@ class Bell
         return app($driver);
     }
 
-
     /**
      * @return \Fintech\Bell\Services\TriggerService
      */

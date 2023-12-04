@@ -4,11 +4,11 @@ namespace Fintech\Bell\Drivers\Push;
 
 use Fintech\Bell\Drivers\PushDriver;
 use Fintech\Bell\Messages\PushMessage;
-use Fintech\Bell\Messages\SmsMessage;
 use Illuminate\Support\Facades\Http;
 
 /**
  * FCM (Firebase Cloud Messaging)
+ *
  * @see https://laravel-notification-channels.com/fcm/
  */
 class FirebasePush extends PushDriver
