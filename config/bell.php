@@ -118,30 +118,15 @@ return [
         'mode' => 'sandbox',
         'default' => 'fcm',
         'fcm' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Infobip::class,
+            'driver' => \Fintech\Bell\Drivers\Push\FirebasePush::class,
             'live' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
+                'url' => 'https://fcm.googleapis.com/fcm/send',
                 'username' => null,
                 'password' => null,
                 'from' => null,
             ],
             'sandbox' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
-                'username' => null,
-                'password' => null,
-                'from' => null,
-            ],
-        ],
-        'apn' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Infobip::class,
-            'live' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
-                'username' => null,
-                'password' => null,
-                'from' => null,
-            ],
-            'sandbox' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
+                'url' => 'https://fcm.googleapis.com/fcm/send',
                 'username' => null,
                 'password' => null,
                 'from' => null,
