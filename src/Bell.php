@@ -23,6 +23,23 @@ class Bell
     }
 
     /**
+     * @throws BellException
+     */
+    public function push()
+    {
+        $active = config('fintech.bell.push.default');
+
+        if ($active == null) {
+            throw new BellException('No Push Notification driver configured as default');
+        }
+
+        $driver = config("fintech.bell.push.{$active}.driver");
+
+        return app($driver);
+    }
+
+
+    /**
      * @return \Fintech\Bell\Services\TriggerService
      */
     public function trigger()

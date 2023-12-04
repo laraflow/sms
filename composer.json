@@ -64,7 +64,7 @@
             ],
             "aliases": {
                 "Bell": "Fintech\\Bell\\Facades\\Bell",
-                "push": "Fintech\\Bell\\Channels\\PushChannel",
+                "push": "MobilePushChannel",
                 "sms": "Fintech\\Bell\\Channels\\SmsChannel"
             }
         }
