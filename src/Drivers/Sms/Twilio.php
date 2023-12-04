@@ -6,7 +6,7 @@ use Fintech\Bell\Drivers\SmsDriver;
 use Fintech\Bell\Messages\SmsMessage;
 use Illuminate\Support\Facades\Http;
 
-class MessageBird extends SmsDriver
+class Twilio extends SmsDriver
 {
     private array $config;
 
@@ -14,10 +14,10 @@ class MessageBird extends SmsDriver
     {
         $mode = config('fintech.bell.sms.mode', 'sandbox');
 
-        $this->config = config("fintech.bell.sms.messagebird.{$mode}", [
+        $this->config = config("fintech.bell.sms.twilio.{$mode}", [
             'url' => null,
-            'originator' => null,
-            'access_key' => null,
+            'username' => null,
+            'password' => null,
         ]);
     }
 
@@ -26,17 +26,16 @@ class MessageBird extends SmsDriver
         $this->validate($message);
 
         $payload = [
-            'recipients' => $message->getReceiver(),
-            'originator' => $this->config['originator'],
-            'type' => 'sms',
-            'mclass' => 1,
-            'body' => $message->getContent()
+            'To' => $message->getReceiver(),
+            'Body' => $message->getContent()
         ];
+
+        $url = str_replace('$TWILIO_ACCOUNT_SID$', $this->config['username'], $this->config['url']);
 
         $response = Http::withoutVerifying()
             ->timeout(30)
-            ->withToken($this->config['access_key'], 'AccessKey')
-            ->post($this->config['url'], $payload)->json();
+            ->withBasicAuth($this->config['username'], $this->config['password'])
+            ->post($url, $payload)->json();
 
         logger('SMS Response', [$response]);
     }
