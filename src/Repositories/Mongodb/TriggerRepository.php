@@ -2,28 +2,27 @@
 
 namespace Fintech\Bell\Repositories\Mongodb;
 
-use Fintech\Core\Repositories\MongodbRepository;
 use Fintech\Bell\Interfaces\TriggerRepository as InterfacesTriggerRepository;
+use Fintech\Core\Repositories\MongodbRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
-use MongoDB\Laravel\Eloquent\Model;
 use InvalidArgumentException;
+use MongoDB\Laravel\Eloquent\Model;
 
 /**
  * Class TriggerRepository
- * @package Fintech\Bell\Repositories\Mongodb
  */
 class TriggerRepository extends MongodbRepository implements InterfacesTriggerRepository
 {
     public function __construct()
     {
-       $model = app(config('fintech.bell.trigger_model', \Fintech\Bell\Models\Trigger::class));
+        $model = app(config('fintech.bell.trigger_model', \Fintech\Bell\Models\Trigger::class));
 
-       if (!$model instanceof Model) {
-           throw new InvalidArgumentException("Mongodb repository require model class to be `MongoDB\Laravel\Eloquent\Model` instance.");
-       }
+        if (! $model instanceof Model) {
+            throw new InvalidArgumentException("Mongodb repository require model class to be `MongoDB\Laravel\Eloquent\Model` instance.");
+        }
 
-       $this->model = $model;
+        $this->model = $model;
     }
 
     /**

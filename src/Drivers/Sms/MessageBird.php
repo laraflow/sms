@@ -33,7 +33,7 @@ class MessageBird extends SmsDriver
             'originator' => $this->config['originator'],
             'type' => 'sms',
             'mclass' => 1,
-            'body' => $message->getContent()
+            'body' => $message->getContent(),
         ];
 
         $response = Http::withoutVerifying()

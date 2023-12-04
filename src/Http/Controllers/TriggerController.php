@@ -1,34 +1,33 @@
 <?php
 
 namespace Fintech\Bell\Http\Controllers;
+
 use Exception;
-use Fintech\Core\Exceptions\StoreOperationException;
-use Fintech\Core\Exceptions\UpdateOperationException;
-use Fintech\Core\Exceptions\DeleteOperationException;
-use Fintech\Core\Exceptions\RestoreOperationException;
-use Fintech\Core\Traits\ApiResponseTrait;
 use Fintech\Bell\Facades\Bell;
-use Fintech\Bell\Http\Resources\TriggerResource;
-use Fintech\Bell\Http\Resources\TriggerCollection;
 use Fintech\Bell\Http\Requests\ImportTriggerRequest;
+use Fintech\Bell\Http\Requests\IndexTriggerRequest;
 use Fintech\Bell\Http\Requests\StoreTriggerRequest;
 use Fintech\Bell\Http\Requests\UpdateTriggerRequest;
-use Fintech\Bell\Http\Requests\IndexTriggerRequest;
+use Fintech\Bell\Http\Resources\TriggerCollection;
+use Fintech\Bell\Http\Resources\TriggerResource;
+use Fintech\Core\Exceptions\DeleteOperationException;
+use Fintech\Core\Exceptions\RestoreOperationException;
+use Fintech\Core\Exceptions\StoreOperationException;
+use Fintech\Core\Exceptions\UpdateOperationException;
+use Fintech\Core\Traits\ApiResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
 /**
  * Class TriggerController
- * @package Fintech\Bell\Http\Controllers
  *
  * @lrd:start
  * This class handle create, display, update, delete & restore
  * operation related to Trigger
- * @lrd:end
  *
+ * @lrd:end
  */
-
 class TriggerController extends Controller
 {
     use ApiResponseTrait;
@@ -38,10 +37,8 @@ class TriggerController extends Controller
      * Return a listing of the *Trigger* resource as collection.
      *
      * *```paginate=false``` returns all resource as list not pagination*
-     * @lrd:end
      *
-     * @param IndexTriggerRequest $request
-     * @return TriggerCollection|JsonResponse
+     * @lrd:end
      */
     public function index(IndexTriggerRequest $request): TriggerCollection|JsonResponse
     {
@@ -61,10 +58,9 @@ class TriggerController extends Controller
     /**
      * @lrd:start
      * Create a new *Trigger* resource in storage.
+     *
      * @lrd:end
      *
-     * @param StoreTriggerRequest $request
-     * @return JsonResponse
      * @throws StoreOperationException
      */
     public function store(StoreTriggerRequest $request): JsonResponse
@@ -74,14 +70,14 @@ class TriggerController extends Controller
 
             $trigger = Bell::trigger()->create($inputs);
 
-            if (!$trigger) {
+            if (! $trigger) {
                 throw (new StoreOperationException)->setModel(config('fintech.bell.trigger_model'));
             }
 
             return $this->created([
                 'message' => __('core::messages.resource.created', ['model' => 'Trigger']),
-                'id' => $trigger->id
-             ]);
+                'id' => $trigger->id,
+            ]);
 
         } catch (Exception $exception) {
 
@@ -92,10 +88,9 @@ class TriggerController extends Controller
     /**
      * @lrd:start
      * Return a specified *Trigger* resource found by id.
+     *
      * @lrd:end
      *
-     * @param string|int $id
-     * @return TriggerResource|JsonResponse
      * @throws ModelNotFoundException
      */
     public function show(string|int $id): TriggerResource|JsonResponse
@@ -104,7 +99,7 @@ class TriggerController extends Controller
 
             $trigger = Bell::trigger()->find($id);
 
-            if (!$trigger) {
+            if (! $trigger) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_model'), $id);
             }
 
@@ -123,11 +118,9 @@ class TriggerController extends Controller
     /**
      * @lrd:start
      * Update a specified *Trigger* resource using id.
+     *
      * @lrd:end
      *
-     * @param UpdateTriggerRequest $request
-     * @param string|int $id
-     * @return JsonResponse
      * @throws ModelNotFoundException
      * @throws UpdateOperationException
      */
@@ -137,13 +130,13 @@ class TriggerController extends Controller
 
             $trigger = Bell::trigger()->find($id);
 
-            if (!$trigger) {
+            if (! $trigger) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_model'), $id);
             }
 
             $inputs = $request->validated();
 
-            if (!Bell::trigger()->update($id, $inputs)) {
+            if (! Bell::trigger()->update($id, $inputs)) {
 
                 throw (new UpdateOperationException)->setModel(config('fintech.bell.trigger_model'), $id);
             }
@@ -163,10 +156,11 @@ class TriggerController extends Controller
     /**
      * @lrd:start
      * Soft delete a specified *Trigger* resource using id.
+     *
      * @lrd:end
      *
-     * @param string|int $id
      * @return JsonResponse
+     *
      * @throws ModelNotFoundException
      * @throws DeleteOperationException
      */
@@ -176,11 +170,11 @@ class TriggerController extends Controller
 
             $trigger = Bell::trigger()->find($id);
 
-            if (!$trigger) {
+            if (! $trigger) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_model'), $id);
             }
 
-            if (!Bell::trigger()->destroy($id)) {
+            if (! Bell::trigger()->destroy($id)) {
 
                 throw (new DeleteOperationException())->setModel(config('fintech.bell.trigger_model'), $id);
             }
@@ -201,9 +195,9 @@ class TriggerController extends Controller
      * @lrd:start
      * Restore the specified *Trigger* resource from trash.
      * ** ```Soft Delete``` needs to enabled to use this feature**
+     *
      * @lrd:end
      *
-     * @param string|int $id
      * @return JsonResponse
      */
     public function restore(string|int $id)
@@ -212,11 +206,11 @@ class TriggerController extends Controller
 
             $trigger = Bell::trigger()->find($id, true);
 
-            if (!$trigger) {
+            if (! $trigger) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_model'), $id);
             }
 
-            if (!Bell::trigger()->restore($id)) {
+            if (! Bell::trigger()->restore($id)) {
 
                 throw (new RestoreOperationException())->setModel(config('fintech.bell.trigger_model'), $id);
             }
@@ -239,9 +233,6 @@ class TriggerController extends Controller
      * After export job is done system will fire  export completed event
      *
      * @lrd:end
-     *
-     * @param IndexTriggerRequest $request
-     * @return JsonResponse
      */
     public function export(IndexTriggerRequest $request): JsonResponse
     {
@@ -265,7 +256,6 @@ class TriggerController extends Controller
      *
      * @lrd:end
      *
-     * @param ImportTriggerRequest $request
      * @return TriggerCollection|JsonResponse
      */
     public function import(ImportTriggerRequest $request): JsonResponse
