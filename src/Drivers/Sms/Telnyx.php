@@ -7,9 +7,9 @@ use Fintech\Bell\Messages\SmsMessage;
 use Illuminate\Support\Facades\Http;
 
 /**
- * @see https://developers.clicksend.com/docs/rest/v3/?shell#send-sms
+ * @see https://developers.telnyx.com/openapi/messaging/tag/Messages/#tag/Messages/operation/createMessage
  */
-class ClickSend extends SmsDriver
+class Telnyx extends SmsDriver
 {
     private array $config;
 
@@ -17,7 +17,7 @@ class ClickSend extends SmsDriver
     {
         $mode = config('fintech.bell.sms.mode', 'sandbox');
 
-        $this->config = config("fintech.bell.sms.clicksend.{$mode}", [
+        $this->config = config("fintech.bell.sms.telnyx.{$mode}", [
             'url' => null,
             'username' => null,
             'password' => null,
@@ -28,16 +28,16 @@ class ClickSend extends SmsDriver
     {
         $this->validate($message);
 
-        $payload = ['messages' => [[
-            'source' => 'php',
-            'body' => $message->getContent(),
+        $payload = [
             'to' => $message->getReceiver(),
-        ]]];
+            'text' => $message->getContent(),
+            'type' => 'SMS'
+        ];
 
         $response = Http::withoutVerifying()
             ->timeout(30)
             ->contentType('application/json')
-            ->withBasicAuth($this->config['username'], $this->config['password'])
+            ->withToken($this->config['password'])
             ->post($this->config['url'], $payload)->json();
 
         logger('SMS Response', [$response]);

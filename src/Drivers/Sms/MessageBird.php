@@ -6,6 +6,9 @@ use Fintech\Bell\Drivers\SmsDriver;
 use Fintech\Bell\Messages\SmsMessage;
 use Illuminate\Support\Facades\Http;
 
+/**
+ * @see https://developers.messagebird.com/api/sms-messaging/#send-outbound-sms
+ */
 class MessageBird extends SmsDriver
 {
     private array $config;

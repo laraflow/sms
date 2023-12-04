@@ -83,6 +83,21 @@ return [
                 'from' => null,
             ],
         ],
+        'telnyx' => [
+            'driver' => \Fintech\Bell\Drivers\Sms\Telnyx::class,
+            'live' => [
+                'url' => 'https://api.telnyx.com/v2/messages',
+                'username' => null,
+                'password' => null,
+                'from' => null,
+            ],
+            'sandbox' => [
+                'url' => 'https://api.telnyx.com/v2/messages',
+                'username' => null,
+                'password' => null,
+                'from' => null,
+            ],
+        ],
     ],
     'push' => [
         'mode' => 'sandbox',
