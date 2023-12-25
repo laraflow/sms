@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 if (Config::get('fintech.bell.enabled')) {
     Route::prefix('bell')->name('bell.')
-//        ->middleware(config('fintech.auth.middleware'))
+        ->middleware(config('fintech.auth.middleware'))
         ->group(function () {
 
             Route::apiResource('triggers', \Fintech\Bell\Http\Controllers\TriggerController::class);
