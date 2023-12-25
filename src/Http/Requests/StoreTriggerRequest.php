@@ -2,6 +2,7 @@
 
 namespace Fintech\Bell\Http\Requests;
 
+use Fintech\Bell\Models\Trigger;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTriggerRequest extends FormRequest
@@ -21,8 +22,13 @@ class StoreTriggerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $uniqueRule = 'unique:' . config('fintech.bell.trigger_model', Trigger::class) . ',code';
+
         return [
-            //
+            'name' => ['required', 'string', 'min:5', 'max:255'],
+            'code' => ['required', 'string', 'min:5', 'max:255', $uniqueRule],
+            'enabled' => ['nullable', 'boolean'],
+            'description' => ['nullable', 'string'],
         ];
     }
 

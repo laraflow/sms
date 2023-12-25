@@ -16,18 +16,30 @@ class TriggerCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return $this->collection->map(function ($trigger) {
-            return [
+        return $this->collection->map(function ($trigger) use ($request){
+            $data = [
                 'id' => $trigger->getKey() ?? null,
                 'name' => $trigger->name ?? null,
                 'code' => $trigger->code ?? null,
                 'description' => $trigger->description ?? null,
                 'trigger_data' => $trigger->trigger_data ?? null,
                 'enabled' => $trigger->enabled ?? null,
+                'variables' => [],
+                'recipients' => [],
+                'templates' => [],
                 'links' => $trigger->links,
                 'created_at' => $trigger->created_at,
                 'updated_at' => $trigger->updated_at,
             ];
+
+            if ($request->has('with_detail') && $request->boolean('with_detail')) {
+                $data['variables'] = $trigger->triggerVariables ?? [];
+                $data['recipients'] = $trigger->triggerRecipients ?? [];
+                $data['templates'] = $trigger->notificationTemplates ?? [];
+            }
+
+            return $data;
+
         })->toArray();
     }
 

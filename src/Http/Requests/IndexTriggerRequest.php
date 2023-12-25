@@ -30,8 +30,24 @@ class IndexTriggerRequest extends FormRequest
             'paginate' => ['boolean'],
             'sort' => ['string', 'nullable', 'min:2', 'max:255'],
             'dir' => ['string', 'min:3', 'max:4'],
+            'with_detail' => ['boolean', 'nullable'],
             'trashed' => ['boolean', 'nullable'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $options = $this->getPaginateOptions();
+
+        $options['with_detail'] = false;
+
+        $withDetail = $this->input('with_detail', '');
+
+        if ($withDetail != null && strlen($withDetail) != 0) {
+            $options['with_detail'] = $this->boolean('with_detail', true);
+        }
+
+        $this->merge($options);
     }
 
     /**
