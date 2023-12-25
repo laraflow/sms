@@ -6,27 +6,28 @@ use Fintech\Core\Supports\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class TriggerCollection extends ResourceCollection
+class TriggerRecipientCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return array
      */
     public function toArray($request)
     {
-        return $this->collection->map(function ($trigger) {
+        return $this->collection->map(function ($recipient) {
             return [
-                'id' => $trigger->getKey() ?? null,
-                'name' => $trigger->name ?? null,
-                'code' => $trigger->code ?? null,
-                'description' => $trigger->description ?? null,
-                'trigger_data' => $trigger->trigger_data ?? null,
-                'enabled' => $trigger->enabled ?? null,
-                'links' => $trigger->links,
-                'created_at' => $trigger->created_at,
-                'updated_at' => $trigger->updated_at,
+                'id' => $recipient->getKey() ?? null,
+                'trigger_id' => $recipient->trigger_id ?? null,
+                'trigger_name' => $recipient->trigger->name ?? null,
+                'name' => $recipient->name ?? null,
+                'description' => $recipient->description ?? null,
+                'trigger_recipient_data' => $recipient->trigger_recipient_data ?? null,
+                'enabled' => $recipient->enabled ?? null,
+                'links' => $recipient->links,
+                'created_at' => $recipient->created_at,
+                'updated_at' => $recipient->updated_at,
             ];
         })->toArray();
     }
@@ -34,6 +35,7 @@ class TriggerCollection extends ResourceCollection
     /**
      * Get additional data that should be returned with the resource array.
      *
+     * @param Request $request
      * @return array<string, mixed>
      */
     public function with(Request $request): array

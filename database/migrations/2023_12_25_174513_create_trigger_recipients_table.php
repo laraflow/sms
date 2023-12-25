@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('triggers', function (Blueprint $table) {
+        Schema::create('trigger_recipients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('trigger_id');
             $table->string('name');
-            $table->string('code');
-            $table->boolean('enabled')->default(true);
             $table->text('description')->nullable();
-            $table->json('trigger_data')->nullable();
+            $table->json('trigger_recipient_data')->nullable();
+            $table->boolean('enabled')->default(true);
             $table->foreignId('creator_id')->nullable();
             $table->foreignId('editor_id')->nullable();
             $table->foreignId('destroyer_id')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('triggers');
+        Schema::dropIfExists('trigger_recipients');
     }
 };

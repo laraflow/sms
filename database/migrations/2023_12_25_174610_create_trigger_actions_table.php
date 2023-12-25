@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('triggers', function (Blueprint $table) {
+        Schema::create('trigger_actions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('trigger_id');
+            $table->foreignId('notification_template_id');
             $table->string('name');
-            $table->string('code');
-            $table->boolean('enabled')->default(true);
             $table->text('description')->nullable();
-            $table->json('trigger_data')->nullable();
+            $table->text('extra_recipients')->nullable();
+            $table->boolean('enabled')->default(true);
+            $table->json('trigger_action_data')->nullable();
             $table->foreignId('creator_id')->nullable();
             $table->foreignId('editor_id')->nullable();
             $table->foreignId('destroyer_id')->nullable();
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('triggers');
+        Schema::dropIfExists('trigger_actions');
     }
 };

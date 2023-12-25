@@ -158,6 +158,46 @@ return [
     */
     'trigger_model' => \Fintech\Bell\Models\Trigger::class,
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Trigger Recipient Model
+    |--------------------------------------------------------------------------
+    |
+    | This value will be used to across system where model is needed
+    */
+    'trigger_recipient_model' => \Fintech\Bell\Models\TriggerRecipient::class,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Trigger Variable Model
+    |--------------------------------------------------------------------------
+    |
+    | This value will be used to across system where model is needed
+    */
+    'trigger_variable_model' => \Fintech\Bell\Models\TriggerVariable::class,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Notification Template Model
+    |--------------------------------------------------------------------------
+    |
+    | This value will be used to across system where model is needed
+    */
+    'notification_template_model' => \Fintech\Bell\Models\NotificationTemplate::class,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | TriggerAction Model
+    |--------------------------------------------------------------------------
+    |
+    | This value will be used to across system where model is needed
+    */
+    'trigger_action_model' => \Fintech\Bell\Models\TriggerAction::class,
+
     //** Model Config Point Do not Remove **//
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +209,16 @@ return [
 
     'repositories' => [
         \Fintech\Bell\Interfaces\TriggerRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerRepository::class,
+
+        \Fintech\Bell\Interfaces\TriggerRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerRepository::class,
+
+        \Fintech\Bell\Interfaces\TriggerRecipientRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerRecipientRepository::class,
+
+        \Fintech\Bell\Interfaces\TriggerVariableRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerVariableRepository::class,
+
+        \Fintech\Bell\Interfaces\NotificationTemplateRepository::class => \Fintech\Bell\Repositories\Eloquent\NotificationTemplateRepository::class,
+
+        \Fintech\Bell\Interfaces\TriggerActionRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerActionRepository::class,
 
         //** Repository Binding Config Point Do not Remove **//
     ],

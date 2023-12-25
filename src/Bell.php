@@ -46,6 +46,43 @@ class Bell
         return app(\Fintech\Bell\Services\TriggerService::class);
     }
 
+    /**
+     * @return \Fintech\Bell\Services\TriggerRecipientService
+     */
+    public function triggerRecipient()
+    {
+        return app(\Fintech\Bell\Services\TriggerRecipientService::class);
+    }
+
+    /**
+     * @return \Fintech\Bell\Services\TriggerVariableService
+     */
+    public function triggerVariable()
+    {
+        return app(\Fintech\Bell\Services\TriggerVariableService::class);
+    }
+
+    /**
+     * @return \Fintech\Bell\Services\NotificationTemplateService
+     */
+    public function notificationTemplate()
+    {
+        return app(\Fintech\Bell\Services\NotificationTemplateService::class);
+    }
+
+    /**
+     * @return \Fintech\Bell\Services\TriggerActionService
+     */
+    public function triggerAction()
+    {
+        return app(\Fintech\Bell\Services\TriggerActionService::class);
+    }
+
     //** Crud Service Method Point Do not Remove **//
+
+
+
+
+
 
 }

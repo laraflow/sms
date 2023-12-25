@@ -4,13 +4,13 @@ namespace Fintech\Bell\Models;
 
 use Fintech\Core\Traits\AuditableTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Trigger extends Model
+class TriggerRecipient extends Model
 {
-    use AuditableTrait;
-    use SoftDeletes;
+   use AuditableTrait;
+   use SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ class Trigger extends Model
 
     protected $appends = ['links'];
 
-    protected $casts = ['trigger_data' => 'array', 'restored_at' => 'datetime', 'enabled' => 'bool'];
+    protected $casts = ['trigger_recipient_data' => 'array', 'restored_at' => 'datetime', 'enabled' => 'bool'];
 
     protected $hidden = ['creator_id', 'editor_id', 'destroyer_id', 'restorer_id'];
 
@@ -39,26 +39,10 @@ class Trigger extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function triggerActions(): HasMany
+    public function trigger(): BelongsTo
     {
-        return $this->hasMany(config('fintech.bell.trigger_action_model', \Fintech\Bell\Models\TriggerAction::class));
+        return $this->belongsTo(config('fintech.bell.trigger_model', \Fintech\Bell\Models\Trigger::class));
     }
-
-    public function triggerRecipients(): HasMany
-    {
-        return $this->hasMany(config('fintech.bell.trigger_recipient_model', \Fintech\Bell\Models\TriggerRecipient::class));
-    }
-
-    public function triggerVariables(): HasMany
-    {
-        return $this->hasMany(config('fintech.bell.trigger_variable_model', \Fintech\Bell\Models\TriggerVariable::class));
-    }
-
-    public function notificationTemplates(): HasMany
-    {
-        return $this->hasMany(config('fintech.bell.notification_template_model', \Fintech\Bell\Models\NotificationTemplate::class));
-    }
-
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -79,10 +63,10 @@ class Trigger extends Model
         $primaryKey = $this->getKey();
 
         $links = [
-            'show' => action_link(route('bell.triggers.show', $primaryKey), __('core::messages.action.show'), 'get'),
-            'update' => action_link(route('bell.triggers.update', $primaryKey), __('core::messages.action.update'), 'put'),
-            'destroy' => action_link(route('bell.triggers.destroy', $primaryKey), __('core::messages.action.destroy'), 'delete'),
-            'restore' => action_link(route('bell.triggers.restore', $primaryKey), __('core::messages.action.restore'), 'post'),
+            'show' => action_link(route('bell.trigger-recipients.show', $primaryKey), __('core::messages.action.show'), 'get'),
+            'update' => action_link(route('bell.trigger-recipients.update', $primaryKey), __('core::messages.action.update'), 'put'),
+            'destroy' => action_link(route('bell.trigger-recipients.destroy', $primaryKey), __('core::messages.action.destroy'), 'delete'),
+            'restore' => action_link(route('bell.trigger-recipients.restore', $primaryKey), __('core::messages.action.restore'), 'post'),
         ];
 
         if ($this->getAttribute('deleted_at') == null) {

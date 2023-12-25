@@ -6,27 +6,29 @@ use Fintech\Core\Supports\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class TriggerCollection extends ResourceCollection
+class NotificationTemplateCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return array
      */
     public function toArray($request)
     {
-        return $this->collection->map(function ($trigger) {
+        return $this->collection->map(function ($template) {
             return [
-                'id' => $trigger->getKey() ?? null,
-                'name' => $trigger->name ?? null,
-                'code' => $trigger->code ?? null,
-                'description' => $trigger->description ?? null,
-                'trigger_data' => $trigger->trigger_data ?? null,
-                'enabled' => $trigger->enabled ?? null,
-                'links' => $trigger->links,
-                'created_at' => $trigger->created_at,
-                'updated_at' => $trigger->updated_at,
+                'id' => $template->getKey() ?? null,
+                'trigger_id' => $template->trigger_id ?? null,
+                'trigger_name' => $template->trigger_name ?? null,
+                'name' => $template->name ?? null,
+                'type' => $template->type ?? null,
+                'content' => $template->content ?? null,
+                'notification_template_data' => $template->notification_template_data ?? null,
+                'enabled' => $template->enabled ?? null,
+                'links' => $template->links,
+                'created_at' => $template->created_at,
+                'updated_at' => $template->updated_at,
             ];
         })->toArray();
     }
@@ -34,6 +36,7 @@ class TriggerCollection extends ResourceCollection
     /**
      * Get additional data that should be returned with the resource array.
      *
+     * @param Request $request
      * @return array<string, mixed>
      */
     public function with(Request $request): array

@@ -4,7 +4,7 @@ namespace Fintech\Bell\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TriggerResource extends JsonResource
+class TriggerVariableResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,13 @@ class TriggerResource extends JsonResource
     {
         return [
             'id' => $this->getKey() ?? null,
+            'trigger_id' => $this->trigger_id ?? null,
+            'trigger_name' => $this->trigger->name ?? null,
             'name' => $this->name ?? null,
-            'code' => $this->code ?? null,
+            'value' => $this->value ?? null,
             'description' => $this->description ?? null,
-            'trigger_data' => $this->trigger_data ?? null,
+            'trigger_variable_data' => $this->trigger_variable_data ?? null,
             'enabled' => $this->enabled ?? null,
-            'triggerVariables' => $this->triggerVariables ?? null,
-            'triggerRecipients' => $this->triggerRecipients ?? null,
             'links' => $this->links,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
