@@ -16,7 +16,7 @@ class TriggerCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return $this->collection->map(function ($trigger) use ($request){
+        return $this->collection->map(function ($trigger) use ($request) {
             $data = [
                 'id' => $trigger->getKey() ?? null,
                 'name' => $trigger->name ?? null,

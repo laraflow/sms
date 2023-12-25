@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTriggerActionRequest extends FormRequest
 {
-    
     /**
      * Determine if the user is authorized to make this request.
      */

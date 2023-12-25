@@ -158,7 +158,6 @@ return [
     */
     'trigger_model' => \Fintech\Bell\Models\Trigger::class,
 
-
     /*
     |--------------------------------------------------------------------------
     | Trigger Recipient Model
@@ -167,7 +166,6 @@ return [
     | This value will be used to across system where model is needed
     */
     'trigger_recipient_model' => \Fintech\Bell\Models\TriggerRecipient::class,
-
 
     /*
     |--------------------------------------------------------------------------
@@ -178,7 +176,6 @@ return [
     */
     'trigger_variable_model' => \Fintech\Bell\Models\TriggerVariable::class,
 
-
     /*
     |--------------------------------------------------------------------------
     | Notification Template Model
@@ -187,7 +184,6 @@ return [
     | This value will be used to across system where model is needed
     */
     'notification_template_model' => \Fintech\Bell\Models\NotificationTemplate::class,
-
 
     /*
     |--------------------------------------------------------------------------

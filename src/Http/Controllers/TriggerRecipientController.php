@@ -1,34 +1,33 @@
 <?php
 
 namespace Fintech\Bell\Http\Controllers;
+
 use Exception;
-use Fintech\Core\Exceptions\StoreOperationException;
-use Fintech\Core\Exceptions\UpdateOperationException;
-use Fintech\Core\Exceptions\DeleteOperationException;
-use Fintech\Core\Exceptions\RestoreOperationException;
-use Fintech\Core\Traits\ApiResponseTrait;
 use Fintech\Bell\Facades\Bell;
-use Fintech\Bell\Http\Resources\TriggerRecipientResource;
-use Fintech\Bell\Http\Resources\TriggerRecipientCollection;
 use Fintech\Bell\Http\Requests\ImportTriggerRecipientRequest;
+use Fintech\Bell\Http\Requests\IndexTriggerRecipientRequest;
 use Fintech\Bell\Http\Requests\StoreTriggerRecipientRequest;
 use Fintech\Bell\Http\Requests\UpdateTriggerRecipientRequest;
-use Fintech\Bell\Http\Requests\IndexTriggerRecipientRequest;
+use Fintech\Bell\Http\Resources\TriggerRecipientCollection;
+use Fintech\Bell\Http\Resources\TriggerRecipientResource;
+use Fintech\Core\Exceptions\DeleteOperationException;
+use Fintech\Core\Exceptions\RestoreOperationException;
+use Fintech\Core\Exceptions\StoreOperationException;
+use Fintech\Core\Exceptions\UpdateOperationException;
+use Fintech\Core\Traits\ApiResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
 /**
  * Class TriggerRecipientController
- * @package Fintech\Bell\Http\Controllers
  *
  * @lrd:start
  * This class handle create, display, update, delete & restore
  * operation related to TriggerRecipient
- * @lrd:end
  *
+ * @lrd:end
  */
-
 class TriggerRecipientController extends Controller
 {
     use ApiResponseTrait;
@@ -38,10 +37,8 @@ class TriggerRecipientController extends Controller
      * Return a listing of the *TriggerRecipient* resource as collection.
      *
      * *```paginate=false``` returns all resource as list not pagination*
-     * @lrd:end
      *
-     * @param IndexTriggerRecipientRequest $request
-     * @return TriggerRecipientCollection|JsonResponse
+     * @lrd:end
      */
     public function index(IndexTriggerRecipientRequest $request): TriggerRecipientCollection|JsonResponse
     {
@@ -61,10 +58,9 @@ class TriggerRecipientController extends Controller
     /**
      * @lrd:start
      * Create a new *TriggerRecipient* resource in storage.
+     *
      * @lrd:end
      *
-     * @param StoreTriggerRecipientRequest $request
-     * @return JsonResponse
      * @throws StoreOperationException
      */
     public function store(StoreTriggerRecipientRequest $request): JsonResponse
@@ -74,14 +70,14 @@ class TriggerRecipientController extends Controller
 
             $triggerRecipient = Bell::triggerRecipient()->create($inputs);
 
-            if (!$triggerRecipient) {
+            if (! $triggerRecipient) {
                 throw (new StoreOperationException)->setModel(config('fintech.bell.trigger_recipient_model'));
             }
 
             return $this->created([
                 'message' => __('core::messages.resource.created', ['model' => 'Trigger Recipient']),
-                'id' => $triggerRecipient->id
-             ]);
+                'id' => $triggerRecipient->id,
+            ]);
 
         } catch (Exception $exception) {
 
@@ -92,10 +88,9 @@ class TriggerRecipientController extends Controller
     /**
      * @lrd:start
      * Return a specified *TriggerRecipient* resource found by id.
+     *
      * @lrd:end
      *
-     * @param string|int $id
-     * @return TriggerRecipientResource|JsonResponse
      * @throws ModelNotFoundException
      */
     public function show(string|int $id): TriggerRecipientResource|JsonResponse
@@ -104,7 +99,7 @@ class TriggerRecipientController extends Controller
 
             $triggerRecipient = Bell::triggerRecipient()->find($id);
 
-            if (!$triggerRecipient) {
+            if (! $triggerRecipient) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_recipient_model'), $id);
             }
 
@@ -123,11 +118,9 @@ class TriggerRecipientController extends Controller
     /**
      * @lrd:start
      * Update a specified *TriggerRecipient* resource using id.
+     *
      * @lrd:end
      *
-     * @param UpdateTriggerRecipientRequest $request
-     * @param string|int $id
-     * @return JsonResponse
      * @throws ModelNotFoundException
      * @throws UpdateOperationException
      */
@@ -137,13 +130,13 @@ class TriggerRecipientController extends Controller
 
             $triggerRecipient = Bell::triggerRecipient()->find($id);
 
-            if (!$triggerRecipient) {
+            if (! $triggerRecipient) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_recipient_model'), $id);
             }
 
             $inputs = $request->validated();
 
-            if (!Bell::triggerRecipient()->update($id, $inputs)) {
+            if (! Bell::triggerRecipient()->update($id, $inputs)) {
 
                 throw (new UpdateOperationException)->setModel(config('fintech.bell.trigger_recipient_model'), $id);
             }
@@ -163,10 +156,11 @@ class TriggerRecipientController extends Controller
     /**
      * @lrd:start
      * Soft delete a specified *TriggerRecipient* resource using id.
+     *
      * @lrd:end
      *
-     * @param string|int $id
      * @return JsonResponse
+     *
      * @throws ModelNotFoundException
      * @throws DeleteOperationException
      */
@@ -176,11 +170,11 @@ class TriggerRecipientController extends Controller
 
             $triggerRecipient = Bell::triggerRecipient()->find($id);
 
-            if (!$triggerRecipient) {
+            if (! $triggerRecipient) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_recipient_model'), $id);
             }
 
-            if (!Bell::triggerRecipient()->destroy($id)) {
+            if (! Bell::triggerRecipient()->destroy($id)) {
 
                 throw (new DeleteOperationException())->setModel(config('fintech.bell.trigger_recipient_model'), $id);
             }
@@ -201,9 +195,9 @@ class TriggerRecipientController extends Controller
      * @lrd:start
      * Restore the specified *TriggerRecipient* resource from trash.
      * ** ```Soft Delete``` needs to enabled to use this feature**
+     *
      * @lrd:end
      *
-     * @param string|int $id
      * @return JsonResponse
      */
     public function restore(string|int $id)
@@ -212,11 +206,11 @@ class TriggerRecipientController extends Controller
 
             $triggerRecipient = Bell::triggerRecipient()->find($id, true);
 
-            if (!$triggerRecipient) {
+            if (! $triggerRecipient) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.trigger_recipient_model'), $id);
             }
 
-            if (!Bell::triggerRecipient()->restore($id)) {
+            if (! Bell::triggerRecipient()->restore($id)) {
 
                 throw (new RestoreOperationException())->setModel(config('fintech.bell.trigger_recipient_model'), $id);
             }
@@ -239,9 +233,6 @@ class TriggerRecipientController extends Controller
      * After export job is done system will fire  export completed event
      *
      * @lrd:end
-     *
-     * @param IndexTriggerRecipientRequest $request
-     * @return JsonResponse
      */
     public function export(IndexTriggerRecipientRequest $request): JsonResponse
     {
@@ -265,7 +256,6 @@ class TriggerRecipientController extends Controller
      *
      * @lrd:end
      *
-     * @param ImportTriggerRecipientRequest $request
      * @return TriggerRecipientCollection|JsonResponse
      */
     public function import(ImportTriggerRecipientRequest $request): JsonResponse

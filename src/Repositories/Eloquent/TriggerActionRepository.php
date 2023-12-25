@@ -2,8 +2,8 @@
 
 namespace Fintech\Bell\Repositories\Eloquent;
 
-use Fintech\Core\Repositories\EloquentRepository;
 use Fintech\Bell\Interfaces\TriggerActionRepository as InterfacesTriggerActionRepository;
+use Fintech\Core\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -11,19 +11,18 @@ use InvalidArgumentException;
 
 /**
  * Class TriggerActionRepository
- * @package Fintech\Bell\Repositories\Eloquent
  */
 class TriggerActionRepository extends EloquentRepository implements InterfacesTriggerActionRepository
 {
     public function __construct()
     {
-       $model = app(config('fintech.bell.trigger_action_model', \Fintech\Bell\Models\TriggerAction::class));
+        $model = app(config('fintech.bell.trigger_action_model', \Fintech\Bell\Models\TriggerAction::class));
 
-       if (!$model instanceof Model) {
-           throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
-       }
+        if (! $model instanceof Model) {
+            throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
+        }
 
-       $this->model = $model;
+        $this->model = $model;
     }
 
     /**

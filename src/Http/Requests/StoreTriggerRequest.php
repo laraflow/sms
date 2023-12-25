@@ -22,7 +22,7 @@ class StoreTriggerRequest extends FormRequest
      */
     public function rules(): array
     {
-        $uniqueRule = 'unique:' . config('fintech.bell.trigger_model', Trigger::class) . ',code';
+        $uniqueRule = 'unique:'.config('fintech.bell.trigger_model', Trigger::class).',code';
 
         return [
             'name' => ['required', 'string', 'min:5', 'max:255'],

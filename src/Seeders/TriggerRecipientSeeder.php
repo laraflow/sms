@@ -2,8 +2,8 @@
 
 namespace Fintech\Bell\Seeders;
 
-use Illuminate\Database\Seeder;
 use Fintech\Bell\Facades\Bell;
+use Illuminate\Database\Seeder;
 
 class TriggerRecipientSeeder extends Seeder
 {
@@ -24,6 +24,6 @@ class TriggerRecipientSeeder extends Seeder
 
     private function data()
     {
-        return array();
+        return [];
     }
 }

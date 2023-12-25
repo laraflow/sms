@@ -2,26 +2,22 @@
 
 namespace Fintech\Bell\Services;
 
-
 use Fintech\Bell\Interfaces\TriggerRecipientRepository;
 
 /**
  * Class TriggerRecipientService
- * @package Fintech\Bell\Services
- *
  */
 class TriggerRecipientService
 {
     /**
      * TriggerRecipientService constructor.
-     * @param TriggerRecipientRepository $triggerRecipientRepository
      */
-    public function __construct(TriggerRecipientRepository $triggerRecipientRepository) {
+    public function __construct(TriggerRecipientRepository $triggerRecipientRepository)
+    {
         $this->triggerRecipientRepository = $triggerRecipientRepository;
     }
 
     /**
-     * @param array $filters
      * @return mixed
      */
     public function list(array $filters = [])

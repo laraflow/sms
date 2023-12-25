@@ -22,7 +22,7 @@ class UpdateTriggerRequest extends FormRequest
      */
     public function rules(): array
     {
-        $uniqueRule = 'unique:' . config('fintech.bell.trigger_model', Trigger::class) . ',code,' . $this->route('trigger');
+        $uniqueRule = 'unique:'.config('fintech.bell.trigger_model', Trigger::class).',code,'.$this->route('trigger');
 
         return [
             'name' => ['required', 'string', 'min:5', 'max:255'],

@@ -2,28 +2,27 @@
 
 namespace Fintech\Bell\Repositories\Mongodb;
 
-use Fintech\Core\Repositories\MongodbRepository;
 use Fintech\Bell\Interfaces\TriggerVariableRepository as InterfacesTriggerVariableRepository;
+use Fintech\Core\Repositories\MongodbRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
-use MongoDB\Laravel\Eloquent\Model;
 use InvalidArgumentException;
+use MongoDB\Laravel\Eloquent\Model;
 
 /**
  * Class TriggerVariableRepository
- * @package Fintech\Bell\Repositories\Mongodb
  */
 class TriggerVariableRepository extends MongodbRepository implements InterfacesTriggerVariableRepository
 {
     public function __construct()
     {
-       $model = app(config('fintech.bell.trigger_variable_model', \Fintech\Bell\Models\TriggerVariable::class));
+        $model = app(config('fintech.bell.trigger_variable_model', \Fintech\Bell\Models\TriggerVariable::class));
 
-       if (!$model instanceof Model) {
-           throw new InvalidArgumentException("Mongodb repository require model class to be `MongoDB\Laravel\Eloquent\Model` instance.");
-       }
+        if (! $model instanceof Model) {
+            throw new InvalidArgumentException("Mongodb repository require model class to be `MongoDB\Laravel\Eloquent\Model` instance.");
+        }
 
-       $this->model = $model;
+        $this->model = $model;
     }
 
     /**

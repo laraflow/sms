@@ -2,26 +2,22 @@
 
 namespace Fintech\Bell\Services;
 
-
 use Fintech\Bell\Interfaces\TriggerVariableRepository;
 
 /**
  * Class TriggerVariableService
- * @package Fintech\Bell\Services
- *
  */
 class TriggerVariableService
 {
     /**
      * TriggerVariableService constructor.
-     * @param TriggerVariableRepository $triggerVariableRepository
      */
-    public function __construct(TriggerVariableRepository $triggerVariableRepository) {
+    public function __construct(TriggerVariableRepository $triggerVariableRepository)
+    {
         $this->triggerVariableRepository = $triggerVariableRepository;
     }
 
     /**
-     * @param array $filters
      * @return mixed
      */
     public function list(array $filters = [])

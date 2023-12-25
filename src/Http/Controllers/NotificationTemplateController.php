@@ -1,34 +1,33 @@
 <?php
 
 namespace Fintech\Bell\Http\Controllers;
+
 use Exception;
-use Fintech\Core\Exceptions\StoreOperationException;
-use Fintech\Core\Exceptions\UpdateOperationException;
-use Fintech\Core\Exceptions\DeleteOperationException;
-use Fintech\Core\Exceptions\RestoreOperationException;
-use Fintech\Core\Traits\ApiResponseTrait;
 use Fintech\Bell\Facades\Bell;
-use Fintech\Bell\Http\Resources\NotificationTemplateResource;
-use Fintech\Bell\Http\Resources\NotificationTemplateCollection;
 use Fintech\Bell\Http\Requests\ImportNotificationTemplateRequest;
+use Fintech\Bell\Http\Requests\IndexNotificationTemplateRequest;
 use Fintech\Bell\Http\Requests\StoreNotificationTemplateRequest;
 use Fintech\Bell\Http\Requests\UpdateNotificationTemplateRequest;
-use Fintech\Bell\Http\Requests\IndexNotificationTemplateRequest;
+use Fintech\Bell\Http\Resources\NotificationTemplateCollection;
+use Fintech\Bell\Http\Resources\NotificationTemplateResource;
+use Fintech\Core\Exceptions\DeleteOperationException;
+use Fintech\Core\Exceptions\RestoreOperationException;
+use Fintech\Core\Exceptions\StoreOperationException;
+use Fintech\Core\Exceptions\UpdateOperationException;
+use Fintech\Core\Traits\ApiResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
 /**
  * Class NotificationTemplateController
- * @package Fintech\Bell\Http\Controllers
  *
  * @lrd:start
  * This class handle create, display, update, delete & restore
  * operation related to NotificationTemplate
- * @lrd:end
  *
+ * @lrd:end
  */
-
 class NotificationTemplateController extends Controller
 {
     use ApiResponseTrait;
@@ -38,10 +37,8 @@ class NotificationTemplateController extends Controller
      * Return a listing of the *NotificationTemplate* resource as collection.
      *
      * *```paginate=false``` returns all resource as list not pagination*
-     * @lrd:end
      *
-     * @param IndexNotificationTemplateRequest $request
-     * @return NotificationTemplateCollection|JsonResponse
+     * @lrd:end
      */
     public function index(IndexNotificationTemplateRequest $request): NotificationTemplateCollection|JsonResponse
     {
@@ -61,10 +58,9 @@ class NotificationTemplateController extends Controller
     /**
      * @lrd:start
      * Create a new *NotificationTemplate* resource in storage.
+     *
      * @lrd:end
      *
-     * @param StoreNotificationTemplateRequest $request
-     * @return JsonResponse
      * @throws StoreOperationException
      */
     public function store(StoreNotificationTemplateRequest $request): JsonResponse
@@ -74,14 +70,14 @@ class NotificationTemplateController extends Controller
 
             $notificationTemplate = Bell::notificationTemplate()->create($inputs);
 
-            if (!$notificationTemplate) {
+            if (! $notificationTemplate) {
                 throw (new StoreOperationException)->setModel(config('fintech.bell.notification_template_model'));
             }
 
             return $this->created([
                 'message' => __('core::messages.resource.created', ['model' => 'Notification Template']),
-                'id' => $notificationTemplate->id
-             ]);
+                'id' => $notificationTemplate->id,
+            ]);
 
         } catch (Exception $exception) {
 
@@ -92,10 +88,9 @@ class NotificationTemplateController extends Controller
     /**
      * @lrd:start
      * Return a specified *NotificationTemplate* resource found by id.
+     *
      * @lrd:end
      *
-     * @param string|int $id
-     * @return NotificationTemplateResource|JsonResponse
      * @throws ModelNotFoundException
      */
     public function show(string|int $id): NotificationTemplateResource|JsonResponse
@@ -104,7 +99,7 @@ class NotificationTemplateController extends Controller
 
             $notificationTemplate = Bell::notificationTemplate()->find($id);
 
-            if (!$notificationTemplate) {
+            if (! $notificationTemplate) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.notification_template_model'), $id);
             }
 
@@ -123,11 +118,9 @@ class NotificationTemplateController extends Controller
     /**
      * @lrd:start
      * Update a specified *NotificationTemplate* resource using id.
+     *
      * @lrd:end
      *
-     * @param UpdateNotificationTemplateRequest $request
-     * @param string|int $id
-     * @return JsonResponse
      * @throws ModelNotFoundException
      * @throws UpdateOperationException
      */
@@ -137,13 +130,13 @@ class NotificationTemplateController extends Controller
 
             $notificationTemplate = Bell::notificationTemplate()->find($id);
 
-            if (!$notificationTemplate) {
+            if (! $notificationTemplate) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.notification_template_model'), $id);
             }
 
             $inputs = $request->validated();
 
-            if (!Bell::notificationTemplate()->update($id, $inputs)) {
+            if (! Bell::notificationTemplate()->update($id, $inputs)) {
 
                 throw (new UpdateOperationException)->setModel(config('fintech.bell.notification_template_model'), $id);
             }
@@ -163,10 +156,11 @@ class NotificationTemplateController extends Controller
     /**
      * @lrd:start
      * Soft delete a specified *NotificationTemplate* resource using id.
+     *
      * @lrd:end
      *
-     * @param string|int $id
      * @return JsonResponse
+     *
      * @throws ModelNotFoundException
      * @throws DeleteOperationException
      */
@@ -176,11 +170,11 @@ class NotificationTemplateController extends Controller
 
             $notificationTemplate = Bell::notificationTemplate()->find($id);
 
-            if (!$notificationTemplate) {
+            if (! $notificationTemplate) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.notification_template_model'), $id);
             }
 
-            if (!Bell::notificationTemplate()->destroy($id)) {
+            if (! Bell::notificationTemplate()->destroy($id)) {
 
                 throw (new DeleteOperationException())->setModel(config('fintech.bell.notification_template_model'), $id);
             }
@@ -201,9 +195,9 @@ class NotificationTemplateController extends Controller
      * @lrd:start
      * Restore the specified *NotificationTemplate* resource from trash.
      * ** ```Soft Delete``` needs to enabled to use this feature**
+     *
      * @lrd:end
      *
-     * @param string|int $id
      * @return JsonResponse
      */
     public function restore(string|int $id)
@@ -212,11 +206,11 @@ class NotificationTemplateController extends Controller
 
             $notificationTemplate = Bell::notificationTemplate()->find($id, true);
 
-            if (!$notificationTemplate) {
+            if (! $notificationTemplate) {
                 throw (new ModelNotFoundException)->setModel(config('fintech.bell.notification_template_model'), $id);
             }
 
-            if (!Bell::notificationTemplate()->restore($id)) {
+            if (! Bell::notificationTemplate()->restore($id)) {
 
                 throw (new RestoreOperationException())->setModel(config('fintech.bell.notification_template_model'), $id);
             }
@@ -239,9 +233,6 @@ class NotificationTemplateController extends Controller
      * After export job is done system will fire  export completed event
      *
      * @lrd:end
-     *
-     * @param IndexNotificationTemplateRequest $request
-     * @return JsonResponse
      */
     public function export(IndexNotificationTemplateRequest $request): JsonResponse
     {
@@ -265,7 +256,6 @@ class NotificationTemplateController extends Controller
      *
      * @lrd:end
      *
-     * @param ImportNotificationTemplateRequest $request
      * @return NotificationTemplateCollection|JsonResponse
      */
     public function import(ImportNotificationTemplateRequest $request): JsonResponse

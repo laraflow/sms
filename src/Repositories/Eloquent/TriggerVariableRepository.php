@@ -2,8 +2,8 @@
 
 namespace Fintech\Bell\Repositories\Eloquent;
 
-use Fintech\Core\Repositories\EloquentRepository;
 use Fintech\Bell\Interfaces\TriggerVariableRepository as InterfacesTriggerVariableRepository;
+use Fintech\Core\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -11,19 +11,18 @@ use InvalidArgumentException;
 
 /**
  * Class TriggerVariableRepository
- * @package Fintech\Bell\Repositories\Eloquent
  */
 class TriggerVariableRepository extends EloquentRepository implements InterfacesTriggerVariableRepository
 {
     public function __construct()
     {
-       $model = app(config('fintech.bell.trigger_variable_model', \Fintech\Bell\Models\TriggerVariable::class));
+        $model = app(config('fintech.bell.trigger_variable_model', \Fintech\Bell\Models\TriggerVariable::class));
 
-       if (!$model instanceof Model) {
-           throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
-       }
+        if (! $model instanceof Model) {
+            throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
+        }
 
-       $this->model = $model;
+        $this->model = $model;
     }
 
     /**
