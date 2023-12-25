@@ -2,26 +2,22 @@
 
 namespace Fintech\Bell\Services;
 
-
 use Fintech\Bell\Interfaces\TriggerActionRepository;
 
 /**
  * Class TriggerActionService
- * @package Fintech\Bell\Services
- *
  */
 class TriggerActionService
 {
     /**
      * TriggerActionService constructor.
-     * @param TriggerActionRepository $triggerActionRepository
      */
-    public function __construct(TriggerActionRepository $triggerActionRepository) {
+    public function __construct(TriggerActionRepository $triggerActionRepository)
+    {
         $this->triggerActionRepository = $triggerActionRepository;
     }
 
     /**
-     * @param array $filters
      * @return mixed
      */
     public function list(array $filters = [])
