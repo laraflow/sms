@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTriggerVariableRequest extends FormRequest
 {
-    
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,7 +23,11 @@ class StoreTriggerVariableRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'trigger_id' => ['required', 'integer'],
+            'name' => ['required', 'string', 'min:2'],
+            'value' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'enabled' => ['nullable', 'boolean'],
         ];
     }
 

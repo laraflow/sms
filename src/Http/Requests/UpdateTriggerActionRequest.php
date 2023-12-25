@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTriggerActionRequest extends FormRequest
 {
-    
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,7 +23,12 @@ class UpdateTriggerActionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'trigger_id' => ['required', 'integer'],
+            'notification_template_id' => ['required', 'integer'],
+            'name' => ['required', 'string', 'min:2'],
+            'description' => ['nullable', 'string'],
+            'extra_recipients' => ['nullable', 'string'],
+            'enabled' => ['nullable', 'boolean'],
         ];
     }
 

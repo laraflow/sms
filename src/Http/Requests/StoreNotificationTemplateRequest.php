@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreNotificationTemplateRequest extends FormRequest
 {
-    
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,7 +23,11 @@ class StoreNotificationTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'trigger_id' => ['required', 'integer'],
+            'name' => ['required', 'string', 'min:2'],
+            'type' => ['required', 'string', 'in:sms,email,push,chat'],
+            'content' => ['required', 'string'],
+            'enabled' => ['nullable', 'boolean'],
         ];
     }
 
