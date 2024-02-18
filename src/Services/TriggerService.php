@@ -60,4 +60,11 @@ class TriggerService
     {
         return $this->triggerRepository->create($filters);
     }
+
+    public function sync()
+    {
+        $events = \Illuminate\Support\Facades\App::make('events');
+
+        dd($events);
+    }
 }

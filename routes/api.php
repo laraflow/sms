@@ -18,6 +18,9 @@ if (Config::get('fintech.bell.enabled')) {
         ->middleware(config('fintech.auth.middleware'))
         ->group(function () {
 
+            Route::get('triggers/sync',
+                [\Fintech\Bell\Http\Controllers\TriggerController::class, 'sync'])
+                ->name('triggers.sync');
             Route::apiResource('triggers', \Fintech\Bell\Http\Controllers\TriggerController::class);
             Route::post('triggers/{trigger}/restore',
                 [\Fintech\Bell\Http\Controllers\TriggerController::class, 'restore'])
