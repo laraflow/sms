@@ -65,6 +65,6 @@ class TriggerService
     {
         $events = \Illuminate\Support\Facades\App::make('events');
 
-        dd($events);
+        dd($events->getRawListeners());
     }
 }
