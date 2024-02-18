@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Fintech\Bell\Services\TriggerVariableService triggerVariable()
  * @method static \Fintech\Bell\Services\NotificationTemplateService notificationTemplate()
  * @method static \Fintech\Bell\Services\TriggerActionService triggerAction()
- * // Crud Service Method Point Do not Remove //
+ *                                                                            // Crud Service Method Point Do not Remove //
  *
  * @see \Fintech\Bell\Bell
  */

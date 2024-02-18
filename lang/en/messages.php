@@ -11,6 +11,6 @@
 */
 return [
     'trigger' => [
-        'synced' => 'Trigger Entries have been updated.'
-    ]
+        'synced' => 'Trigger Entries have been updated.',
+    ],
 ];
