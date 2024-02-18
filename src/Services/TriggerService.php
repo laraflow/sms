@@ -63,8 +63,14 @@ class TriggerService
 
     public function sync()
     {
-        $events = \Illuminate\Support\Facades\App::make('events');
+        $eventDispatcher = \Illuminate\Support\Facades\App::make('events');
 
-        dd($events->getRawListeners());
+        $events = $eventDispatcher->getRawListeners();
+
+        $onlyFintechEvents = array_filter($events, function ($event) {
+            return str_starts_with($event, 'Fintech');
+
+        }, ARRAY_FILTER_USE_KEY);
+
     }
 }
