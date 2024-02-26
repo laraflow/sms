@@ -3,6 +3,7 @@
 namespace Fintech\Bell\Services;
 
 use Fintech\Bell\Interfaces\TriggerRepository;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class TriggerService
@@ -15,20 +16,6 @@ class TriggerService
     public function __construct(TriggerRepository $triggerRepository)
     {
         $this->triggerRepository = $triggerRepository;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function list(array $filters = [])
-    {
-        return $this->triggerRepository->list($filters);
-
-    }
-
-    public function create(array $inputs = [])
-    {
-        return $this->triggerRepository->create($inputs);
     }
 
     public function find($id, $onlyTrashed = false)
@@ -56,14 +43,28 @@ class TriggerService
         return $this->triggerRepository->list($filters);
     }
 
+    /**
+     * @return mixed
+     */
+    public function list(array $filters = [])
+    {
+        return $this->triggerRepository->list($filters);
+
+    }
+
     public function import(array $filters)
     {
         return $this->triggerRepository->create($filters);
     }
 
+    public function create(array $inputs = [])
+    {
+        return $this->triggerRepository->create($inputs);
+    }
+
     public function sync()
     {
-        $eventDispatcher = \Illuminate\Support\Facades\App::make('events');
+        $eventDispatcher = App::make('events');
 
         $events = $eventDispatcher->getRawListeners();
 

@@ -3,10 +3,10 @@
 namespace Fintech\Bell\Repositories\Eloquent;
 
 use Fintech\Bell\Interfaces\TriggerRecipientRepository as InterfacesTriggerRecipientRepository;
+use Fintech\Bell\Models\TriggerRecipient;
 use Fintech\Core\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 
 /**
@@ -16,9 +16,9 @@ class TriggerRecipientRepository extends EloquentRepository implements Interface
 {
     public function __construct()
     {
-        $model = app(config('fintech.bell.trigger_recipient_model', \Fintech\Bell\Models\TriggerRecipient::class));
+        $model = app(config('fintech.bell.trigger_recipient_model', TriggerRecipient::class));
 
-        if (! $model instanceof Model) {
+        if (!$model instanceof Model) {
             throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
         }
 
@@ -36,7 +36,7 @@ class TriggerRecipientRepository extends EloquentRepository implements Interface
         $query = $this->model->newQuery();
 
         //Searching
-        if (! empty($filters['search'])) {
+        if (!empty($filters['search'])) {
             if (is_numeric($filters['search'])) {
                 $query->where($this->model->getKeyName(), 'like', "%{$filters['search']}%");
             } else {

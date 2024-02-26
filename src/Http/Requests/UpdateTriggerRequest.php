@@ -3,6 +3,7 @@
 namespace Fintech\Bell\Http\Requests;
 
 use Fintech\Bell\Models\Trigger;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTriggerRequest extends FormRequest
@@ -18,11 +19,11 @@ class UpdateTriggerRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
-        $uniqueRule = 'unique:'.config('fintech.bell.trigger_model', Trigger::class).',code,'.$this->route('trigger');
+        $uniqueRule = 'unique:' . config('fintech.bell.trigger_model', Trigger::class) . ',code,' . $this->route('trigger');
 
         return [
             'name' => ['required', 'string', 'min:5', 'max:255'],

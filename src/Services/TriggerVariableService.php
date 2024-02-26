@@ -17,20 +17,6 @@ class TriggerVariableService
         $this->triggerVariableRepository = $triggerVariableRepository;
     }
 
-    /**
-     * @return mixed
-     */
-    public function list(array $filters = [])
-    {
-        return $this->triggerVariableRepository->list($filters);
-
-    }
-
-    public function create(array $inputs = [])
-    {
-        return $this->triggerVariableRepository->create($inputs);
-    }
-
     public function find($id, $onlyTrashed = false)
     {
         return $this->triggerVariableRepository->find($id, $onlyTrashed);
@@ -56,8 +42,22 @@ class TriggerVariableService
         return $this->triggerVariableRepository->list($filters);
     }
 
+    /**
+     * @return mixed
+     */
+    public function list(array $filters = [])
+    {
+        return $this->triggerVariableRepository->list($filters);
+
+    }
+
     public function import(array $filters)
     {
         return $this->triggerVariableRepository->create($filters);
+    }
+
+    public function create(array $inputs = [])
+    {
+        return $this->triggerVariableRepository->create($inputs);
     }
 }

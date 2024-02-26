@@ -1,6 +1,23 @@
 <?php
 
 // config for Fintech/Bell
+use Fintech\Bell\Drivers\Push\FirebasePush;
+use Fintech\Bell\Drivers\Sms\ClickSend;
+use Fintech\Bell\Drivers\Sms\Infobip;
+use Fintech\Bell\Drivers\Sms\MessageBird;
+use Fintech\Bell\Drivers\Sms\Telnyx;
+use Fintech\Bell\Drivers\Sms\Twilio;
+use Fintech\Bell\Models\NotificationTemplate;
+use Fintech\Bell\Models\Trigger;
+use Fintech\Bell\Models\TriggerAction;
+use Fintech\Bell\Models\TriggerRecipient;
+use Fintech\Bell\Models\TriggerVariable;
+use Fintech\Bell\Repositories\Eloquent\NotificationTemplateRepository;
+use Fintech\Bell\Repositories\Eloquent\TriggerActionRepository;
+use Fintech\Bell\Repositories\Eloquent\TriggerRecipientRepository;
+use Fintech\Bell\Repositories\Eloquent\TriggerRepository;
+use Fintech\Bell\Repositories\Eloquent\TriggerVariableRepository;
+
 return [
 
     /*
@@ -38,7 +55,7 @@ return [
         'mode' => 'sandbox',
         'default' => 'clicksend',
         'clicksend' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\ClickSend::class,
+            'driver' => ClickSend::class,
             'live' => [
                 'url' => 'https://rest.clicksend.com/v3/sms/send',
                 'username' => null,
@@ -54,7 +71,7 @@ return [
             ],
         ],
         'messagebird' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\MessageBird::class,
+            'driver' => MessageBird::class,
             'live' => [
                 'url' => 'https://rest.messagebird.com/messages',
                 'originator' => null,
@@ -69,7 +86,7 @@ return [
             ],
         ],
         'twilio' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Twilio::class,
+            'driver' => Twilio::class,
             'live' => [
                 'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'username' => null,
@@ -84,7 +101,7 @@ return [
             ],
         ],
         'telnyx' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Telnyx::class,
+            'driver' => Telnyx::class,
             'live' => [
                 'url' => 'https://api.telnyx.com/v2/messages',
                 'username' => null,
@@ -99,7 +116,7 @@ return [
             ],
         ],
         'infobip' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Infobip::class,
+            'driver' => Infobip::class,
             'live' => [
                 'url' => 'https://api.infobip.com/sms/2/text/advanced',
                 'username' => null,
@@ -118,7 +135,7 @@ return [
         'mode' => 'sandbox',
         'default' => 'fcm',
         'fcm' => [
-            'driver' => \Fintech\Bell\Drivers\Push\FirebasePush::class,
+            'driver' => FirebasePush::class,
             'live' => [
                 'url' => 'https://fcm.googleapis.com/fcm/send',
                 'username' => null,
@@ -133,7 +150,7 @@ return [
             ],
         ],
         'web' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Infobip::class,
+            'driver' => Infobip::class,
             'live' => [
                 'url' => 'https://api.infobip.com/sms/2/text/advanced',
                 'username' => null,
@@ -156,7 +173,7 @@ return [
     |
     | This value will be used to across system where model is needed
     */
-    'trigger_model' => \Fintech\Bell\Models\Trigger::class,
+    'trigger_model' => Trigger::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -165,7 +182,7 @@ return [
     |
     | This value will be used to across system where model is needed
     */
-    'trigger_recipient_model' => \Fintech\Bell\Models\TriggerRecipient::class,
+    'trigger_recipient_model' => TriggerRecipient::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -174,7 +191,7 @@ return [
     |
     | This value will be used to across system where model is needed
     */
-    'trigger_variable_model' => \Fintech\Bell\Models\TriggerVariable::class,
+    'trigger_variable_model' => TriggerVariable::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -183,7 +200,7 @@ return [
     |
     | This value will be used to across system where model is needed
     */
-    'notification_template_model' => \Fintech\Bell\Models\NotificationTemplate::class,
+    'notification_template_model' => NotificationTemplate::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -192,7 +209,7 @@ return [
     |
     | This value will be used to across system where model is needed
     */
-    'trigger_action_model' => \Fintech\Bell\Models\TriggerAction::class,
+    'trigger_action_model' => TriggerAction::class,
 
     //** Model Config Point Do not Remove **//
     /*
@@ -204,17 +221,17 @@ return [
     */
 
     'repositories' => [
-        \Fintech\Bell\Interfaces\TriggerRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerRepository::class,
+        \Fintech\Bell\Interfaces\TriggerRepository::class => TriggerRepository::class,
 
-        \Fintech\Bell\Interfaces\TriggerRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerRepository::class,
+        \Fintech\Bell\Interfaces\TriggerRepository::class => TriggerRepository::class,
 
-        \Fintech\Bell\Interfaces\TriggerRecipientRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerRecipientRepository::class,
+        \Fintech\Bell\Interfaces\TriggerRecipientRepository::class => TriggerRecipientRepository::class,
 
-        \Fintech\Bell\Interfaces\TriggerVariableRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerVariableRepository::class,
+        \Fintech\Bell\Interfaces\TriggerVariableRepository::class => TriggerVariableRepository::class,
 
-        \Fintech\Bell\Interfaces\NotificationTemplateRepository::class => \Fintech\Bell\Repositories\Eloquent\NotificationTemplateRepository::class,
+        \Fintech\Bell\Interfaces\NotificationTemplateRepository::class => NotificationTemplateRepository::class,
 
-        \Fintech\Bell\Interfaces\TriggerActionRepository::class => \Fintech\Bell\Repositories\Eloquent\TriggerActionRepository::class,
+        \Fintech\Bell\Interfaces\TriggerActionRepository::class => TriggerActionRepository::class,
 
         //** Repository Binding Config Point Do not Remove **//
     ],

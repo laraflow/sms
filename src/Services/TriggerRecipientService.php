@@ -17,20 +17,6 @@ class TriggerRecipientService
         $this->triggerRecipientRepository = $triggerRecipientRepository;
     }
 
-    /**
-     * @return mixed
-     */
-    public function list(array $filters = [])
-    {
-        return $this->triggerRecipientRepository->list($filters);
-
-    }
-
-    public function create(array $inputs = [])
-    {
-        return $this->triggerRecipientRepository->create($inputs);
-    }
-
     public function find($id, $onlyTrashed = false)
     {
         return $this->triggerRecipientRepository->find($id, $onlyTrashed);
@@ -56,8 +42,22 @@ class TriggerRecipientService
         return $this->triggerRecipientRepository->list($filters);
     }
 
+    /**
+     * @return mixed
+     */
+    public function list(array $filters = [])
+    {
+        return $this->triggerRecipientRepository->list($filters);
+
+    }
+
     public function import(array $filters)
     {
         return $this->triggerRecipientRepository->create($filters);
+    }
+
+    public function create(array $inputs = [])
+    {
+        return $this->triggerRecipientRepository->create($inputs);
     }
 }

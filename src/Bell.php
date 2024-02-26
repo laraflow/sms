@@ -3,6 +3,11 @@
 namespace Fintech\Bell;
 
 use Fintech\Bell\Exceptions\BellException;
+use Fintech\Bell\Services\NotificationTemplateService;
+use Fintech\Bell\Services\TriggerActionService;
+use Fintech\Bell\Services\TriggerRecipientService;
+use Fintech\Bell\Services\TriggerService;
+use Fintech\Bell\Services\TriggerVariableService;
 
 class Bell
 {
@@ -39,43 +44,43 @@ class Bell
     }
 
     /**
-     * @return \Fintech\Bell\Services\TriggerService
+     * @return TriggerService
      */
     public function trigger()
     {
-        return app(\Fintech\Bell\Services\TriggerService::class);
+        return app(TriggerService::class);
     }
 
     /**
-     * @return \Fintech\Bell\Services\TriggerRecipientService
+     * @return TriggerRecipientService
      */
     public function triggerRecipient()
     {
-        return app(\Fintech\Bell\Services\TriggerRecipientService::class);
+        return app(TriggerRecipientService::class);
     }
 
     /**
-     * @return \Fintech\Bell\Services\TriggerVariableService
+     * @return TriggerVariableService
      */
     public function triggerVariable()
     {
-        return app(\Fintech\Bell\Services\TriggerVariableService::class);
+        return app(TriggerVariableService::class);
     }
 
     /**
-     * @return \Fintech\Bell\Services\NotificationTemplateService
+     * @return NotificationTemplateService
      */
     public function notificationTemplate()
     {
-        return app(\Fintech\Bell\Services\NotificationTemplateService::class);
+        return app(NotificationTemplateService::class);
     }
 
     /**
-     * @return \Fintech\Bell\Services\TriggerActionService
+     * @return TriggerActionService
      */
     public function triggerAction()
     {
-        return app(\Fintech\Bell\Services\TriggerActionService::class);
+        return app(TriggerActionService::class);
     }
 
     //** Crud Service Method Point Do not Remove **//

@@ -17,20 +17,6 @@ class NotificationTemplateService
         $this->notificationTemplateRepository = $notificationTemplateRepository;
     }
 
-    /**
-     * @return mixed
-     */
-    public function list(array $filters = [])
-    {
-        return $this->notificationTemplateRepository->list($filters);
-
-    }
-
-    public function create(array $inputs = [])
-    {
-        return $this->notificationTemplateRepository->create($inputs);
-    }
-
     public function find($id, $onlyTrashed = false)
     {
         return $this->notificationTemplateRepository->find($id, $onlyTrashed);
@@ -56,8 +42,22 @@ class NotificationTemplateService
         return $this->notificationTemplateRepository->list($filters);
     }
 
+    /**
+     * @return mixed
+     */
+    public function list(array $filters = [])
+    {
+        return $this->notificationTemplateRepository->list($filters);
+
+    }
+
     public function import(array $filters)
     {
         return $this->notificationTemplateRepository->create($filters);
+    }
+
+    public function create(array $inputs = [])
+    {
+        return $this->notificationTemplateRepository->create($inputs);
     }
 }

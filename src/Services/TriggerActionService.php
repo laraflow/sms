@@ -17,20 +17,6 @@ class TriggerActionService
         $this->triggerActionRepository = $triggerActionRepository;
     }
 
-    /**
-     * @return mixed
-     */
-    public function list(array $filters = [])
-    {
-        return $this->triggerActionRepository->list($filters);
-
-    }
-
-    public function create(array $inputs = [])
-    {
-        return $this->triggerActionRepository->create($inputs);
-    }
-
     public function find($id, $onlyTrashed = false)
     {
         return $this->triggerActionRepository->find($id, $onlyTrashed);
@@ -56,8 +42,22 @@ class TriggerActionService
         return $this->triggerActionRepository->list($filters);
     }
 
+    /**
+     * @return mixed
+     */
+    public function list(array $filters = [])
+    {
+        return $this->triggerActionRepository->list($filters);
+
+    }
+
     public function import(array $filters)
     {
         return $this->triggerActionRepository->create($filters);
+    }
+
+    public function create(array $inputs = [])
+    {
+        return $this->triggerActionRepository->create($inputs);
     }
 }

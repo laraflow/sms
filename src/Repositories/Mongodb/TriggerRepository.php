@@ -3,6 +3,7 @@
 namespace Fintech\Bell\Repositories\Mongodb;
 
 use Fintech\Bell\Interfaces\TriggerRepository as InterfacesTriggerRepository;
+use Fintech\Bell\Models\Trigger;
 use Fintech\Core\Repositories\MongodbRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,9 +17,9 @@ class TriggerRepository extends MongodbRepository implements InterfacesTriggerRe
 {
     public function __construct()
     {
-        $model = app(config('fintech.bell.trigger_model', \Fintech\Bell\Models\Trigger::class));
+        $model = app(config('fintech.bell.trigger_model', Trigger::class));
 
-        if (! $model instanceof Model) {
+        if (!$model instanceof Model) {
             throw new InvalidArgumentException("Mongodb repository require model class to be `MongoDB\Laravel\Eloquent\Model` instance.");
         }
 
@@ -36,7 +37,7 @@ class TriggerRepository extends MongodbRepository implements InterfacesTriggerRe
         $query = $this->model->newQuery();
 
         //Searching
-        if (! empty($filters['search'])) {
+        if (!empty($filters['search'])) {
             if (is_numeric($filters['search'])) {
                 $query->where($this->model->getKeyName(), 'like', "%{$filters['search']}%");
             } else {

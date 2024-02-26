@@ -2,12 +2,12 @@
 
 namespace Fintech\Bell\Models;
 
+use Fintech\Core\Abstracts\BaseModel;
 use Fintech\Core\Traits\AuditableTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class NotificationTemplate extends Model
+class NotificationTemplate extends BaseModel
 {
     use AuditableTrait;
     use SoftDeletes;
@@ -41,7 +41,7 @@ class NotificationTemplate extends Model
     */
     public function trigger(): BelongsTo
     {
-        return $this->belongsTo(config('fintech.bell.trigger_model', \Fintech\Bell\Models\Trigger::class));
+        return $this->belongsTo(config('fintech.bell.trigger_model', Trigger::class));
     }
     /*
     |--------------------------------------------------------------------------

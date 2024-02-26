@@ -2,11 +2,13 @@
 
 namespace Fintech\Bell\Http\Requests;
 
+use Fintech\Core\Traits\HasPaginateQuery;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IndexTriggerRequest extends FormRequest
 {
-    use \Fintech\Core\Traits\HasPaginateQuery;
+    use HasPaginateQuery;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -19,7 +21,7 @@ class IndexTriggerRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -33,21 +35,6 @@ class IndexTriggerRequest extends FormRequest
             'with_detail' => ['boolean', 'nullable'],
             'trashed' => ['boolean', 'nullable'],
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $options = $this->getPaginateOptions();
-
-        $options['with_detail'] = false;
-
-        $withDetail = $this->input('with_detail', '');
-
-        if ($withDetail != null && strlen($withDetail) != 0) {
-            $options['with_detail'] = $this->boolean('with_detail', true);
-        }
-
-        $this->merge($options);
     }
 
     /**
@@ -72,5 +59,20 @@ class IndexTriggerRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $options = $this->getPaginateOptions();
+
+        $options['with_detail'] = false;
+
+        $withDetail = $this->input('with_detail', '');
+
+        if ($withDetail != null && strlen($withDetail) != 0) {
+            $options['with_detail'] = $this->boolean('with_detail', true);
+        }
+
+        $this->merge($options);
     }
 }

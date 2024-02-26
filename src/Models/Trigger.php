@@ -2,12 +2,12 @@
 
 namespace Fintech\Bell\Models;
 
+use Fintech\Core\Abstracts\BaseModel;
 use Fintech\Core\Traits\AuditableTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Trigger extends Model
+class Trigger extends BaseModel
 {
     use AuditableTrait;
     use SoftDeletes;
@@ -41,22 +41,22 @@ class Trigger extends Model
     */
     public function triggerActions(): HasMany
     {
-        return $this->hasMany(config('fintech.bell.trigger_action_model', \Fintech\Bell\Models\TriggerAction::class));
+        return $this->hasMany(config('fintech.bell.trigger_action_model', TriggerAction::class));
     }
 
     public function triggerRecipients(): HasMany
     {
-        return $this->hasMany(config('fintech.bell.trigger_recipient_model', \Fintech\Bell\Models\TriggerRecipient::class));
+        return $this->hasMany(config('fintech.bell.trigger_recipient_model', TriggerRecipient::class));
     }
 
     public function triggerVariables(): HasMany
     {
-        return $this->hasMany(config('fintech.bell.trigger_variable_model', \Fintech\Bell\Models\TriggerVariable::class));
+        return $this->hasMany(config('fintech.bell.trigger_variable_model', TriggerVariable::class));
     }
 
     public function notificationTemplates(): HasMany
     {
-        return $this->hasMany(config('fintech.bell.notification_template_model', \Fintech\Bell\Models\NotificationTemplate::class));
+        return $this->hasMany(config('fintech.bell.notification_template_model', NotificationTemplate::class));
     }
 
     /*

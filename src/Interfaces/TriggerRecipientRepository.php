@@ -5,6 +5,7 @@ namespace Fintech\Bell\Interfaces;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use MongoDB\Laravel\Eloquent\Model as MongodbModel;
 
 /**
@@ -37,7 +38,7 @@ interface TriggerRecipientRepository
     /**
      * find and delete a entry from records
      *
-     * @param  bool  $onlyTrashed
+     * @param bool $onlyTrashed
      * @return EloquentModel|MongodbModel|null
      */
     public function find(int|string $id, $onlyTrashed = false);
@@ -50,7 +51,7 @@ interface TriggerRecipientRepository
     /**
      * find and restore a entry from records
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function restore(int|string $id);
 }
