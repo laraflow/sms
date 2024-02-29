@@ -7,7 +7,6 @@ use Fintech\Bell\Models\TriggerRecipient;
 use Fintech\Core\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
-use InvalidArgumentException;
 
 /**
  * Class TriggerRecipientRepository
@@ -30,7 +29,7 @@ class TriggerRecipientRepository extends EloquentRepository implements Interface
         $query = $this->model->newQuery();
 
         //Searching
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             if (is_numeric($filters['search'])) {
                 $query->where($this->model->getKeyName(), 'like', "%{$filters['search']}%");
             } else {

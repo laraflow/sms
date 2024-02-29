@@ -19,7 +19,7 @@ class TriggerVariableRepository extends MongodbRepository implements InterfacesT
     {
         $model = app(config('fintech.bell.trigger_variable_model', TriggerVariable::class));
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new InvalidArgumentException("Mongodb repository require model class to be `MongoDB\Laravel\Eloquent\Model` instance.");
         }
 
@@ -37,7 +37,7 @@ class TriggerVariableRepository extends MongodbRepository implements InterfacesT
         $query = $this->model->newQuery();
 
         //Searching
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             if (is_numeric($filters['search'])) {
                 $query->where($this->model->getKeyName(), 'like', "%{$filters['search']}%");
             } else {

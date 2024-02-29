@@ -19,7 +19,7 @@ class TriggerActionRepository extends MongodbRepository implements InterfacesTri
     {
         $model = app(config('fintech.bell.trigger_action_model', TriggerAction::class));
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new InvalidArgumentException("Mongodb repository require model class to be `MongoDB\Laravel\Eloquent\Model` instance.");
         }
 
@@ -37,7 +37,7 @@ class TriggerActionRepository extends MongodbRepository implements InterfacesTri
         $query = $this->model->newQuery();
 
         //Searching
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             if (is_numeric($filters['search'])) {
                 $query->where($this->model->getKeyName(), 'like', "%{$filters['search']}%");
             } else {
