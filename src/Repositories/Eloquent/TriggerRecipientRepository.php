@@ -16,13 +16,7 @@ class TriggerRecipientRepository extends EloquentRepository implements Interface
 {
     public function __construct()
     {
-        $model = app(config('fintech.bell.trigger_recipient_model', TriggerRecipient::class));
-
-        if (!$model instanceof Model) {
-            throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
-        }
-
-        $this->model = $model;
+        parent::__construct(config('fintech.bell.trigger_recipient_model', TriggerRecipient::class));
     }
 
     /**

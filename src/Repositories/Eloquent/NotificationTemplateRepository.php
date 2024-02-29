@@ -7,7 +7,6 @@ use Fintech\Bell\Models\NotificationTemplate;
 use Fintech\Core\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
-use InvalidArgumentException;
 
 /**
  * Class NotificationTemplateRepository
@@ -16,13 +15,7 @@ class NotificationTemplateRepository extends EloquentRepository implements Inter
 {
     public function __construct()
     {
-        $model = app(config('fintech.bell.notification_template_model', NotificationTemplate::class));
-
-        if (!$model instanceof Model) {
-            throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
-        }
-
-        $this->model = $model;
+        parent::__construct(config('fintech.bell.notification_template_model', NotificationTemplate::class));
     }
 
     /**

@@ -16,13 +16,7 @@ class TriggerActionRepository extends EloquentRepository implements InterfacesTr
 {
     public function __construct()
     {
-        $model = app(config('fintech.bell.trigger_action_model', TriggerAction::class));
-
-        if (!$model instanceof Model) {
-            throw new InvalidArgumentException("Eloquent repository require model class to be `Illuminate\Database\Eloquent\Model` instance.");
-        }
-
-        $this->model = $model;
+        parent::__construct(config('fintech.bell.trigger_action_model', TriggerAction::class));
     }
 
     /**

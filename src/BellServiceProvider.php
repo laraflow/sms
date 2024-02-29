@@ -22,9 +22,6 @@ class BellServiceProvider extends ServiceProvider
             __DIR__ . '/../config/bell.php', 'fintech.bell'
         );
 
-        $this->app->register(RouteServiceProvider::class);
-        $this->app->register(RepositoryServiceProvider::class);
-
     }
 
     /**
