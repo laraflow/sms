@@ -60,9 +60,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fintech\\Bell\\BellServiceProvider",
-                "Fintech\\Bell\\RouteServiceProvider",
-                "Fintech\\Bell\\RepositoryServiceProvider"
+                "Fintech\\Bell\\BellServiceProvider"
             ],
             "aliases": {
                 "Bell": "Fintech\\Bell\\Facades\\Bell",
