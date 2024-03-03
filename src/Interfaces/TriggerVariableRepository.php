@@ -3,10 +3,10 @@
 namespace Fintech\Bell\Interfaces;
 
 use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Fintech\Core\Abstracts\BaseModel;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
-use MongoDB\Laravel\Eloquent\Model as MongodbModel;
+
 
 /**
  * Interface TriggerVariableRepository
@@ -24,14 +24,14 @@ interface TriggerVariableRepository
     /**
      * Create a new entry resource
      *
-     * @return EloquentModel|MongodbModel|null
+     * @return BaseModel
      */
     public function create(array $attributes = []);
 
     /**
      * find and update a resource attributes
      *
-     * @return EloquentModel|MongodbModel|null
+     * @return BaseModel
      */
     public function update(int|string $id, array $attributes = []);
 
@@ -39,7 +39,7 @@ interface TriggerVariableRepository
      * find and delete a entry from records
      *
      * @param  bool  $onlyTrashed
-     * @return EloquentModel|MongodbModel|null
+     * @return BaseModel
      */
     public function find(int|string $id, $onlyTrashed = false);
 
