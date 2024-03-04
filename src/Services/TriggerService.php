@@ -13,9 +13,9 @@ class TriggerService
     /**
      * TriggerService constructor.
      */
-    public function __construct(TriggerRepository $triggerRepository)
+    public function __construct(public TriggerRepository $triggerRepository)
     {
-        $this->triggerRepository = $triggerRepository;
+
     }
 
     public function find($id, $onlyTrashed = false)

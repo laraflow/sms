@@ -12,9 +12,8 @@ class TriggerRecipientService
     /**
      * TriggerRecipientService constructor.
      */
-    public function __construct(TriggerRecipientRepository $triggerRecipientRepository)
+    public function __construct(public TriggerRecipientRepository $triggerRecipientRepository)
     {
-        $this->triggerRecipientRepository = $triggerRecipientRepository;
     }
 
     public function find($id, $onlyTrashed = false)

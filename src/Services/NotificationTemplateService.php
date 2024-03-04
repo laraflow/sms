@@ -12,9 +12,8 @@ class NotificationTemplateService
     /**
      * NotificationTemplateService constructor.
      */
-    public function __construct(NotificationTemplateRepository $notificationTemplateRepository)
+    public function __construct(public NotificationTemplateRepository $notificationTemplateRepository)
     {
-        $this->notificationTemplateRepository = $notificationTemplateRepository;
     }
 
     public function find($id, $onlyTrashed = false)

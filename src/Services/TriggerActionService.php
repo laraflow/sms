@@ -12,9 +12,8 @@ class TriggerActionService
     /**
      * TriggerActionService constructor.
      */
-    public function __construct(TriggerActionRepository $triggerActionRepository)
+    public function __construct(public TriggerActionRepository $triggerActionRepository)
     {
-        $this->triggerActionRepository = $triggerActionRepository;
     }
 
     public function find($id, $onlyTrashed = false)

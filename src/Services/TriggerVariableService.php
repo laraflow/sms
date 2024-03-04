@@ -12,9 +12,8 @@ class TriggerVariableService
     /**
      * TriggerVariableService constructor.
      */
-    public function __construct(TriggerVariableRepository $triggerVariableRepository)
+    public function __construct(public TriggerVariableRepository $triggerVariableRepository)
     {
-        $this->triggerVariableRepository = $triggerVariableRepository;
     }
 
     public function find($id, $onlyTrashed = false)
