@@ -2,7 +2,6 @@
 
 namespace Fintech\Bell\Http\Requests;
 
-use Fintech\Bell\Models\Trigger;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
