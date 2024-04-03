@@ -53,7 +53,7 @@ return [
     */
     'sms' => [
         'mode' => 'sandbox',
-        'default' => 'clicksend',
+        'default' => 'infobip',
         'clicksend' => [
             'driver' => ClickSend::class,
             'live' => [
@@ -118,16 +118,14 @@ return [
         'infobip' => [
             'driver' => Infobip::class,
             'live' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
-                'username' => null,
-                'password' => null,
-                'from' => null,
+                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
+                'token' => 'fb74be5a5535c425732e225f3f2697ec-9b4b774d-580b-4ece-8384-0ef883464536',
+                'from' => 'ServiceSMS',
             ],
             'sandbox' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
-                'username' => null,
-                'password' => null,
-                'from' => null,
+                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
+                'token' => 'fb74be5a5535c425732e225f3f2697ec-9b4b774d-580b-4ece-8384-0ef883464536',
+                'from' => 'ServiceSMS',
             ],
         ],
     ],
@@ -152,13 +150,13 @@ return [
         'web' => [
             'driver' => Infobip::class,
             'live' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
+                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
                 'username' => null,
                 'password' => null,
                 'from' => null,
             ],
             'sandbox' => [
-                'url' => 'https://api.infobip.com/sms/2/text/advanced',
+                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
                 'username' => null,
                 'password' => null,
                 'from' => null,

@@ -18,9 +18,8 @@ class Infobip extends SmsDriver
         $mode = config('fintech.bell.sms.mode', 'sandbox');
 
         $this->config = config("fintech.bell.sms.infobip.{$mode}", [
-            'url' => null,
-            'username' => null,
-            'password' => null,
+            'url' => 'https://api.infobip.com/sms/2/text/advanced',
+            'token' => null,
             'from' => null,
         ]);
     }
@@ -30,18 +29,22 @@ class Infobip extends SmsDriver
         $this->validate($message);
 
         $payload = [
-            'messages' => [[
-                'destinations' => [['to' => $message->getReceiver()]],
-                'from' => $this->config['from'],
-                'text' => $message->getContent(),
-            ]],
+            'messages' => [
+                [
+                    'destinations' => [['to' => $message->getReceiver()]],
+                    'from' => $this->config['from'],
+                    'text' => $message->getContent(),
+                ]
+            ],
         ];
 
         $response = Http::withoutVerifying()
             ->timeout(30)
-            ->withBasicAuth($this->config['username'], $this->config['password'])
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('Accept', 'application/json')
+            ->withToken($this->config['token'], 'App')
             ->post($this->config['url'], $payload)->json();
 
-        logger('SMS Response', [$response]);
+        logger('Info Bip Response', [$response]);
     }
 }
