@@ -34,7 +34,7 @@ class Infobip extends SmsDriver
                     'destinations' => [['to' => $message->getReceiver()]],
                     'from' => $this->config['from'],
                     'text' => $message->getContent(),
-                ]
+                ],
             ],
         ];
 
