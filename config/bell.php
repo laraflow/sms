@@ -2,6 +2,7 @@
 
 // config for Fintech/Bell
 use Fintech\Bell\Drivers\Push\FirebasePush;
+use Fintech\Bell\Drivers\Sms\Clickatell;
 use Fintech\Bell\Drivers\Sms\ClickSend;
 use Fintech\Bell\Drivers\Sms\Infobip;
 use Fintech\Bell\Drivers\Sms\MessageBird;
@@ -126,6 +127,19 @@ return [
                 'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
                 'token' => 'fb74be5a5535c425732e225f3f2697ec-9b4b774d-580b-4ece-8384-0ef883464536',
                 'from' => 'ServiceSMS',
+            ],
+        ],
+        'clickatell' => [
+            'driver' => Clickatell::class,
+            'live' => [
+                'url' => 'https://platform.clickatell.com/messages/http/send',
+                'apiKey' => '',
+                'from' => ''
+            ],
+            'sandbox' => [
+                'url' => 'https://platform.clickatell.com/messages/http/send',
+                'apiKey' => '',
+                'from' => ''
             ],
         ],
     ],
