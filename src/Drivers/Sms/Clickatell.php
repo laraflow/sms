@@ -20,7 +20,7 @@ class Clickatell extends SmsDriver
         $this->config = config("fintech.bell.sms.clickatell.{$mode}", [
             'url' => 'https://platform.clickatell.com/messages/http/send',
             'apiKey' => null,
-            'from' => null
+            'from' => null,
         ]);
     }
 

@@ -127,7 +127,7 @@ return [
                 'from' => null,
                 'ref' => null,
                 'maxsplit' => null,
-                'delay' => null
+                'delay' => null,
             ],
             'sandbox' => [
                 'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
@@ -136,7 +136,7 @@ return [
                 'from' => null,
                 'ref' => null,
                 'maxsplit' => null,
-                'delay' => null
+                'delay' => null,
             ],
         ],
         'africastalking' => [
@@ -172,12 +172,12 @@ return [
             'live' => [
                 'url' => 'https://platform.clickatell.com/messages/http/send',
                 'apiKey' => '',
-                'from' => ''
+                'from' => '',
             ],
             'sandbox' => [
                 'url' => 'https://platform.clickatell.com/messages/http/send',
                 'apiKey' => '',
-                'from' => ''
+                'from' => '',
             ],
         ],
     ],

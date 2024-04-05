@@ -24,7 +24,7 @@ class SmsBroadcast extends SmsDriver
             'from' => null,
             'ref' => null,
             'maxsplit' => null,
-            'delay' => null
+            'delay' => null,
         ]);
     }
 

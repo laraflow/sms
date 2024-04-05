@@ -21,7 +21,7 @@ class AfricasTalking extends SmsDriver
             'url' => 'https://api.sandbox.africastalking.com/version1/messaging',
             'apiKey' => null,
             'username' => null,
-            'from' => null
+            'from' => null,
         ]);
     }
 
