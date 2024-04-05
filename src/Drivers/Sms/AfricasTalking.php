@@ -7,9 +7,9 @@ use Fintech\Bell\Messages\SmsMessage;
 use Illuminate\Support\Facades\Http;
 
 /**
- * @see https://www.smsbroadcast.co.uk/developers
+ * @see https://docs.clickatell.com/channels/sms-channels/sms-api-reference/#tag/SMS-API/operation/sendMessageHTTP
  */
-class SmsBroadcast extends SmsDriver
+class AfricasTalking extends SmsDriver
 {
     private array $config;
 
@@ -17,14 +17,11 @@ class SmsBroadcast extends SmsDriver
     {
         $mode = config('fintech.bell.sms.mode', 'sandbox');
 
-        $this->config = config("fintech.bell.sms.smsbroadcast.{$mode}", [
-            'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
+        $this->config = config("fintech.bell.sms.clickatell.{$mode}", [
+            'url' => 'https://api.sandbox.africastalking.com/version1/messaging',
+            'apiKey' => null,
             'username' => null,
-            'password' => null,
-            'from' => null,
-            'ref' => null,
-            'maxsplit' => null,
-            'delay' => null
+            'from' => null
         ]);
     }
 
@@ -34,12 +31,8 @@ class SmsBroadcast extends SmsDriver
 
         $payload = [
             'username' => $this->config['username'],
-            'password' => $this->config['password'],
-            'from' => $this->config['from'],
-            'ref' => $this->config['ref'],
-            'maxsplit' => $this->config['maxsplit'],
-            'delay' => $this->config['delay'],
             'to' => $message->getReceiver(),
+            'from' => $this->config['from'],
             'message' => $message->getContent(),
         ];
 
@@ -47,8 +40,9 @@ class SmsBroadcast extends SmsDriver
             ->timeout(30)
             ->withHeader('Content-Type', 'application/json')
             ->withHeader('Accept', 'application/json')
+            ->withHeader('apiKey', $this->config['apiKey'])
             ->get($this->config['url'], $payload)->json();
 
-        logger('Sms Broadcast Response', [$response]);
+        logger('Africa\'s Talking Response', [$response]);
     }
 }

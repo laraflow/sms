@@ -2,6 +2,7 @@
 
 // config for Fintech/Bell
 use Fintech\Bell\Drivers\Push\FirebasePush;
+use Fintech\Bell\Drivers\Sms\AfricasTalking;
 use Fintech\Bell\Drivers\Sms\Clickatell;
 use Fintech\Bell\Drivers\Sms\ClickSend;
 use Fintech\Bell\Drivers\Sms\Infobip;
@@ -136,6 +137,21 @@ return [
                 'ref' => null,
                 'maxsplit' => null,
                 'delay' => null
+            ],
+        ],
+        'africastalking' => [
+            'driver' => AfricasTalking::class,
+            'live' => [
+                'url' => 'https://api.africastalking.com/version1/messaging',
+                'apiKey' => null,
+                'username' => null,
+                'from' => null,
+            ],
+            'sandbox' => [
+                'url' => 'https://api.sandbox.africastalking.com/version1/messaging',
+                'apiKey' => null,
+                'username' => null,
+                'from' => null,
             ],
         ],
         'infobip' => [
