@@ -6,6 +6,7 @@ use Fintech\Bell\Drivers\Sms\Clickatell;
 use Fintech\Bell\Drivers\Sms\ClickSend;
 use Fintech\Bell\Drivers\Sms\Infobip;
 use Fintech\Bell\Drivers\Sms\MessageBird;
+use Fintech\Bell\Drivers\Sms\SmsBroadcast;
 use Fintech\Bell\Drivers\Sms\Telnyx;
 use Fintech\Bell\Drivers\Sms\Twilio;
 use Fintech\Bell\Models\NotificationTemplate;
@@ -114,6 +115,27 @@ return [
                 'username' => null,
                 'password' => null,
                 'from' => null,
+            ],
+        ],
+        'smsbroadcast' => [
+            'driver' => SmsBroadcast::class,
+            'live' => [
+                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
+                'username' => null,
+                'password' => null,
+                'from' => null,
+                'ref' => null,
+                'maxsplit' => null,
+                'delay' => null
+            ],
+            'sandbox' => [
+                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
+                'username' => null,
+                'password' => null,
+                'from' => null,
+                'ref' => null,
+                'maxsplit' => null,
+                'delay' => null
             ],
         ],
         'infobip' => [
