@@ -23,7 +23,7 @@ class SmsChannel implements ChannelInterface
 
         $driver = config("sms.vendors.{$active}.driver");
 
-        $mode = config("sms.mode", 'sandbox');
+        $mode = config('sms.mode', 'sandbox');
 
         $config = config("sms.vendors.{$active}.{$mode}", []);
 
@@ -35,8 +35,8 @@ class SmsChannel implements ChannelInterface
      */
     public function send(object $notifiable, \Illuminate\Notifications\Notification $notification): void
     {
-        if (!method_exists($notification, 'toSms')) {
-            throw new BadMethodCallException(get_class($notification) . " notification is missing the toSms(object $notifiable): SmsMessage method.");
+        if (! method_exists($notification, 'toSms')) {
+            throw new BadMethodCallException(get_class($notification)." notification is missing the toSms(object $notifiable): SmsMessage method.");
         }
 
         try {

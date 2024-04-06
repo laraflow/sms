@@ -9,7 +9,7 @@ return [
     | this configuration is for debugging purpose. if enabled then program will log
     | sms vendor response in debug category.
     */
-    'log' => (bool)env('SMS_LOG', env('APP_DEBUG', false)),
+    'log' => (bool) env('SMS_LOG', env('APP_DEBUG', false)),
 
     /*
     |--------------------------------------------------------------------------

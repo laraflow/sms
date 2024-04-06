@@ -2,9 +2,9 @@
 
 namespace Laraflow\Sms\Drivers\Sms;
 
+use Illuminate\Support\Facades\Http;
 use Laraflow\Sms\Drivers\SmsDriver;
 use Laraflow\Sms\Messages\SmsMessage;
-use Illuminate\Support\Facades\Http;
 
 /**
  * @see https://developers.messagebird.com/api/sms-messaging/#send-outbound-sms

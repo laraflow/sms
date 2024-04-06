@@ -2,8 +2,8 @@
 
 namespace Laraflow\Sms\Drivers;
 
-use Laraflow\Sms\Messages\SmsMessage;
 use InvalidArgumentException;
+use Laraflow\Sms\Messages\SmsMessage;
 
 abstract class SmsDriver
 {

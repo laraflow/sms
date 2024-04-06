@@ -2,9 +2,9 @@
 
 namespace Laraflow\Sms\Drivers\Sms;
 
+use Illuminate\Support\Facades\Http;
 use Laraflow\Sms\Drivers\SmsDriver;
 use Laraflow\Sms\Messages\SmsMessage;
-use Illuminate\Support\Facades\Http;
 
 /**
  * @see https://developers.clicksend.com/docs/rest/v3/?shell#send-sms

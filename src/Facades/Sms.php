@@ -8,7 +8,6 @@ use Laraflow\Sms\Drivers\SmsDriver;
 /**
  * @method static SmsDriver sms()
  *
- *
  * @see \Laraflow\Sms\Bell
  */
 class Sms extends Facade
