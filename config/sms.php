@@ -33,6 +33,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | SMS Sender Name
+    |--------------------------------------------------------------------------
+    | this configuration is used to tell system what value will be used
+    | if sms vendor support sms name masking
+    | "sandbox" or "live".
+    */
+    'from' => env('SMS_FROM_NAME', env('APP_NAME', 'Laravel')),
+
+    /*
+    |--------------------------------------------------------------------------
     | Vendor Configuration
     |--------------------------------------------------------------------------
     |
@@ -42,74 +52,89 @@ return [
     | Note: while adding prefix add closing ending slash '/'
     */
     'vendors' => [
+        'africastalking' => [
+            'driver' => \Laraflow\Sms\Drivers\AfricasTalking::class,
+            'live' => [
+                'url' => 'https://api.africastalking.com/version1/messaging',
+                'apiKey' => env('SMS_AFRICA_TALKING_API_KEY'),
+                'username' => env('SMS_AFRICA_TALKING_USERNAME'),
+
+            ],
+            'sandbox' => [
+                'url' => 'https://api.sandbox.africastalking.com/version1/messaging',
+                'apiKey' => env('SMS_AFRICA_TALKING_API_KEY'),
+                'username' => env('SMS_AFRICA_TALKING_USERNAME'),
+
+            ],
+        ],
         'clicksend' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\ClickSend::class,
+            'driver' => \Laraflow\Sms\Drivers\ClickSend::class,
             'live' => [
                 'url' => 'https://rest.clicksend.com/v3/sms/send',
                 'username' => null,
                 'password' => null,
-                'from' => null,
+
             ],
             'sandbox' => [
                 'url' => 'https://rest.clicksend.com/v3/sms/send',
                 'username' => 'masud@clavisint.com',
                 //                                'password' => 'Masudalam@13119214',
                 'password' => 'D08ECA95-5C9B-B77B-D6B9-47AF3CED3F5E',
-                'from' => null,
+
             ],
         ],
         'messagebird' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\MessageBird::class,
+            'driver' => \Laraflow\Sms\Drivers\MessageBird::class,
             'live' => [
                 'url' => 'https://rest.messagebird.com/messages',
                 'originator' => null,
                 'access_key' => null,
-                'from' => null,
+
             ],
             'sandbox' => [
                 'url' => 'https://rest.messagebird.com/messages',
                 'originator' => null,
                 'access_key' => null,
-                'from' => null,
+
             ],
         ],
         'twilio' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Twilio::class,
+            'driver' => \Laraflow\Sms\Drivers\Twilio::class,
             'live' => [
                 'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'username' => null,
                 'password' => null,
-                'from' => null,
+
             ],
             'sandbox' => [
                 'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'username' => null,
                 'password' => null,
-                'from' => null,
+
             ],
         ],
         'telnyx' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Telnyx::class,
+            'driver' => \Laraflow\Sms\Drivers\Telnyx::class,
             'live' => [
                 'url' => 'https://api.telnyx.com/v2/messages',
                 'username' => null,
                 'password' => null,
-                'from' => null,
+
             ],
             'sandbox' => [
                 'url' => 'https://api.telnyx.com/v2/messages',
                 'username' => null,
                 'password' => null,
-                'from' => null,
+
             ],
         ],
         'smsbroadcast' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\SmsBroadcast::class,
+            'driver' => \Laraflow\Sms\Drivers\SmsBroadcast::class,
             'live' => [
                 'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
                 'username' => null,
                 'password' => null,
-                'from' => null,
+
                 'ref' => null,
                 'maxsplit' => null,
                 'delay' => null,
@@ -118,29 +143,14 @@ return [
                 'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
                 'username' => null,
                 'password' => null,
-                'from' => null,
+
                 'ref' => null,
                 'maxsplit' => null,
                 'delay' => null,
-            ],
-        ],
-        'africastalking' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\AfricasTalking::class,
-            'live' => [
-                'url' => 'https://api.africastalking.com/version1/messaging',
-                'apiKey' => null,
-                'username' => null,
-                'from' => null,
-            ],
-            'sandbox' => [
-                'url' => 'https://api.sandbox.africastalking.com/version1/messaging',
-                'apiKey' => null,
-                'username' => null,
-                'from' => null,
             ],
         ],
         'infobip' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Infobip::class,
+            'driver' => \Laraflow\Sms\Drivers\Infobip::class,
             'live' => [
                 'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
                 'token' => 'fb74be5a5535c425732e225f3f2697ec-9b4b774d-580b-4ece-8384-0ef883464536',
@@ -153,7 +163,7 @@ return [
             ],
         ],
         'clickatell' => [
-            'driver' => \Fintech\Bell\Drivers\Sms\Clickatell::class,
+            'driver' => \Laraflow\Sms\Drivers\Clickatell::class,
             'live' => [
                 'url' => 'https://platform.clickatell.com/messages/http/send',
                 'apiKey' => '',

@@ -1,10 +1,10 @@
 <?php
 
-namespace Laraflow\Sms\Drivers\Sms;
+namespace Laraflow\Sms\Drivers;
 
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Drivers\SmsDriver;
-use Laraflow\Sms\Messages\SmsMessage;
+use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\SmsMessage;
 
 /**
  * @see https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message

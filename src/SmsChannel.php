@@ -3,12 +3,18 @@
 namespace Laraflow\Sms;
 
 use BadMethodCallException;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
+use Laraflow\Sms\Abstracts\SmsDriver;
 use Laraflow\Sms\Exceptions\SmsException;
-use Laraflow\Sms\Interfaces\ChannelInterface;
 
-class SmsChannel implements ChannelInterface
+class SmsChannel
 {
-    private $driver;
+    /**
+     * @var SmsDriver
+     */
+    private mixed $driver;
 
     /**
      * @throws SmsException
@@ -27,26 +33,42 @@ class SmsChannel implements ChannelInterface
 
         $config = config("sms.vendors.{$active}.{$mode}", []);
 
-        $this->driver = \App::make($driver, $config);
+        $this->driver = \Illuminate\Support\Facades\App::make($driver);
+
+        $this->driver->setConfig($config);
+
+        $this->driver->mode = $mode;
     }
 
     /**
      * Send the given notification.
+     * @throws ValidationException
+     * @throws \Exception
      */
     public function send(object $notifiable, \Illuminate\Notifications\Notification $notification): void
     {
-        if (! method_exists($notification, 'toSms')) {
-            throw new BadMethodCallException(get_class($notification)." notification is missing the toSms(object $notifiable): SmsMessage method.");
+        $this->driver->validateConfig();
+
+        if (!method_exists($notification, 'toSms')) {
+            throw new BadMethodCallException(get_class($notification) . " notification is missing the toSms(object $notifiable): SmsMessage method.");
         }
 
         try {
+
             $message = $notification->toSms($notifiable);
 
-            $this->driver->send($message);
+            $this->driver->validate($message);
+
+            $response = $this->driver->send($message);
+
+            if (config('sms.log', false)) {
+                Log::debug("SMS Vendor Response: ", ['status_code' => $response->status(), 'response' => $response->body()]);
+            }
 
         } catch (\Exception $exception) {
-
-            \Log::error($exception);
+            (App::isProduction())
+                ? Log::error($exception)
+                : throw new \Exception($exception->getMessage(), 0, $exception);
         }
     }
 }

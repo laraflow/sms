@@ -1,34 +1,38 @@
 <?php
 
-namespace Laraflow\Sms\Drivers\Sms;
+namespace Laraflow\Sms\Drivers;
 
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Drivers\SmsDriver;
-use Laraflow\Sms\Messages\SmsMessage;
+use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\SmsMessage;
 
 /**
- * @see https://docs.clickatell.com/channels/sms-channels/sms-api-reference/#tag/SMS-API/operation/sendMessageHTTP
+ * @reference https://developers.africastalking.com/docs/sms/overview
  */
 class AfricasTalking extends SmsDriver
 {
-    private array $config;
 
-    public function __construct()
+    /**
+     * this function return validation rules for
+     * that sms driver to operate.
+     *
+     * @return array
+     */
+    public function rules(): array
     {
-        $mode = config('fintech.bell.sms.mode', 'sandbox');
-
-        $this->config = config("fintech.bell.sms.clickatell.{$mode}", [
-            'url' => 'https://api.sandbox.africastalking.com/version1/messaging',
-            'apiKey' => null,
-            'username' => null,
-            'from' => null,
-        ]);
+        return [
+            'url' => 'required|url:http,https',
+            'apiKey' => 'required|string',
+            'username' => 'required|string'
+        ];
     }
 
-    public function send(SmsMessage $message): void
+    /**
+     * @param SmsMessage $message
+     * @return \Illuminate\Http\Client\Response
+     */
+    public function send(SmsMessage $message): \Illuminate\Http\Client\Response
     {
-        $this->validate($message);
-
         $payload = [
             'username' => $this->config['username'],
             'to' => $message->getReceiver(),
@@ -36,13 +40,13 @@ class AfricasTalking extends SmsDriver
             'message' => $message->getContent(),
         ];
 
-        $response = Http::withoutVerifying()
+        return Http::withoutVerifying()
             ->timeout(30)
             ->withHeader('Content-Type', 'application/json')
             ->withHeader('Accept', 'application/json')
             ->withHeader('apiKey', $this->config['apiKey'])
-            ->get($this->config['url'], $payload)->json();
+            ->get($this->config['url'], $payload);
 
-        logger('Africa\'s Talking Response', [$response]);
     }
+
 }
