@@ -23,8 +23,6 @@ class MessageBird extends SmsDriver
     /**
      * this function return validation rules for
      * that sms driver to operate.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -32,14 +30,10 @@ class MessageBird extends SmsDriver
             'type' => 'required|string',
             'url' => 'required|url:http,https',
             'access_key' => 'required|string',
-            'mclass' => 'nullable'
+            'mclass' => 'nullable',
         ];
     }
 
-    /**
-     * @param SmsMessage $message
-     * @return Response
-     */
     public function send(SmsMessage $message): Response
     {
         $payload = [

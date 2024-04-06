@@ -42,6 +42,7 @@ class SmsChannel
 
     /**
      * Send the given notification.
+     *
      * @throws ValidationException
      * @throws \Exception
      */
@@ -49,8 +50,8 @@ class SmsChannel
     {
         $this->driver->validateConfig();
 
-        if (!method_exists($notification, 'toSms')) {
-            throw new BadMethodCallException(get_class($notification) . " notification is missing the toSms(object $notifiable): SmsMessage method.");
+        if (! method_exists($notification, 'toSms')) {
+            throw new BadMethodCallException(get_class($notification)." notification is missing the toSms(object $notifiable): SmsMessage method.");
         }
 
         try {
@@ -62,7 +63,7 @@ class SmsChannel
             $response = $this->driver->send($message);
 
             if (config('sms.log', false)) {
-                Log::debug("SMS Vendor Response: ", ['status_code' => $response->status(), 'response' => $response->body()]);
+                Log::debug('SMS Vendor Response: ', ['status_code' => $response->status(), 'response' => $response->body()]);
             }
 
         } catch (\Exception $exception) {

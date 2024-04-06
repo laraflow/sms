@@ -15,15 +15,13 @@ class ClickSend extends SmsDriver
     protected function mergeConfig(): array
     {
         return [
-            'source' => 'php'
+            'source' => 'php',
         ];
     }
 
     /**
      * this function return validation rules for
      * that sms driver to operate.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -31,14 +29,10 @@ class ClickSend extends SmsDriver
             'source' => 'required|string',
             'url' => 'required|url:http,https',
             'password' => 'required|string',
-            'username' => 'required|string'
+            'username' => 'required|string',
         ];
     }
 
-    /**
-     * @param SmsMessage $message
-     * @return Response
-     */
     public function send(SmsMessage $message): Response
     {
         $payload = ['messages' => [[
