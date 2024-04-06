@@ -2,6 +2,7 @@
 
 namespace Laraflow\Sms\Drivers;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Laraflow\Sms\Abstracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
@@ -11,35 +12,45 @@ use Laraflow\Sms\SmsMessage;
  */
 class ClickSend extends SmsDriver
 {
-    private array $config;
-
-    public function __construct()
+    protected function mergeConfig(): array
     {
-        $mode = config('fintech.bell.sms.mode', 'sandbox');
-
-        $this->config = config("fintech.bell.sms.clicksend.{$mode}", [
-            'url' => null,
-            'username' => null,
-            'password' => null,
-        ]);
+        return [
+            'source' => 'php'
+        ];
     }
 
-    public function send(SmsMessage $message): void
+    /**
+     * this function return validation rules for
+     * that sms driver to operate.
+     *
+     * @return array
+     */
+    public function rules(): array
     {
-        $this->validate($message);
+        return [
+            'source' => 'required|string',
+            'url' => 'required|url:http,https',
+            'password' => 'required|string',
+            'username' => 'required|string'
+        ];
+    }
 
+    /**
+     * @param SmsMessage $message
+     * @return Response
+     */
+    public function send(SmsMessage $message): Response
+    {
         $payload = ['messages' => [[
-            'source' => 'php',
+            'source' => $this->config['source'],
             'body' => $message->getContent(),
             'to' => $message->getReceiver(),
         ]]];
 
-        $response = Http::withoutVerifying()
+        return Http::withoutVerifying()
             ->timeout(30)
             ->contentType('application/json')
             ->withBasicAuth($this->config['username'], $this->config['password'])
-            ->post($this->config['url'], $payload)->json();
-
-        logger('SMS Response', [$response]);
+            ->post($this->config['url'], $payload);
     }
 }

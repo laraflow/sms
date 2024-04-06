@@ -2,6 +2,7 @@
 
 namespace Laraflow\Sms\Drivers;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Laraflow\Sms\Abstracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
@@ -28,14 +29,14 @@ class AfricasTalking extends SmsDriver
 
     /**
      * @param SmsMessage $message
-     * @return \Illuminate\Http\Client\Response
+     * @return Response
      */
-    public function send(SmsMessage $message): \Illuminate\Http\Client\Response
+    public function send(SmsMessage $message): Response
     {
         $payload = [
             'username' => $this->config['username'],
             'to' => $message->getReceiver(),
-            'from' => $this->config['from'],
+            'from' => $message->getSender(),
             'message' => $message->getContent(),
         ];
 

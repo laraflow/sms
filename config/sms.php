@@ -9,7 +9,7 @@ return [
     | this configuration is for debugging purpose. if enabled then program will log
     | sms vendor response in debug category.
     */
-    'log' => (bool) env('SMS_LOG', env('APP_DEBUG', false)),
+    'log' => (bool)env('SMS_LOG', env('APP_DEBUG', false)),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,16 +82,25 @@ return [
             'driver' => \Laraflow\Sms\Drivers\ClickSend::class,
             'live' => [
                 'url' => 'https://rest.clicksend.com/v3/sms/send',
-                'username' => null,
-                'password' => null,
+                'username' => env('SMS_CLICKSEND_USERNAME'),
+                'password' => env('SMS_CLICKSEND_PASSWORD'),
 
             ],
             'sandbox' => [
                 'url' => 'https://rest.clicksend.com/v3/sms/send',
-                'username' => 'masud@clavisint.com',
-                //                                'password' => 'Masudalam@13119214',
-                'password' => 'D08ECA95-5C9B-B77B-D6B9-47AF3CED3F5E',
-
+                'username' => env('SMS_CLICKSEND_USERNAME'),
+                'password' => env('SMS_CLICKSEND_PASSWORD'),
+            ],
+        ],
+        'infobip' => [
+            'driver' => \Laraflow\Sms\Drivers\Infobip::class,
+            'live' => [
+                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
+                'token' => env('SMS_INFOBIP_API_TOKEN'),
+            ],
+            'sandbox' => [
+                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
+                'token' => env('SMS_INFOBIP_API_TOKEN'),
             ],
         ],
         'messagebird' => [
@@ -160,18 +169,5 @@ return [
                 'delay' => null,
             ],
         ],
-        'infobip' => [
-            'driver' => \Laraflow\Sms\Drivers\Infobip::class,
-            'live' => [
-                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
-                'token' => 'fb74be5a5535c425732e225f3f2697ec-9b4b774d-580b-4ece-8384-0ef883464536',
-                'from' => 'ServiceSMS',
-            ],
-            'sandbox' => [
-                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
-                'token' => 'fb74be5a5535c425732e225f3f2697ec-9b4b774d-580b-4ece-8384-0ef883464536',
-                'from' => 'ServiceSMS',
-            ],
-        ]
     ],
 ];

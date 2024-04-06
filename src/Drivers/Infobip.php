@@ -2,6 +2,7 @@
 
 namespace Laraflow\Sms\Drivers;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Laraflow\Sms\Abstracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
@@ -11,40 +12,37 @@ use Laraflow\Sms\SmsMessage;
  */
 class Infobip extends SmsDriver
 {
-    private array $config;
 
-    public function __construct()
+    /**
+     * this function return validation rules for
+     * that sms driver to operate.
+     *
+     * @return array
+     */
+    public function rules(): array
     {
-        $mode = config('fintech.bell.sms.mode', 'sandbox');
-
-        $this->config = config("fintech.bell.sms.infobip.{$mode}", [
-            'url' => 'https://api.infobip.com/sms/2/text/advanced',
-            'token' => null,
-            'from' => null,
-        ]);
+        return [
+            'url' => 'required|url:http,https',
+            'token' => 'required|string'
+        ];
     }
 
-    public function send(SmsMessage $message): void
+    /**
+     * @param SmsMessage $message
+     * @return Response
+     */
+    public function send(SmsMessage $message): Response
     {
-        $this->validate($message);
+        $payload = ['messages' => [[
+            'destinations' => [['to' => $message->getReceiver()]],
+            'from' => $message->getSender(),
+            'text' => $message->getContent(),
+        ]]];
 
-        $payload = [
-            'messages' => [
-                [
-                    'destinations' => [['to' => $message->getReceiver()]],
-                    'from' => $this->config['from'],
-                    'text' => $message->getContent(),
-                ],
-            ],
-        ];
-
-        $response = Http::withoutVerifying()
+        return Http::withoutVerifying()
             ->timeout(30)
-            ->withHeader('Content-Type', 'application/json')
-            ->withHeader('Accept', 'application/json')
+            ->withHeaders(['Content-Type' => 'application/json', 'Accept' => 'application/json'])
             ->withToken($this->config['token'], 'App')
-            ->post($this->config['url'], $payload)->json();
-
-        logger('Info Bip Response', [$response]);
+            ->post($this->config['url'], $payload);
     }
 }
