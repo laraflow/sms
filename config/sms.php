@@ -67,6 +67,17 @@ return [
 
             ],
         ],
+        'clickatell' => [
+            'driver' => \Laraflow\Sms\Drivers\ClickATell::class,
+            'live' => [
+                'url' => 'https://platform.clickatell.com/messages/http/send',
+                'apiKey' => env('SMS_CLICKATELL_API_KEY'),
+            ],
+            'sandbox' => [
+                'url' => 'https://platform.clickatell.com/messages/http/send',
+                'apiKey' => env('SMS_CLICKATELL_API_KEY'),
+            ],
+        ],
         'clicksend' => [
             'driver' => \Laraflow\Sms\Drivers\ClickSend::class,
             'live' => [
@@ -161,19 +172,6 @@ return [
                 'token' => 'fb74be5a5535c425732e225f3f2697ec-9b4b774d-580b-4ece-8384-0ef883464536',
                 'from' => 'ServiceSMS',
             ],
-        ],
-        'clickatell' => [
-            'driver' => \Laraflow\Sms\Drivers\Clickatell::class,
-            'live' => [
-                'url' => 'https://platform.clickatell.com/messages/http/send',
-                'apiKey' => '',
-                'from' => '',
-            ],
-            'sandbox' => [
-                'url' => 'https://platform.clickatell.com/messages/http/send',
-                'apiKey' => '',
-                'from' => '',
-            ],
-        ],
+        ]
     ],
 ];

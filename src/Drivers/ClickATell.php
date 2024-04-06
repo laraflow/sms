@@ -9,20 +9,27 @@ use Laraflow\Sms\SmsMessage;
 /**
  * @see https://docs.clickatell.com/channels/sms-channels/sms-api-reference/#tag/SMS-API/operation/sendMessageHTTP
  */
-class Clickatell extends SmsDriver
+class ClickATell extends SmsDriver
 {
-    private array $config;
 
-    public function __construct()
+    /**
+     * this function return validation rules for
+     * that sms driver to operate.
+     *
+     * @return array
+     */
+    public function rules(): array
     {
-        $mode = config('fintech.bell.sms.mode', 'sandbox');
-
-        $this->config = config("fintech.bell.sms.clickatell.{$mode}", [
-            'url' => 'https://platform.clickatell.com/messages/http/send',
-            'apiKey' => null,
-            'from' => null,
-        ]);
+        return [
+            'url' => 'required|url:http,https',
+            'apiKey' => 'required|string'
+        ];
     }
+
+    /**
+     * @param SmsMessage $message
+     * @return \Illuminate\Http\Client\Response
+     */
 
     public function send(SmsMessage $message): void
     {

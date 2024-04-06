@@ -11,7 +11,6 @@ use Laraflow\Sms\SmsMessage;
  */
 class AfricasTalking extends SmsDriver
 {
-
     /**
      * this function return validation rules for
      * that sms driver to operate.
