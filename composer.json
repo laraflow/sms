@@ -1,25 +1,39 @@
 {
-    "name": "fintech/bell",
-    "description": "This is my package bell",
+    "name": "laraflow/sms",
+    "description": "This package allow users to change the sms driver without affecting the notification class or route name.",
     "keywords": [
-        "fintech",
+        "laraflow",
         "laravel",
-        "bell"
+        "sms",
+        "notification",
+        "channels",
+        "clicknsend",
+        "messagebird",
+        "twilio",
+        "telnyx",
+        "smsbroadcast",
+        "africastalking",
+        "infobip",
+        "clickatell"
     ],
-    "homepage": "https://github.com/fintech/bell",
+    "homepage": "https://github.com/laraflow/sms",
     "license": "MIT",
     "authors": [
         {
             "name": "Mohammad Hafijul Islam",
             "email": "hafijul233@gmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "Mohammad Ariful Haque",
+            "email": "mah.shamim@gmail.com",
+            "role": "Maintainer"
         }
     ],
     "require": {
         "php": "^8.1",
-        "fintech/core": "*",
         "illuminate/contracts": "^10.0",
-        "owen-it/laravel-auditing": "^13.5"
+        "guzzlehttp/guzzle": "^7.2"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -35,12 +49,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Fintech\\Bell\\": "src/"
+            "Laraflow\\Sms\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fintech\\Bell\\Tests\\": "tests/"
+            "Laraflow\\Sms\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -60,12 +74,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fintech\\Bell\\BellServiceProvider"
+                "Laraflow\\Sms\\SmsServiceProvider"
             ],
             "aliases": {
-                "Bell": "Fintech\\Bell\\Facades\\Bell",
-                "push": "MobilePushChannel",
-                "sms": "Fintech\\Bell\\Channels\\SmsChannel"
+                "sms": "Laraflow\\Sms\\Channels\\SmsChannel"
             }
         }
     },
