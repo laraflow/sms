@@ -107,15 +107,11 @@ return [
             'driver' => \Laraflow\Sms\Drivers\MessageBird::class,
             'live' => [
                 'url' => 'https://rest.messagebird.com/messages',
-                'originator' => null,
-                'access_key' => null,
-
+                'access_key' => env('SMS_MESSAGE_BIRD_ACCESS_KEY'),
             ],
             'sandbox' => [
                 'url' => 'https://rest.messagebird.com/messages',
-                'originator' => null,
-                'access_key' => null,
-
+                'access_key' => env('SMS_MESSAGE_BIRD_ACCESS_KEY'),
             ],
         ],
         'twilio' => [
