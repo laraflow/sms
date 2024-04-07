@@ -30,8 +30,6 @@ abstract class SmsDriver
     /**
      * this function allow programmer to append more config
      * that may or may be needed in the configuration file
-     *
-     * @return array
      */
     protected function mergeConfig(): array
     {
@@ -48,7 +46,7 @@ abstract class SmsDriver
     {
         $validator = Validator::make($this->config, $this->rules());
 
-        if (!$validator->valid()) {
+        if (! $validator->valid()) {
             throw ValidationException::withMessages($validator->errors()->messages());
         }
     }
@@ -56,8 +54,6 @@ abstract class SmsDriver
     /**
      * this function return validation rules for
      * that sms driver to operate.
-     *
-     * @return array
      */
     abstract public function rules(): array;
 

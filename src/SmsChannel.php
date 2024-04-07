@@ -51,12 +51,13 @@ class SmsChannel
 
     /**
      * Send the given notification.
+     *
      * @throws ValidationException
      * @throws Exception
      */
     public function send(object $notifiable, Notification $notification): void
     {
-        if (!method_exists($notification, 'toSms')) {
+        if (! method_exists($notification, 'toSms')) {
             throw new BadMethodCallException(get_class($notification) . " notification is missing the toSms(object $notifiable): SmsMessage method.");
         }
 

@@ -32,14 +32,14 @@ class SmsMessage
 
     public function to($receiver): self
     {
-        $this->receiver = (string)$receiver;
+        $this->receiver = (string) $receiver;
 
         return $this;
     }
 
     public function message($content): self
     {
-        $this->content = (string)$content;
+        $this->content = (string) $content;
 
         return $this;
     }

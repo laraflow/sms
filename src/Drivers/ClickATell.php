@@ -12,25 +12,18 @@ use Laraflow\Sms\SmsMessage;
  */
 class ClickATell extends SmsDriver
 {
-
     /**
      * this function return validation rules for
      * that sms driver to operate.
-     *
-     * @return array
      */
     public function rules(): array
     {
         return [
             'url' => 'required|url:http,https',
-            'apiKey' => 'required|string'
+            'apiKey' => 'required|string',
         ];
     }
 
-    /**
-     * @param SmsMessage $message
-     * @return Response
-     */
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
