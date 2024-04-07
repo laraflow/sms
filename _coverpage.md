@@ -9,4 +9,4 @@
 - Fully Customizable
 
 [GitHub](https://github.com/laraflow/sms/)
-[Get Started](#laraflowsms)
+[Get Started](#introduction)

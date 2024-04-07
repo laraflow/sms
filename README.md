@@ -1,4 +1,4 @@
-# Laraflow/SMS
+# Introduction
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laraflow/sms.svg?style=flat-square)](https://packagist.org/packages/laraflow/sms)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/laraflow/sms/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/laraflow/sms/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -7,7 +7,7 @@
 
 **Laraflow/SMS** is a fast and lightweight sms channel collection for laravel application. This package allow users to integrate different **SMS** gateway api without any hassle.
 
-## Installation
+# Installation
 
 You can install the package via composer:
 
@@ -181,40 +181,30 @@ return [
 ];
 ```
 
-## Usage
+# Configuration
 
 Please follow this steps and you are live with in a mere seconds.
 
-### First
+## General Configuration
 
-On notification classes add SMS channel on the like this.
+1. On notification classes add SMS channel on the like this.
+    ```php
+        public function via(object $notifiable): array
+        {
+            return ['sms', '...other channel'];
+        }
+    ```
+2. On the `.env` file please add this configuration.
+    ```shell
+    SMS_LOG=false
+    SMS_DRIVER="twilio"
+    SMS_ACCOUNT_MODE="sandbox"
+    SMS_FROM_NAME="${APP_NAME}"
+    ```
 
-```php
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
-     */
-    public function via(object $notifiable): array
-    {
-        return ['sms'];
-    }
-```
+## Driver Configuration
 
-### Second
-
-On the `.env` file please add this configuration.
-
-```shell
-SMS_LOG=false
-SMS_DRIVER="twilio"
-SMS_ACCOUNT_MODE="sandbox"
-SMS_FROM_NAME="${APP_NAME}"
-```
-
-### Last
-
-Depending on driver option you choose, add those API credentials to existing variables.
+Depending on driver option you choose, add these API credentials after existing general configuration variables.
 
 | Driver           | Credentials                                                             | 
 |------------------|-------------------------------------------------------------------------|
@@ -227,32 +217,17 @@ Depending on driver option you choose, add those API credentials to existing var
 | `telnyx`         | `SMS_TELNYX_API_TOKEN=null`                                             |
 | `twilio`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |
 
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
+# Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-## Security Vulnerabilities
+# Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+Please review [our security policy](https://github.com/laraflow/sms/security/policy) on how to report security vulnerabilities.
 
-## Credits
-
-- [Mohammad Hafijul Islam](https://github.com/hafijul233)
-- [Mohammad Ariful Haque](https://github.com/mah-shamim)
-- [All Contributors](../../contributors)
-
-## License
+# License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[//]: # (## Support us)
-
-[//]: # ()
-[//]: # (We invest a lot of resources into creating [best in class open source packages]&#40;https://spatie.be/open-source&#41;. You can support us by [buying one of our paid products]&#40;https://spatie.be/open-source/support-us&#41;.)
-
-[//]: # ()
-[//]: # (We highly appreciate you sending us a postcard from your hometown, mentioning which of our package&#40;s&#41; you are using. You'll find our address on [our contact page]&#40;https://spatie.be/about-us&#41;. We publish all received postcards on [our virtual postcard wall]&#40;https://spatie.be/open-source/postcards&#41;.)
+# Auditory
+This document was last updated at  {docsify-updated}.
