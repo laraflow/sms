@@ -119,23 +119,23 @@ return [
             'live' => [
                 'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
                 'username' => env('SMS_SMSBROADCAST_USERNAME'),
-                'password' => env('SMS_SMSBROADCAST_PASSWORD')
+                'password' => env('SMS_SMSBROADCAST_PASSWORD'),
             ],
             'sandbox' => [
                 'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
                 'username' => env('SMS_SMSBROADCAST_USERNAME'),
-                'password' => env('SMS_SMSBROADCAST_PASSWORD')
+                'password' => env('SMS_SMSBROADCAST_PASSWORD'),
             ],
         ],
         'telnyx' => [
             'driver' => \Laraflow\Sms\Drivers\Telnyx::class,
             'live' => [
                 'url' => 'https://api.telnyx.com/v2/messages',
-                'token' => env('SMS_TELNYX_API_TOKEN')
+                'token' => env('SMS_TELNYX_API_TOKEN'),
             ],
             'sandbox' => [
                 'url' => 'https://api.telnyx.com/v2/messages',
-                'token' => env('SMS_TELNYX_API_TOKEN')
+                'token' => env('SMS_TELNYX_API_TOKEN'),
             ],
         ],
         'twilio' => [

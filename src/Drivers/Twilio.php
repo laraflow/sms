@@ -12,10 +12,6 @@ use Laraflow\Sms\SmsMessage;
  */
 class Twilio extends SmsDriver
 {
-    /**
-     * @param SmsMessage $message
-     * @return Response
-     */
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
@@ -36,15 +32,13 @@ class Twilio extends SmsDriver
     /**
      * this function return validation rules for
      * that sms driver to operate.
-     *
-     * @return array
      */
     public function rules(): array
     {
         return [
             'url' => 'required|string',
             'username' => 'required|string',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ];
     }
 }

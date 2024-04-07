@@ -34,7 +34,7 @@ class SmsChannel
 
         $driver = config("sms.vendors.{$active}.driver");
 
-        if ($driver == null || !class_exists($driver)) {
+        if ($driver == null || ! class_exists($driver)) {
             throw new DriverNotFoundException("No driver configuration found by `{$active}` name.");
         }
 
@@ -58,7 +58,7 @@ class SmsChannel
     public function send(object $notifiable, Notification $notification): void
     {
         if (! method_exists($notification, 'toSms')) {
-            throw new BadMethodCallException(get_class($notification) . " notification is missing the toSms(object $notifiable): SmsMessage method.");
+            throw new BadMethodCallException(get_class($notification)." notification is missing the toSms(object $notifiable): SmsMessage method.");
         }
 
         try {
@@ -81,16 +81,13 @@ class SmsChannel
     private function logSmsResponse(): void
     {
         if (config('sms.log', false)) {
-            Log::debug("SMS Vendor Response: ", ['status_code' => $this->response->status(), 'response' => $this->response->body()]);
+            Log::debug('SMS Vendor Response: ', ['status_code' => $this->response->status(), 'response' => $this->response->body()]);
         }
     }
 
     /**
      * this function will validate if the given content satisfy the
      * driver required params.
-     *
-     * @param SmsMessage $message
-     * @return void
      */
     private function validate(SmsMessage $message): void
     {

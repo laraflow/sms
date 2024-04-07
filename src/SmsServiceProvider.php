@@ -13,19 +13,17 @@ class SmsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/sms.php', 'sms'
+            __DIR__.'/../config/sms.php', 'sms'
         );
     }
 
     /**
      * Bootstrap any package services.
-     *
-     * @return void
      */
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/sms.php' => config_path('sms.php'),
+            __DIR__.'/../config/sms.php' => config_path('sms.php'),
         ]);
 
         $this->extendNotificationChannel();
@@ -34,8 +32,6 @@ class SmsServiceProvider extends ServiceProvider
     /**
      * Adding "sms" as notification channel insist of
      * the class name as drivers will get swapped under the hood.
-     *
-     * @return void
      */
     private function extendNotificationChannel(): void
     {
