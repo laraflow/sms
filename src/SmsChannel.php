@@ -56,11 +56,11 @@ class SmsChannel
 
     private function validate(SmsMessage $message): void
     {
-        if ($message->getReceiver() == null || strlen($message->getReceiver()) == 0) {
+        if (strlen($message->getReceiver()) == 0) {
             throw new InvalidArgumentException('Message recipient(s) is empty.');
         }
 
-        if ($message->getContent() == null || strlen($message->getContent()) == 0) {
+        if (strlen($message->getContent()) == 0) {
             throw new InvalidArgumentException('Message content is empty.');
         }
     }
