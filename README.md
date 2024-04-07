@@ -217,17 +217,7 @@ Depending on driver option you choose, add these API credentials after existing 
 | `telnyx`         | `SMS_TELNYX_API_TOKEN=null`                                             |
 | `twilio`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |
 
-# Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+### Auditory
 
-# Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laraflow/sms/security/policy) on how to report security vulnerabilities.
-
-# License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-# Auditory
-This document was last updated at  {docsify-updated}.
+This document was last updated at <strong><i>{docsify-updated}</i></strong>.
