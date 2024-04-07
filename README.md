@@ -77,6 +77,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [Mohammad Hafijul Islam](https://github.com/hafijul233)
+- [Mohammad Ariful Haque](https://github.com/mah-shamim)
 - [All Contributors](../../contributors)
 
 ## License
