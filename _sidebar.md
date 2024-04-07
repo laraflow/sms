@@ -3,8 +3,9 @@
   - [Installation](README.md#installation)
 
 - Configuration
-  - [General Configuration](README.md#general-configuration) 
-  - [Driver Configuration](README.md#driver-configuration) 
+  - [General Configuration](CONFIGURATION.md#general-configuration) 
+  - [Driver Configuration](CONFIGURATION.md#driver-configuration) 
+  - [Notification Class](CONFIGURATION.md#notification-class) 
 
 - Support
   - [Changelog](CHANGELOG.md)

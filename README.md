@@ -181,43 +181,6 @@ return [
 ];
 ```
 
-# Configuration
-
-Please follow this steps and you are live with in a mere seconds.
-
-## General Configuration
-
-1. On notification classes add SMS channel on the like this.
-    ```php
-        public function via(object $notifiable): array
-        {
-            return ['sms', '...other channel'];
-        }
-    ```
-2. On the `.env` file please add this configuration.
-    ```shell
-    SMS_LOG=false
-    SMS_DRIVER="twilio"
-    SMS_ACCOUNT_MODE="sandbox"
-    SMS_FROM_NAME="${APP_NAME}"
-    ```
-
-## Driver Configuration
-
-Depending on driver option you choose, add these API credentials after existing general configuration variables.
-
-| Driver           | Credentials                                                             | 
-|------------------|-------------------------------------------------------------------------|
-| `africastalking` | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` |
-| `clickatell`     | `SMS_CLICKATELL_API_KEY=null`                                           |
-| `clicksend`      | `SMS_CLICKSEND_USERNAME=null`<br>`SMS_CLICKSEND_PASSWORD=null`          |
-| `infobip`        | `SMS_INFOBIP_API_TOKEN=null`                                            |
-| `messagebird`    | `SMS_MESSAGE_BIRD_ACCESS_KEY=null`                                      |
-| `smsbroadcast`   | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    |
-| `telnyx`         | `SMS_TELNYX_API_TOKEN=null`                                             |
-| `twilio`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |
-
-
 ### Auditory
 
 This document was last updated at <strong><i>{docsify-updated}</i></strong>.

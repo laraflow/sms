@@ -4,6 +4,7 @@ namespace Laraflow\Sms;
 
 use BadMethodCallException;
 use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -19,22 +20,19 @@ class SmsChannel
      */
     private mixed $driver;
 
-    public $response;
+    public Response $response;
 
-    /**
-     * @throws DriverNotFoundException|ValidationException|InvalidArgumentException
-     */
-    public function __construct()
+    private function initDriver(string $driver = null): void
     {
-        $active = config('sms.default');
+        $active = $driver ?? config('sms.default');
 
         if ($active == null) {
-            throw new InvalidArgumentException('No SMS vendor driver configured as default.');
+            throw new InvalidArgumentException('No SMS vendor driver configured.');
         }
 
-        $driver = config("sms.vendors.{$active}.driver");
+        $driverClass = config("sms.vendors.{$active}.driver");
 
-        if ($driver == null || ! class_exists($driver)) {
+        if ($driverClass == null || ! class_exists($driverClass)) {
             throw new DriverNotFoundException("No driver configuration found by `{$active}` name.");
         }
 
@@ -42,11 +40,29 @@ class SmsChannel
 
         $config = config("sms.vendors.{$active}.{$mode}", []);
 
-        $this->driver = App::make($driver);
+        $this->driver = App::make($driverClass);
 
         $this->driver->setConfig($config);
 
         $this->driver->mode = $mode;
+    }
+
+    private function logSmsResponse(): void
+    {
+        if (config('sms.log', false)) {
+            Log::debug('SMS Vendor Response: ', ['status_code' => $this->response->status(), 'response' => $this->response->body()]);
+        }
+    }
+
+    private function validate(SmsMessage $message): void
+    {
+        if ($message->getReceiver() == null || strlen($message->getReceiver()) == 0) {
+            throw new InvalidArgumentException('Message recipient(s) is empty.');
+        }
+
+        if ($message->getContent() == null || strlen($message->getContent()) == 0) {
+            throw new InvalidArgumentException('Message content is empty.');
+        }
     }
 
     /**
@@ -62,8 +78,12 @@ class SmsChannel
         }
 
         try {
-
+            /**
+             * @var SmsMessage $message
+             */
             $message = $notification->toSms($notifiable);
+
+            $this->initDriver($message->getDriver());
 
             $this->validate($message);
 
@@ -75,28 +95,6 @@ class SmsChannel
             (App::isProduction())
                 ? Log::error($exception)
                 : throw new Exception($exception->getMessage(), 0, $exception);
-        }
-    }
-
-    private function logSmsResponse(): void
-    {
-        if (config('sms.log', false)) {
-            Log::debug('SMS Vendor Response: ', ['status_code' => $this->response->status(), 'response' => $this->response->body()]);
-        }
-    }
-
-    /**
-     * this function will validate if the given content satisfy the
-     * driver required params.
-     */
-    private function validate(SmsMessage $message): void
-    {
-        if ($message->getReceiver() == null || strlen($message->getReceiver()) == 0) {
-            throw new InvalidArgumentException('Message recipient(s) is empty.');
-        }
-
-        if ($message->getContent() == null || strlen($message->getContent()) == 0) {
-            throw new InvalidArgumentException('Message content is empty.');
         }
     }
 }
