@@ -2,8 +2,9 @@
 
 namespace Laraflow\Sms\Drivers;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\Contracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
 
 /**
@@ -11,35 +12,39 @@ use Laraflow\Sms\SmsMessage;
  */
 class Twilio extends SmsDriver
 {
-    private array $config;
-
-    public function __construct()
+    /**
+     * @param SmsMessage $message
+     * @return Response
+     */
+    public function send(SmsMessage $message): Response
     {
-        $mode = config('fintech.bell.sms.mode', 'sandbox');
-
-        $this->config = config("fintech.bell.sms.twilio.{$mode}", [
-            'url' => null,
-            'username' => null,
-            'password' => null,
-        ]);
-    }
-
-    public function send(SmsMessage $message): void
-    {
-        $this->validate($message);
-
-        $payload = [
+        $this->payload = [
             'To' => $message->getReceiver(),
             'Body' => $message->getContent(),
         ];
 
         $url = str_replace('$TWILIO_ACCOUNT_SID$', $this->config['username'], $this->config['url']);
 
-        $response = Http::withoutVerifying()
+        $this->removeEmptyParams();
+
+        return Http::withoutVerifying()
             ->timeout(30)
             ->withBasicAuth($this->config['username'], $this->config['password'])
-            ->post($url, $payload)->json();
+            ->post($url, $this->payload);
+    }
 
-        logger('SMS Response', [$response]);
+    /**
+     * this function return validation rules for
+     * that sms driver to operate.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            'url' => 'required|string',
+            'username' => 'required|string',
+            'password' => 'required|string'
+        ];
     }
 }

@@ -1,26 +1,30 @@
 <?php
 
-namespace Laraflow\Sms\Abstracts;
+namespace Laraflow\Sms\Contracts;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use InvalidArgumentException;
 use Laraflow\Sms\SmsMessage;
 
 abstract class SmsDriver
 {
+    public ?string $mode;
+
     protected mixed $config;
 
-    public ?string $mode;
+    public $payload;
 
     /**
      * @param array $config
      * @return void
+     * @throws ValidationException
      */
     public function setConfig(array $config = []): void
     {
         $this->config = array_merge($config, $this->mergeConfig());
+
+        $this->validate();
     }
 
     /**
@@ -40,30 +44,12 @@ abstract class SmsDriver
      *
      * @throws ValidationException
      */
-    public function validateConfig(): void
+    private function validate(): void
     {
         $validator = Validator::make($this->config, $this->rules());
 
         if (!$validator->valid()) {
             throw ValidationException::withMessages($validator->errors()->messages());
-        }
-    }
-
-    /**
-     * this function will validate if the given content satisfy the
-     * driver required params.
-     *
-     * @param SmsMessage $message
-     * @return void
-     */
-    public function validate(SmsMessage $message): void
-    {
-        if ($message->getReceiver() == null || strlen($message->getReceiver()) == 0) {
-            throw new InvalidArgumentException('Message recipient could not be empty.');
-        }
-
-        if ($message->getContent() == null || strlen($message->getContent()) == 0) {
-            throw new InvalidArgumentException('Message content could not be empty.');
         }
     }
 
@@ -74,6 +60,13 @@ abstract class SmsDriver
      * @return array
      */
     abstract public function rules(): array;
+
+    protected function removeEmptyParams(): void
+    {
+        $this->payload = array_filter($this->payload, function ($element) {
+           return !empty($element);
+        });
+    }
 
     /**
      * @param SmsMessage $message

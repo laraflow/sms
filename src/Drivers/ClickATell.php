@@ -4,7 +4,7 @@ namespace Laraflow\Sms\Drivers;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\Contracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
 
 /**
@@ -33,17 +33,19 @@ class ClickATell extends SmsDriver
      */
     public function send(SmsMessage $message): Response
     {
-        $payload = [
+        $this->payload = [
             'apiKey' => $this->config['apiKey'],
             'to' => $message->getReceiver(),
             'from' => $message->getSender(),
             'content' => $message->getContent(),
         ];
 
+        $this->removeEmptyParams();
+
         return Http::withoutVerifying()
             ->timeout(30)
             ->withHeader('Content-Type', 'application/json')
             ->withHeader('Accept', 'application/json')
-            ->get($this->config['url'], $payload);
+            ->get($this->config['url'], $this->payload);
     }
 }

@@ -4,7 +4,7 @@ namespace Laraflow\Sms\Drivers;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\Contracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
 
 /**
@@ -33,16 +33,18 @@ class Infobip extends SmsDriver
      */
     public function send(SmsMessage $message): Response
     {
-        $payload = ['messages' => [[
+        $this->payload = ['messages' => [[
             'destinations' => [['to' => $message->getReceiver()]],
             'from' => $message->getSender(),
             'text' => $message->getContent(),
         ]]];
 
+        $this->removeEmptyParams();
+
         return Http::withoutVerifying()
             ->timeout(30)
             ->withHeaders(['Content-Type' => 'application/json', 'Accept' => 'application/json'])
             ->withToken($this->config['token'], 'App')
-            ->post($this->config['url'], $payload);
+            ->post($this->config['url'], $this->payload);
     }
 }

@@ -4,7 +4,7 @@ namespace Laraflow\Sms\Drivers;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\Contracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
 
 /**
@@ -42,7 +42,7 @@ class MessageBird extends SmsDriver
      */
     public function send(SmsMessage $message): Response
     {
-        $payload = [
+        $this->payload = [
             'recipients' => $message->getReceiver(),
             'originator' => $message->getSender(),
             'type' => $this->config['type'],
@@ -50,9 +50,11 @@ class MessageBird extends SmsDriver
             'body' => $message->getContent(),
         ];
 
+        $this->removeEmptyParams();
+
         return Http::withoutVerifying()
             ->timeout(30)
             ->withToken($this->config['access_key'], 'AccessKey')
-            ->post($this->config['url'], $payload);
+            ->post($this->config['url'], $this->payload);
     }
 }

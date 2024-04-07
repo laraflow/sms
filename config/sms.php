@@ -114,55 +114,43 @@ return [
                 'access_key' => env('SMS_MESSAGE_BIRD_ACCESS_KEY'),
             ],
         ],
-        'twilio' => [
-            'driver' => \Laraflow\Sms\Drivers\Twilio::class,
+        'smsbroadcast' => [
+            'driver' => \Laraflow\Sms\Drivers\SmsBroadcast::class,
             'live' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
-                'username' => null,
-                'password' => null,
-
+                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
+                'username' => env('SMS_SMSBROADCAST_USERNAME'),
+                'password' => env('SMS_SMSBROADCAST_PASSWORD')
             ],
             'sandbox' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
-                'username' => null,
-                'password' => null,
-
+                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
+                'username' => env('SMS_SMSBROADCAST_USERNAME'),
+                'password' => env('SMS_SMSBROADCAST_PASSWORD')
             ],
         ],
         'telnyx' => [
             'driver' => \Laraflow\Sms\Drivers\Telnyx::class,
             'live' => [
                 'url' => 'https://api.telnyx.com/v2/messages',
-                'username' => null,
-                'password' => null,
-
+                'token' => env('SMS_TELNYX_API_TOKEN')
             ],
             'sandbox' => [
                 'url' => 'https://api.telnyx.com/v2/messages',
-                'username' => null,
-                'password' => null,
-
+                'token' => env('SMS_TELNYX_API_TOKEN')
             ],
         ],
-        'smsbroadcast' => [
-            'driver' => \Laraflow\Sms\Drivers\SmsBroadcast::class,
+        'twilio' => [
+            'driver' => \Laraflow\Sms\Drivers\Twilio::class,
             'live' => [
-                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
-                'username' => null,
-                'password' => null,
+                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
+                'username' => env('SMS_TWILIO_USERNAME'),
+                'password' => env('SMS_TWILIO_PASSWORD'),
 
-                'ref' => null,
-                'maxsplit' => null,
-                'delay' => null,
             ],
             'sandbox' => [
-                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
-                'username' => null,
-                'password' => null,
+                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
+                'username' => env('SMS_TWILIO_USERNAME'),
+                'password' => env('SMS_TWILIO_PASSWORD'),
 
-                'ref' => null,
-                'maxsplit' => null,
-                'delay' => null,
             ],
         ],
     ],

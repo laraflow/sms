@@ -4,7 +4,7 @@ namespace Laraflow\Sms\Drivers;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\Contracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
 
 /**
@@ -12,13 +12,6 @@ use Laraflow\Sms\SmsMessage;
  */
 class ClickSend extends SmsDriver
 {
-    protected function mergeConfig(): array
-    {
-        return [
-            'source' => 'php'
-        ];
-    }
-
     /**
      * this function return validation rules for
      * that sms driver to operate.
@@ -41,16 +34,25 @@ class ClickSend extends SmsDriver
      */
     public function send(SmsMessage $message): Response
     {
-        $payload = ['messages' => [[
+        $this->payload = ['messages' => [[
             'source' => $this->config['source'],
             'body' => $message->getContent(),
             'to' => $message->getReceiver(),
         ]]];
 
+        $this->removeEmptyParams();
+
         return Http::withoutVerifying()
             ->timeout(30)
             ->contentType('application/json')
             ->withBasicAuth($this->config['username'], $this->config['password'])
-            ->post($this->config['url'], $payload);
+            ->post($this->config['url'], $this->payload);
+    }
+
+    protected function mergeConfig(): array
+    {
+        return [
+            'source' => 'php'
+        ];
     }
 }

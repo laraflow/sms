@@ -2,8 +2,9 @@
 
 namespace Laraflow\Sms\Drivers;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Laraflow\Sms\Abstracts\SmsDriver;
+use Laraflow\Sms\Contracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
 
 /**
@@ -11,44 +12,53 @@ use Laraflow\Sms\SmsMessage;
  */
 class SmsBroadcast extends SmsDriver
 {
-    private array $config;
-
-    public function __construct()
+    protected function mergeConfig(): array
     {
-        $mode = config('fintech.bell.sms.mode', 'sandbox');
-
-        $this->config = config("fintech.bell.sms.smsbroadcast.{$mode}", [
-            'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
-            'username' => null,
-            'password' => null,
-            'from' => null,
+        return [
             'ref' => null,
             'maxsplit' => null,
             'delay' => null,
-        ]);
+        ];
     }
 
-    public function send(SmsMessage $message): void
+    /**
+     * @param SmsMessage $message
+     * @return Response
+     */
+    public function send(SmsMessage $message): Response
     {
-        $this->validate($message);
-
-        $payload = [
+        $this->payload = [
             'username' => $this->config['username'],
             'password' => $this->config['password'],
-            'from' => $this->config['from'],
             'ref' => $this->config['ref'],
             'maxsplit' => $this->config['maxsplit'],
             'delay' => $this->config['delay'],
+            'from' => $message->getSender(),
             'to' => $message->getReceiver(),
             'message' => $message->getContent(),
         ];
 
-        $response = Http::withoutVerifying()
+        $this->removeEmptyParams();
+
+        return Http::withoutVerifying()
             ->timeout(30)
             ->withHeader('Content-Type', 'application/json')
             ->withHeader('Accept', 'application/json')
-            ->get($this->config['url'], $payload)->json();
+            ->get($this->config['url'], $this->payload);
+    }
 
-        logger('Sms Broadcast Response', [$response]);
+    /**
+     * this function return validation rules for
+     * that sms driver to operate.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            'url' => 'required|url:http,https',
+            'password' => 'required|string',
+            'username' => 'required|string'
+        ];
     }
 }

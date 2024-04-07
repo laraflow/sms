@@ -10,12 +10,12 @@ class SmsMessage
 
     private ?string $content;
 
-    public function getReceiver()
+    public function getReceiver(): ?string
     {
         return $this->receiver;
     }
 
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
