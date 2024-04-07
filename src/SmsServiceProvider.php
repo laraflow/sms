@@ -13,7 +13,8 @@ class SmsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/sms.php', 'sms'
+            __DIR__.'/../config/sms.php',
+            'sms'
         );
     }
 
