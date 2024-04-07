@@ -15,14 +15,10 @@ class Telnyx extends SmsDriver
     protected function mergeConfig(): array
     {
         return [
-            'type' => 'SMS'
+            'type' => 'SMS',
         ];
     }
 
-    /**
-     * @param SmsMessage $message
-     * @return Response
-     */
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
@@ -44,14 +40,12 @@ class Telnyx extends SmsDriver
     /**
      * this function return validation rules for
      * that sms driver to operate.
-     *
-     * @return array
      */
     public function rules(): array
     {
         return [
             'url' => 'required|url:http,https',
-            'token' => 'required|string'
+            'token' => 'required|string',
         ];
     }
 }

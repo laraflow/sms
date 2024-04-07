@@ -16,8 +16,6 @@ abstract class SmsDriver
     public $payload;
 
     /**
-     * @param array $config
-     * @return void
      * @throws ValidationException
      */
     public function setConfig(array $config = []): void
@@ -60,13 +58,9 @@ abstract class SmsDriver
     protected function removeEmptyParams(): void
     {
         $this->payload = array_filter($this->payload, function ($element) {
-           return !empty($element);
+            return ! empty($element);
         });
     }
 
-    /**
-     * @param SmsMessage $message
-     * @return Response
-     */
     abstract public function send(SmsMessage $message): Response;
 }

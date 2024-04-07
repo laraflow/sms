@@ -46,7 +46,7 @@ class ClickSend extends SmsDriver
     protected function mergeConfig(): array
     {
         return [
-            'source' => 'php'
+            'source' => 'php',
         ];
     }
 }

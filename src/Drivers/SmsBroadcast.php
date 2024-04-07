@@ -21,10 +21,6 @@ class SmsBroadcast extends SmsDriver
         ];
     }
 
-    /**
-     * @param SmsMessage $message
-     * @return Response
-     */
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
@@ -50,15 +46,13 @@ class SmsBroadcast extends SmsDriver
     /**
      * this function return validation rules for
      * that sms driver to operate.
-     *
-     * @return array
      */
     public function rules(): array
     {
         return [
             'url' => 'required|url:http,https',
             'password' => 'required|string',
-            'username' => 'required|string'
+            'username' => 'required|string',
         ];
     }
 }
