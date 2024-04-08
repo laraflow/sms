@@ -22,7 +22,7 @@ class Providers
     public const BOOM_CAST = 'boomcast';
     public const BRILLIANT = 'brilliant';
     public const BULK_SMS_BD = 'bulksmsbd';
-    public const CUSTOM_GATEWAY= 'customgateway';
+    public const CUSTOM_GATEWAY = 'customgateway';
     public const DIANA_HOST = 'dianahost';
     public const DIANA_SMS = 'dianasms';
     public const DNS_BD = 'dnsbd';
