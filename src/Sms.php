@@ -11,9 +11,11 @@ class Sms
      * @param $message
      * @param $from
      * @param $driver
+     * @throws \ErrorException
      */
     private function __construct($to = null, $message = null, $from = null, $driver = null)
     {
+        throw new \ErrorException("This feature is under early stage of development");
         $this->message = new SmsMessage();
     }
 
