@@ -69,7 +69,7 @@ class SmsMessage
     {
         $this->driver = ($name != null) ? $name : config('sms.default');
 
-        if (config("sms.vendors.{$this->driver}.driver") == null) {
+        if (config("sms.providers.{$this->driver}.driver") == null) {
             throw new DriverNotFoundException("No driver configuration found by `{$this->driver}` name.");
         }
 
