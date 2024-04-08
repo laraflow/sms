@@ -49,10 +49,7 @@
     "autoload": {
         "psr-4": {
             "Laraflow\\Sms\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
