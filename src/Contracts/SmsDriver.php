@@ -64,5 +64,11 @@ abstract class SmsDriver
         });
     }
 
+    /**
+     * execute the sms sending request to api provider
+     *
+     * @param SmsMessage $message
+     * @return Response
+     */
     abstract public function send(SmsMessage $message): Response;
 }

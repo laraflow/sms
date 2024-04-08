@@ -31,15 +31,14 @@ return [
     | mode should be used when sending the sms. Available options are
     | "sandbox" or "live".
     */
-    'mode' => env('SMS_ACCOUNT_MODE', null),
+    'mode' => env('SMS_ACCOUNT_MODE', 'sandbox'),
 
     /*
     |--------------------------------------------------------------------------
     | SMS Sender Name
     |--------------------------------------------------------------------------
     | this configuration is used to tell system what value will be used
-    | if sms vendor support sms name masking
-    | "sandbox" or "live".
+    | if sms vendor support sms name masking.
     */
     'from' => env('SMS_FROM_NAME', env('APP_NAME', 'Laravel')),
 

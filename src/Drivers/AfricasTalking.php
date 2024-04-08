@@ -25,6 +25,12 @@ class AfricasTalking extends SmsDriver
         ];
     }
 
+    /**
+     * execute the sms sending request to api provider
+     *
+     * @param SmsMessage $message
+     * @return Response
+     */
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
