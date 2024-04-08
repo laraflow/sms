@@ -40,4 +40,18 @@ class Infobip extends SmsDriver
             ->withToken($this->config['token'], 'App')
             ->post($this->config['url'], $this->payload);
     }
+
+    /**
+     * this function allow programmer to append more config
+     * that may or may be needed in the configuration file
+     *
+     * @return string[]
+     */
+    protected function mergeConfig(): array
+    {
+        return [
+            'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
+        ];
+    }
+
 }

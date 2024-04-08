@@ -17,6 +17,7 @@ class MessageBird extends SmsDriver
         return [
             'type' => 'sms',
             'mclass' => 1,
+            'url' => 'https://rest.messagebird.com/messages',
         ];
     }
 

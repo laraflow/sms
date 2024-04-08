@@ -15,6 +15,7 @@ class Telnyx extends SmsDriver
     protected function mergeConfig(): array
     {
         return [
+            'url' => 'https://api.telnyx.com/v2/messages',
             'type' => 'SMS',
         ];
     }

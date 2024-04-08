@@ -10,7 +10,7 @@ use Laraflow\Sms\SmsMessage;
 /**
  * @reference
  */
-class MDL extends SmsDriver
+class Mdl extends SmsDriver
 {
     /**
      * Return validation rules for

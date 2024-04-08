@@ -43,9 +43,16 @@ class ClickSend extends SmsDriver
             ->post($this->config['url'], $this->payload);
     }
 
+    /**
+     * this function allow programmer to append more config
+     * that may or may be needed in the configuration file
+     *
+     * @return string[]
+     */
     protected function mergeConfig(): array
     {
         return [
+            'url' => 'https://rest.clicksend.com/v3/sms/send',
             'source' => 'php',
         ];
     }

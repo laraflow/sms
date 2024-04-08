@@ -24,6 +24,10 @@ abstract class SmsDriver
 
         $this->config = array_merge($config, $this->mergeConfig());
 
+        if (isset($config['url'])) {
+            $this->config['url'] = $config['url'];
+        }
+
         $this->validate();
     }
 
@@ -46,7 +50,7 @@ abstract class SmsDriver
     {
         $validator = Validator::make($this->config, $this->rules());
 
-        if (! $validator->valid()) {
+        if (!$validator->valid()) {
             throw ValidationException::withMessages($validator->errors()->messages());
         }
     }
@@ -60,7 +64,7 @@ abstract class SmsDriver
     protected function removeEmptyParams(): void
     {
         $this->payload = array_filter($this->payload, function ($element) {
-            return ! empty($element);
+            return !empty($element);
         });
     }
 

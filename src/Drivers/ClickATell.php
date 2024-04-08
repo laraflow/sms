@@ -13,6 +13,19 @@ use Laraflow\Sms\SmsMessage;
 class ClickATell extends SmsDriver
 {
     /**
+     * this function allow programmer to append more config
+     * that may or may be needed in the configuration file
+     *
+     * @return string[]
+     */
+    protected function mergeConfig(): array
+    {
+        return [
+            'url' => 'https://platform.clickatell.com/messages/http/send',
+        ];
+    }
+
+    /**
      * this function return validation rules for
      * that sms driver to operate.
      */

@@ -20,7 +20,7 @@ class AfricasTalking extends SmsDriver
     {
         return [
             'url' => 'required|url:http,https',
-            'apiKey' => 'required|string',
+            'api_key' => 'required|string',
             'username' => 'required|string',
         ];
     }
@@ -44,9 +44,9 @@ class AfricasTalking extends SmsDriver
 
         return Http::withoutVerifying()
             ->timeout(30)
+            ->withToken($this->config['api_key'], 'apiKey')
             ->withHeader('Content-Type', 'application/json')
             ->withHeader('Accept', 'application/json')
-            ->withHeader('apiKey', $this->config['apiKey'])
             ->get($this->config['url'], $this->payload);
 
     }

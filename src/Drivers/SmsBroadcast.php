@@ -18,6 +18,7 @@ class SmsBroadcast extends SmsDriver
             'ref' => null,
             'maxsplit' => null,
             'delay' => null,
+            'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
         ];
     }
 

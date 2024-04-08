@@ -21,31 +21,32 @@ Please follow this steps and you are live with in a mere seconds.
 
 ## Driver Configuration
 
-Depending on driver option you choose, add these API credentials 
+Depending on driver option you choose, add these API credentials
 after existing general configuration variables.
 
-| Driver           | Credentials                                                             | 
-|------------------|-------------------------------------------------------------------------|
-| `africastalking` | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` |
-| `clickatell`     | `SMS_CLICKATELL_API_KEY=null`                                           |
-| `clicksend`      | `SMS_CLICKSEND_USERNAME=null`<br>`SMS_CLICKSEND_PASSWORD=null`          |
-| `infobip`        | `SMS_INFOBIP_API_TOKEN=null`                                            |
-| `messagebird`    | `SMS_MESSAGE_BIRD_ACCESS_KEY=null`                                      |
-| `smsbroadcast`   | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    |
-| `telnyx`         | `SMS_TELNYX_API_TOKEN=null`                                             |
-| `twilio`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |
-
+| Driver           | Credentials                                                             |     Configured     | Tested |
+|------------------|-------------------------------------------------------------------------|:------------------:|:------:|
+| `africastalking` | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` | :white_check_mark: |  :x:   |
+| `clickatell`     | `SMS_CLICKATELL_API_KEY=null`                                           | :white_check_mark: |  :x:   |
+| `clicksend`      | `SMS_CLICKSEND_USERNAME=null`<br>`SMS_CLICKSEND_PASSWORD=null`          | :white_check_mark: |  :x:   |
+| `infobip`        | `SMS_INFOBIP_API_TOKEN=null`                                            | :white_check_mark: |  :x:   |
+| `messagebird`    | `SMS_MESSAGE_BIRD_ACCESS_KEY=null`                                      | :white_check_mark: |  :x:   |
+| `smsbroadcast`   | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    | :white_check_mark: |  :x:   |
+| `telnyx`         | `SMS_TELNYX_API_TOKEN=null`                                             | :white_check_mark: |  :x:   |
+| `twilio`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                | :white_check_mark: |  :x:   |
 
 ## Notification Class
 
-On the notification class the `via()` will look like this 
+On the notification class the `via()` method will look like this
 after adding the sms channel
+
 ```php
 public function via(object $notifiable): array
 {
     return ['sms', '...other'];
 }
 ```
+
 OR
 
 ```php
@@ -57,8 +58,8 @@ public function via(object $notifiable): array
 }
 ```
 
-And the message prepare method should be named `toSms` and 
-return type is `SmsMessage` class instance. 
+And the message prepare method should be named `toSms` and
+return type is `SmsMessage` class instance.
 Such example is given below.
 
 ```php
