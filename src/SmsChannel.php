@@ -20,8 +20,14 @@ class SmsChannel
      */
     private mixed $driver;
 
+    private string $driver_code;
+
     public Response $response;
 
+    /**
+     * @throws DriverNotFoundException
+     * @throws ValidationException
+     */
     private function initDriver(string $driver = null): void
     {
         $active = $driver ?? config('sms.default');
@@ -32,9 +38,11 @@ class SmsChannel
 
         $driverClass = config("sms.vendors.{$active}.driver");
 
-        if ($driverClass == null || ! class_exists($driverClass)) {
+        if ($driverClass == null || !class_exists($driverClass)) {
             throw new DriverNotFoundException("No driver configuration found by `{$active}` name.");
         }
+
+        $this->driver_code = $active;
 
         $mode = config('sms.mode', 'sandbox');
 
@@ -42,15 +50,19 @@ class SmsChannel
 
         $this->driver = App::make($driverClass);
 
-        $this->driver->setConfig($config);
+        $this->driver->setConfig($config, $mode);
 
-        $this->driver->mode = $mode;
     }
 
     private function logSmsResponse(): void
     {
         if (config('sms.log', false)) {
-            Log::debug('SMS Vendor Response: ', ['status_code' => $this->response->status(), 'response' => $this->response->body()]);
+            Log::channel('sms')->info('Response: ', [
+                'vendor' => $this->driver_code,
+                'model' => $this->driver->mode,
+                'status_code' => $this->response->status(),
+                'response' => $this->response->body()
+            ]);
         }
     }
 
@@ -73,8 +85,8 @@ class SmsChannel
      */
     public function send(object $notifiable, Notification $notification): void
     {
-        if (! method_exists($notification, 'toSms')) {
-            throw new BadMethodCallException(get_class($notification)." notification is missing the toSms(object $notifiable): SmsMessage method.");
+        if (!method_exists($notification, 'toSms')) {
+            throw new BadMethodCallException(get_class($notification) . " notification is missing the toSms(object $notifiable): SmsMessage method.");
         }
 
         try {

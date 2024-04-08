@@ -18,8 +18,10 @@ abstract class SmsDriver
     /**
      * @throws ValidationException
      */
-    public function setConfig(array $config = []): void
+    public function setConfig(array $config = [], string $mode = 'sandbox'): void
     {
+        $this->mode = $mode;
+
         $this->config = array_merge($config, $this->mergeConfig());
 
         $this->validate();

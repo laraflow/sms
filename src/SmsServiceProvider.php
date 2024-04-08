@@ -2,6 +2,7 @@
 
 namespace Laraflow\Sms;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,9 +14,11 @@ class SmsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/sms.php',
+            __DIR__ . '/../config/sms.php',
             'sms'
         );
+
+        $this->extendLoggerChannel();
     }
 
     /**
@@ -24,7 +27,7 @@ class SmsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../config/sms.php' => config_path('sms.php'),
+            __DIR__ . '/../config/sms.php' => config_path('sms.php'),
         ], 'sms-config');
 
         $this->extendNotificationChannel();
@@ -39,5 +42,16 @@ class SmsServiceProvider extends ServiceProvider
         Notification::extend('sms', function ($app) {
             return $app->make(SmsChannel::class);
         });
+    }
+
+    private function extendLoggerChannel()
+    {
+        Config::set('sms', [
+            'driver' => 'daily',
+            'path' => storage_path('logs/sms.log'),
+            'level' => 'info',
+            'days' => 14,
+            'replace_placeholders' => true,
+        ]);
     }
 }
