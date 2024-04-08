@@ -37,7 +37,7 @@ class Providers
     public const MOBI_REACH = 'mobireach';
     public const MOBI_SHASRA = 'mobishasra';
     public const MUTHOFUN = 'muthofun';
-    public const NOVOCOMBD = 'movocombd';
+    public const NOVOCOMBD = 'novocombd';
     public const ONNOROKOM = 'onnorokom';
     public const QUICK_SMS = 'quicksms';
     public const REDMO_IT_SMS = 'redmoitsms';

@@ -70,10 +70,10 @@ return [
         Providers::CLICK_A_TELL => [
             'driver' => \Laraflow\Sms\Drivers\ClickATell::class,
             'live' => [
-                'apiKey' => env('SMS_CLICKATELL_API_KEY'),
+                'api_key' => env('SMS_CLICKATELL_API_KEY'),
             ],
             'sandbox' => [
-                'apiKey' => env('SMS_CLICKATELL_API_KEY'),
+                'api_key' => env('SMS_CLICKATELL_API_KEY'),
             ],
         ],
         Providers::CLICK_SEND => [
@@ -142,7 +142,6 @@ return [
         Providers::ADN => [
             'driver' => \Laraflow\Sms\Drivers\Adn::class,
             'live' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'senderid' => env('SMS_ADN_SENDER_ID', ''),
                 'api_key' => env('SMS_ADN_API_KEY', ''),
                 'api_secret' => env('SMS_ADN_API_SECRET', ''),
@@ -150,7 +149,6 @@ return [
                 'message_type' => env('SMS_ADN_API_MESSAGE_TYPE', ''),
             ],
             'sandbox' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'senderid' => env('SMS_ADN_SENDER_ID', ''),
                 'api_key' => env('SMS_ADN_API_KEY', ''),
                 'api_secret' => env('SMS_ADN_API_SECRET', ''),
@@ -176,24 +174,20 @@ return [
         Providers::ALPHA => [
             'driver' => \Laraflow\Sms\Drivers\Alpha::class,
             'live' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'api_key' => env('SMS_ALPHA_SMS_API_KEY'),
             ],
             'sandbox' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'api_key' => env('SMS_ALPHA_SMS_API_KEY'),
             ],
         ],
         Providers::BANGLALINK => [
             'driver' => \Laraflow\Sms\Drivers\Banglalink::class,
             'live' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'userID' => env('SMS_BANGLALINK_USERID', ''),
                 'passwd' => env('SMS_BANGLALINK_PASSWD', ''),
                 'sender' => env('SMS_BANGLALINK_SENDER', ''),
             ],
             'sandbox' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
                 'userID' => env('SMS_BANGLALINK_USERID', ''),
                 'passwd' => env('SMS_BANGLALINK_PASSWD', ''),
                 'sender' => env('SMS_BANGLALINK_SENDER', ''),

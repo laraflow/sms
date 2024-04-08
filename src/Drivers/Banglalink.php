@@ -13,6 +13,19 @@ use Laraflow\Sms\SmsMessage;
 class Banglalink extends SmsDriver
 {
     /**
+     * this function allow programmer to append more config
+     * that may or may be needed in the configuration file
+     *
+     * @return string[]
+     */
+    protected function mergeConfig(): array
+    {
+        return [
+            'url' => 'https://vas.banglalink.net/sendSMS/sendSMS',
+        ];
+    }
+
+    /**
      * Return validation rules for
      * that sms driver to operate.
      */

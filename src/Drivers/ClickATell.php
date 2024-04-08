@@ -40,7 +40,7 @@ class ClickATell extends SmsDriver
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
-            'apiKey' => $this->config['apiKey'],
+            'apiKey' => $this->config['api_key'],
             'to' => $message->getReceiver(),
             'from' => $message->getSender(),
             'content' => $message->getContent(),

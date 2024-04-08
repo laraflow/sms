@@ -24,16 +24,57 @@ Please follow this steps and you are live with in a mere seconds.
 Depending on driver option you choose, add these API credentials
 after existing general configuration variables.
 
-| Driver           | Credentials                                                             |     Configured     | Tested |
-|------------------|-------------------------------------------------------------------------|:------------------:|:------:|
-| `africastalking` | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` | :white_check_mark: |  :x:   |
-| `clickatell`     | `SMS_CLICKATELL_API_KEY=null`                                           | :white_check_mark: |  :x:   |
-| `clicksend`      | `SMS_CLICKSEND_USERNAME=null`<br>`SMS_CLICKSEND_PASSWORD=null`          | :white_check_mark: |  :x:   |
-| `infobip`        | `SMS_INFOBIP_API_TOKEN=null`                                            | :white_check_mark: |  :x:   |
-| `messagebird`    | `SMS_MESSAGE_BIRD_ACCESS_KEY=null`                                      | :white_check_mark: |  :x:   |
-| `smsbroadcast`   | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    | :white_check_mark: |  :x:   |
-| `telnyx`         | `SMS_TELNYX_API_TOKEN=null`                                             | :white_check_mark: |  :x:   |
-| `twilio`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                | :white_check_mark: |  :x:   |
+| Driver            | Credentials                                                             | Region |     Configured     | Tested |
+|-------------------|-------------------------------------------------------------------------|:------:|:------------------:|:------:|
+| `africastalking`  | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` | GLOBAL | :white_check_mark: |  :x:   |
+| `clickatell`      | `SMS_CLICKATELL_API_KEY=null`                                           | GLOBAL | :white_check_mark: |  :x:   |
+| `clicksend`       | `SMS_CLICKSEND_USERNAME=null`<br>`SMS_CLICKSEND_PASSWORD=null`          | GLOBAL | :white_check_mark: |  :x:   |
+| `infobip`         | `SMS_INFOBIP_API_TOKEN=null`                                            | GLOBAL | :white_check_mark: |  :x:   |
+| `messagebird`     | `SMS_MESSAGE_BIRD_ACCESS_KEY=null`                                      | GLOBAL | :white_check_mark: |  :x:   |
+| `smsbroadcast`    | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    | GLOBAL | :white_check_mark: |  :x:   |
+| `telnyx`          | `SMS_TELNYX_API_TOKEN=null`                                             | GLOBAL | :white_check_mark: |  :x:   |
+| `twilio`          | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                | GLOBAL | :white_check_mark: |  :x:   |
+| `adn`             | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `ajuratech`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `alpha`           | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `banglalink`      | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `bdbulksms`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `boomcast`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `brilliant`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `bulksmsbd`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `customgateway`   | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `dianahost`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `dianasms`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `dnsbd`           | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `elitbuzz`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `esms`            | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `grameenphone`    | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `greenweb`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `lpeek`           | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `mdl`             | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `metronet`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `mimsms`          | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `mobireach`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `mobishasra`      | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `muthofun`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `novocombd`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `onnorokom`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `quicksms`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `redmoitsms`      | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `smartlabsms`     | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `sms4bd`          | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `smsnet24`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `smsnoc`          | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `smsinbd`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `smsnetbd`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `smsq`            | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `ssl`             | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `tense`           | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `trubosms`        | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `twentyfoursmsbd` | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `viatech`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `twenty4bulksms`  | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+
 
 ## Notification Class
 
