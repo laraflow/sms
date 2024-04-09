@@ -33,8 +33,8 @@ class AjuraTech extends SmsDriver
     {
         return [
             'url' => 'required|url:http,https',
-            'apiKey' => 'required|string',
-            'username' => 'required|string',
+            'api_key' => 'required|string',
+            'secret_key' => 'required|string',
         ];
     }
 
@@ -47,19 +47,17 @@ class AjuraTech extends SmsDriver
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
-            'username' => $this->config['username'],
-            'to' => $message->getReceiver(),
-            'from' => $message->getSender(),
-            'message' => $message->getContent(),
+            'apikey' => $this->config['api_key'],
+            'secretkey' => $this->config['secret_key'],
+            'toUser' => $message->getReceiver(),
+            'callerID' => $message->getSender(),
+            'messageContent' => $message->getContent(),
         ];
 
         $this->removeEmptyParams();
 
         return Http::withoutVerifying()
             ->timeout(30)
-            ->withHeader('Content-Type', 'application/json')
-            ->withHeader('Accept', 'application/json')
-            ->withHeader('apiKey', $this->config['apiKey'])
             ->get($this->config['url'], $this->payload);
 
     }

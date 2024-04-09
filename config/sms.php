@@ -162,16 +162,12 @@ return [
         Providers::AJURA_TECH => [
             'driver' => \Laraflow\Sms\Drivers\AjuraTech::class,
             'live' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
-                'apikey' => env('SMS_AjuraTechReveSms_API_KEY', ''),
-                'secretkey' => env('SMS_AjuraTechReveSms_API_SECRET_KEY', ''),
-                'callerID' => env('SMS_AjuraTechReveSms_CALLER_ID', ''),
+                'api_key' => env('SMS_AJURATECH_API_KEY', ''),
+                'secret_key' => env('SMS_AJURATECH_SECRET_KEY', ''),
             ],
             'sandbox' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
-                'apikey' => env('SMS_AjuraTechReveSms_API_KEY', ''),
-                'secretkey' => env('SMS_AjuraTechReveSms_API_SECRET_KEY', ''),
-                'callerID' => env('SMS_AjuraTechReveSms_CALLER_ID', ''),
+                'api_key' => env('SMS_AJURATECH_API_KEY', ''),
+                'secret_key' => env('SMS_AJURATECH_SECRET_KEY', ''),
             ],
         ],
         Providers::ALPHA => [
