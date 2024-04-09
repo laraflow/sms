@@ -138,22 +138,25 @@ return [
                 'password' => env('SMS_TWILIO_PASSWORD'),
             ],
         ],
+        Providers::SMS_API => [
+            'driver' => \Laraflow\Sms\Drivers\SmsApi::class,
+            'live' => [
+                'api_token' => env('SMS_SMSAPI_API_TOKEN', ''),
+            ],
+            'sandbox' => [
+                'api_token' => env('SMS_SMSAPI_API_TOKEN', ''),
+            ],
+        ],
         //Bangladesh
         Providers::ADN => [
             'driver' => \Laraflow\Sms\Drivers\Adn::class,
             'live' => [
-                'senderid' => env('SMS_ADN_SENDER_ID', ''),
                 'api_key' => env('SMS_ADN_API_KEY', ''),
-                'api_secret' => env('SMS_ADN_API_SECRET', ''),
-                'request_type' => env('SMS_ADN_API_REQUEST_TYPE', ''),
-                'message_type' => env('SMS_ADN_API_MESSAGE_TYPE', ''),
+                'api_secret' => env('SMS_ADN_API_SECRET', '')
             ],
             'sandbox' => [
-                'senderid' => env('SMS_ADN_SENDER_ID', ''),
                 'api_key' => env('SMS_ADN_API_KEY', ''),
-                'api_secret' => env('SMS_ADN_API_SECRET', ''),
-                'request_type' => env('SMS_ADN_API_REQUEST_TYPE', ''),
-                'message_type' => env('SMS_ADN_API_MESSAGE_TYPE', ''),
+                'api_secret' => env('SMS_ADN_API_SECRET', '')
             ]
         ],
         Providers::AJURA_TECH => [

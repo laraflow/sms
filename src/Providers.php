@@ -48,6 +48,7 @@ class Providers
     public const SMSINBD = 'smsinbd';
     public const SMSNETBD = 'smsnetbd';
     public const SMSQ = 'smsq';
+    public const SMS_API = 'smsapi';
     public const SSL = 'ssl';
     public const TENSE = 'tense';
     public const TRUBO_SMS = 'trubosms';

@@ -24,6 +24,8 @@ Please follow this steps and you are live with in a mere seconds.
 Depending on driver option you choose, add these API credentials
 after existing general configuration variables.
 
+### Global SMS API Providers
+
 | Driver            | Credentials                                                             | Region |     Configured     | Tested |
 |-------------------|-------------------------------------------------------------------------|:------:|:------------------:|:------:|
 | `africastalking`  | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` | GLOBAL | :white_check_mark: |  :x:   |
@@ -34,7 +36,14 @@ after existing general configuration variables.
 | `smsbroadcast`    | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    | GLOBAL | :white_check_mark: |  :x:   |
 | `telnyx`          | `SMS_TELNYX_API_TOKEN=null`                                             | GLOBAL | :white_check_mark: |  :x:   |
 | `twilio`          | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                | GLOBAL | :white_check_mark: |  :x:   |
-| `adn`             | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
+| `smsapi`          | `SMS_SMSAPI_API_TOKEN=null`                                             | GLOBAL | :white_check_mark: |  :x:   |
+
+
+### Bangladesh only SMS API Providers
+
+| Driver            | Credentials                                                             | Region |     Configured     | Tested |
+|-------------------|-------------------------------------------------------------------------|:------:|:------------------:|:------:|
+| `adn`             | `SMS_ADN_API_KEY=null`<br>`SMS_ADN_API_SECRET=null`                     |  BAN   | :white_check_mark: |  :x:   |
 | `ajuratech`       | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
 | `alpha`           | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |
 | `banglalink`      | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                |  BAN   |        :x:         |  :x:   |

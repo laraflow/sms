@@ -8,9 +8,9 @@ use Laraflow\Sms\Contracts\SmsDriver;
 use Laraflow\Sms\SmsMessage;
 
 /**
- * @reference https://portal.adnsms.com/client/api/documentation
+ * @reference https://www.smsapi.com/docs/#2-single-sms
  */
-class Adn extends SmsDriver
+class SmsApi extends SmsDriver
 {
     /**
      * this function allow programmer to append more config
@@ -21,12 +21,10 @@ class Adn extends SmsDriver
     protected function mergeConfig(): array
     {
         return [
-            'url' => 'https://portal.adnsms.com/api/v1/secure/send-sms',
-            'request_type' => 'SINGLE_SMS',
-            'message_type' => 'UNICODE'
+            'url' => 'https://api.smsapi.com/sms.do',
+            'format' =>'json'
         ];
     }
-
 
     /**
      * Return validation rules for
@@ -36,8 +34,7 @@ class Adn extends SmsDriver
     {
         return [
             'url' => 'required|url:http,https',
-            'api_key' => 'required|string',
-            'api_secret' => 'required|string'
+            'api_token' => 'required|string'
         ];
     }
 
@@ -50,19 +47,19 @@ class Adn extends SmsDriver
     public function send(SmsMessage $message): Response
     {
         $this->payload = [
-            'api_key' => $this->config['api_key'],
-            'api_secret' => $this->config['api_secret'],
-            'request_type' => $this->config['request_type'],
-            'message_type' => $this->config['message_type'],
-            'mobile' => $message->getReceiver(),
-            'message_body' => $message->getContent(),
+            'to' => $message->getReceiver(),
+            'from' => $message->getSender(),
+            'message' => $message->getContent(),
+            'format' => $this->config['format']
         ];
 
         $this->removeEmptyParams();
 
         return Http::withoutVerifying()
             ->timeout(30)
-            ->withHeaders(['Content-Type'=>'application/json','Accept'=>'application/json'])
+            ->withToken($this->config['api_token'])
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('Accept', 'application/json')
             ->post($this->config['url'], $this->payload);
 
     }
