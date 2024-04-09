@@ -22,7 +22,7 @@ class SmsApi extends SmsDriver
     {
         return [
             'url' => 'https://api.smsapi.com/sms.do',
-            'format' =>'json'
+            'format' => 'json'
         ];
     }
 

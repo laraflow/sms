@@ -62,7 +62,7 @@ class Adn extends SmsDriver
 
         return Http::withoutVerifying()
             ->timeout(30)
-            ->withHeaders(['Content-Type'=>'application/json','Accept'=>'application/json'])
+            ->withHeaders(['Content-Type' => 'application/json','Accept' => 'application/json'])
             ->post($this->config['url'], $this->payload);
 
     }
