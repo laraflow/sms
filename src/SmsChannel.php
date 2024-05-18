@@ -36,7 +36,7 @@ class SmsChannel
             throw new InvalidArgumentException('No SMS vendor driver configured.');
         }
 
-        $driverClass = config("sms.providers.{$active}.driver");
+        $driverClass = config("sms.vendors.{$active}.driver");
 
         if ($driverClass == null || !class_exists($driverClass)) {
             throw new DriverNotFoundException("No driver configuration found by `{$active}` name.");
@@ -46,7 +46,7 @@ class SmsChannel
 
         $mode = config('sms.mode', 'sandbox');
 
-        $config = config("sms.providers.{$active}.{$mode}", []);
+        $config = config("sms.vendors.{$active}.{$mode}", []);
 
         $this->driver = App::make($driverClass);
 
