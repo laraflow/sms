@@ -14,6 +14,14 @@ class SmsMessage
 
     private ?string $driver;
 
+    public function __construct()
+    {
+        $this->receiver = null;
+        $this->sender = config('sms.from', config('app.name'));
+        $this->content = null;
+        $this->driver = config('sms.default');
+    }
+
     public function getReceiver(): ?string
     {
         return $this->receiver;
@@ -26,21 +34,11 @@ class SmsMessage
 
     public function getSender(): ?string
     {
-        if ($this->sender == null) {
-
-            $this->sender = config('sms.from', config('app.name'));
-        }
-
         return $this->sender;
     }
 
     public function getDriver(): ?string
     {
-        if ($this->driver == null) {
-
-            $this->driver = config('sms.default');
-        }
-
         return $this->driver;
     }
 
