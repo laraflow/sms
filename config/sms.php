@@ -3,16 +3,6 @@
 use Laraflow\Sms\Providers;
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Response Logger
-    |--------------------------------------------------------------------------
-    | this configuration is for debugging purpose. if enabled then program will log
-    | sms vendor response in debug category.
-    */
-    'log' => (bool)env('SMS_LOG', env('APP_DEBUG', false)),
-
     /*
     |--------------------------------------------------------------------------
     | Default Vendor
@@ -41,6 +31,28 @@ return [
     | if sms vendor support sms name masking.
     */
     'from' => env('SMS_FROM_NAME', env('APP_NAME', 'Laravel')),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Response Logger
+     |--------------------------------------------------------------------------
+     | this configuration is for debugging purpose. if enabled then program will log
+     | sms vendor response in debug category.
+     */
+    'log' => (bool)env('SMS_LOG', env('APP_DEBUG', false)),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Response Log Viewer
+     |--------------------------------------------------------------------------
+     | this configuration is for debugging purpose. if enabled then program will log
+     | sms vendor response in debug category.
+     */
+    'log_viewer' => [
+        'enabled' => env('SMS_LOG_VIEWER', env('APP_DEBUG', false)),
+        'uri' => 'sms-logs',
+        'middleware' => null,
+    ],
 
     /*
     |--------------------------------------------------------------------------

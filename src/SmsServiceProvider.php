@@ -31,6 +31,10 @@ class SmsServiceProvider extends ServiceProvider
         ], 'sms-config');
 
         $this->extendNotificationChannel();
+
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        $this->loadViewsFrom(__DIR__.'/../view', 'sms');
     }
 
     /**
@@ -44,9 +48,9 @@ class SmsServiceProvider extends ServiceProvider
         });
     }
 
-    private function extendLoggerChannel()
+    private function extendLoggerChannel(): void
     {
-        Config::set('sms', [
+        Config::set('logging.channels.sms', [
             'driver' => 'daily',
             'path' => storage_path('logs/sms.log'),
             'level' => 'info',

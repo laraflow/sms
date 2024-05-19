@@ -59,20 +59,31 @@ class SmsChannel
         if (config('sms.log', false)) {
             Log::channel('sms')->info('Response: ', [
                 'vendor' => $this->driver_code,
-                'model' => $this->driver->mode,
+                'mode' => $this->driver->mode,
                 'status_code' => $this->response->status(),
-                'response' => $this->response->body()
+                'response' => $this->processResponseBody($this->response->body())
             ]);
         }
     }
 
+    private function processResponseBody($content)
+    {
+        $dump = json_decode($content, true);
+
+        if (json_last_error() == JSON_ERROR_NONE) {
+            return $dump;
+        }
+
+        return $content;
+    }
+
     private function validate(SmsMessage $message): void
     {
-        if (strlen($message->getReceiver()) == 0) {
+        if (empty($message->getReceiver())) {
             throw new InvalidArgumentException('Message recipient(s) is empty.');
         }
 
-        if (strlen($message->getContent()) == 0) {
+        if (empty($message->getContent())) {
             throw new InvalidArgumentException('Message content is empty.');
         }
     }
@@ -94,6 +105,12 @@ class SmsChannel
              * @var SmsMessage $message
              */
             $message = $notification->toSms($notifiable);
+
+            if (!$to = $notifiable->routeNotificationFor('sms', $notification)) {
+                throw new BadMethodCallException(get_class($notifiable) . " notifiable is missing the `routeNotificationForSms(object $notifiable): string` method.");
+            }
+
+            $message->to($to);
 
             $this->initDriver($message->getDriver());
 

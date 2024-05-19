@@ -14,12 +14,12 @@ class SmsMessage
 
     private ?string $driver;
 
-    public function __construct()
+    public function __construct(array $options = [])
     {
-        $this->receiver = null;
-        $this->sender = config('sms.from', config('app.name'));
-        $this->content = null;
-        $this->driver = config('sms.default');
+        $this->receiver = $options['to'] ?? null;
+        $this->sender = $options['from'] ?? config('sms.from', config('app.name'));
+        $this->content = $options['message'] ?? null;
+        $this->driver = $options['vendor'] ?? config('sms.default');
     }
 
     public function getReceiver(): ?string
@@ -72,5 +72,10 @@ class SmsMessage
         }
 
         return $this;
+    }
+
+    public function send()
+    {
+        
     }
 }
