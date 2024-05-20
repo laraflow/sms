@@ -2,13 +2,11 @@
 
 namespace Laraflow\Sms\Controllers;
 
-
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -52,7 +50,7 @@ class SmsLogController extends Controller
         $current = $request->has('date') ? $this->entries->get($request->input('date')) : $this->entries->first();
 
         if (!$current) {
-            throw (new ModelNotFoundException)->setModel('SmsLog', $request->input('date', now()->format('Y-m-d')));
+            throw (new ModelNotFoundException())->setModel('SmsLog', $request->input('date', now()->format('Y-m-d')));
         }
 
         $current['logs'] = $this->parseFileContent($current['file']);
