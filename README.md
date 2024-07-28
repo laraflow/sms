@@ -24,17 +24,8 @@ php artisan vendor:publish --tag="sms-config"
 This is the contents of the published config file:
 
 ```php
+
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Response Logger
-    |--------------------------------------------------------------------------
-    | this configuration is for debugging purpose. if enabled then program will log
-    | sms vendor response in debug category.
-    */
-    'log' => (bool) env('SMS_LOG', env('APP_DEBUG', false)),
-
     /*
     |--------------------------------------------------------------------------
     | Default Vendor
@@ -53,17 +44,38 @@ return [
     | mode should be used when sending the sms. Available options are
     | "sandbox" or "live".
     */
-    'mode' => env('SMS_ACCOUNT_MODE', null),
+    'mode' => env('SMS_ACCOUNT_MODE', 'sandbox'),
 
     /*
     |--------------------------------------------------------------------------
     | SMS Sender Name
     |--------------------------------------------------------------------------
     | this configuration is used to tell system what value will be used
-    | if sms vendor support sms name masking
-    | "sandbox" or "live".
+    | if sms vendor support sms name masking.
     */
     'from' => env('SMS_FROM_NAME', env('APP_NAME', 'Laravel')),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Response Logger
+     |--------------------------------------------------------------------------
+     | this configuration is for debugging purpose. if enabled then program will log
+     | sms vendor response in debug category.
+     */
+    'log' => (bool)env('SMS_LOG', env('APP_DEBUG', false)),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Response Log Viewer
+     |--------------------------------------------------------------------------
+     | this configuration is for debugging purpose. if enabled then program will log
+     | sms vendor response in debug category.
+     */
+    'log_viewer' => [
+        'enabled' => env('SMS_LOG_VIEWER', env('APP_DEBUG', false)),
+        'uri' => 'sms-logs',
+        'middleware' => null,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -75,111 +87,111 @@ return [
     |
     | Note: while adding prefix add closing ending slash '/'
     */
-    'vendors' => [
-        'africastalking' => [
+    'providers' => [
+        //Global
+        Providers::AFRICAS_TALKING => [
             'driver' => \Laraflow\Sms\Drivers\AfricasTalking::class,
             'live' => [
                 'url' => 'https://api.africastalking.com/version1/messaging',
-                'apiKey' => env('SMS_AFRICA_TALKING_API_KEY'),
+                'api_key' => env('SMS_AFRICA_TALKING_API_KEY'),
                 'username' => env('SMS_AFRICA_TALKING_USERNAME'),
-
             ],
             'sandbox' => [
                 'url' => 'https://api.sandbox.africastalking.com/version1/messaging',
-                'apiKey' => env('SMS_AFRICA_TALKING_API_KEY'),
+                'api_key' => env('SMS_AFRICA_TALKING_API_KEY'),
                 'username' => env('SMS_AFRICA_TALKING_USERNAME'),
-
             ],
         ],
-        'clickatell' => [
+        Providers::CLICK_A_TELL => [
             'driver' => \Laraflow\Sms\Drivers\ClickATell::class,
             'live' => [
-                'url' => 'https://platform.clickatell.com/messages/http/send',
-                'apiKey' => env('SMS_CLICKATELL_API_KEY'),
+                'api_key' => env('SMS_CLICKATELL_API_KEY'),
             ],
             'sandbox' => [
-                'url' => 'https://platform.clickatell.com/messages/http/send',
-                'apiKey' => env('SMS_CLICKATELL_API_KEY'),
+                'api_key' => env('SMS_CLICKATELL_API_KEY'),
             ],
         ],
-        'clicksend' => [
+        Providers::CLICK_SEND => [
             'driver' => \Laraflow\Sms\Drivers\ClickSend::class,
             'live' => [
-                'url' => 'https://rest.clicksend.com/v3/sms/send',
                 'username' => env('SMS_CLICKSEND_USERNAME'),
                 'password' => env('SMS_CLICKSEND_PASSWORD'),
-
             ],
             'sandbox' => [
-                'url' => 'https://rest.clicksend.com/v3/sms/send',
                 'username' => env('SMS_CLICKSEND_USERNAME'),
                 'password' => env('SMS_CLICKSEND_PASSWORD'),
             ],
         ],
-        'infobip' => [
+        Providers::INFOBIP => [
             'driver' => \Laraflow\Sms\Drivers\Infobip::class,
             'live' => [
-                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
                 'token' => env('SMS_INFOBIP_API_TOKEN'),
             ],
             'sandbox' => [
-                'url' => 'https://mmk314.api.infobip.com/sms/2/text/advanced',
                 'token' => env('SMS_INFOBIP_API_TOKEN'),
             ],
         ],
-        'messagebird' => [
+        Providers::MESSAGE_BIRD => [
             'driver' => \Laraflow\Sms\Drivers\MessageBird::class,
             'live' => [
-                'url' => 'https://rest.messagebird.com/messages',
                 'access_key' => env('SMS_MESSAGE_BIRD_ACCESS_KEY'),
             ],
             'sandbox' => [
-                'url' => 'https://rest.messagebird.com/messages',
                 'access_key' => env('SMS_MESSAGE_BIRD_ACCESS_KEY'),
             ],
         ],
-        'smsbroadcast' => [
+        Providers::SMS_BROADCAST => [
             'driver' => \Laraflow\Sms\Drivers\SmsBroadcast::class,
             'live' => [
-                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
                 'username' => env('SMS_SMSBROADCAST_USERNAME'),
                 'password' => env('SMS_SMSBROADCAST_PASSWORD'),
             ],
             'sandbox' => [
-                'url' => 'https://api.smsbroadcast.com.au/api-adv.php',
                 'username' => env('SMS_SMSBROADCAST_USERNAME'),
                 'password' => env('SMS_SMSBROADCAST_PASSWORD'),
             ],
         ],
-        'telnyx' => [
+        Providers::TELNYX => [
             'driver' => \Laraflow\Sms\Drivers\Telnyx::class,
             'live' => [
-                'url' => 'https://api.telnyx.com/v2/messages',
                 'token' => env('SMS_TELNYX_API_TOKEN'),
             ],
             'sandbox' => [
-                'url' => 'https://api.telnyx.com/v2/messages',
                 'token' => env('SMS_TELNYX_API_TOKEN'),
             ],
         ],
-        'twilio' => [
+        Providers::TWILIO => [
             'driver' => \Laraflow\Sms\Drivers\Twilio::class,
             'live' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
+                'url' => env('SMS_TWILIO_URL'),
                 'username' => env('SMS_TWILIO_USERNAME'),
                 'password' => env('SMS_TWILIO_PASSWORD'),
-
             ],
             'sandbox' => [
-                'url' => 'https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID$/Messages.json',
+                'url' => env('SMS_TWILIO_URL'),
                 'username' => env('SMS_TWILIO_USERNAME'),
                 'password' => env('SMS_TWILIO_PASSWORD'),
-
             ],
         ],
+        Providers::SMS_API => [
+            'driver' => \Laraflow\Sms\Drivers\SmsApi::class,
+            'live' => [
+                'api_token' => env('SMS_SMSAPI_API_TOKEN', ''),
+            ],
+            'sandbox' => [
+                'api_token' => env('SMS_SMSAPI_API_TOKEN', ''),
+            ],
+        ],
+
+        // ...
     ],
 ];
+
 ```
+
+
+**Note: Complete list of all the sms vendors are given in [driver configuration](#/CONFIGURATION?id=driver-configuration) section.**
+
 
 ### Auditory
 

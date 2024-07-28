@@ -26,23 +26,23 @@ after existing general configuration variables.
 
 ### Global SMS API Providers
 
-| Driver            | Credentials                                                             | Region |     Configured     | Tested |
-|-------------------|-------------------------------------------------------------------------|:------:|:------------------:|:------:|
-| `africastalking`  | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` | GLOBAL | :white_check_mark: |  :x:   |
-| `clickatell`      | `SMS_CLICKATELL_API_KEY=null`                                           | GLOBAL | :white_check_mark: |  :x:   |
-| `clicksend`       | `SMS_CLICKSEND_USERNAME=null`<br>`SMS_CLICKSEND_PASSWORD=null`          | GLOBAL | :white_check_mark: |  :x:   |
-| `infobip`         | `SMS_INFOBIP_API_TOKEN=null`                                            | GLOBAL | :white_check_mark: |  :x:   |
-| `messagebird`     | `SMS_MESSAGE_BIRD_ACCESS_KEY=null`                                      | GLOBAL | :white_check_mark: |  :x:   |
-| `smsbroadcast`    | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    | GLOBAL | :white_check_mark: |  :x:   |
-| `telnyx`          | `SMS_TELNYX_API_TOKEN=null`                                             | GLOBAL | :white_check_mark: |  :x:   |
-| `twilio`          | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                | GLOBAL | :white_check_mark: |  :x:   |
-| `smsapi`          | `SMS_SMSAPI_API_TOKEN=null`                                             | GLOBAL | :white_check_mark: |  :x:   |
+| Driver           | Credentials                                                             | Region |     Configured     |       Tested       |
+| ---------------- | ----------------------------------------------------------------------- | :----: | :----------------: | :----------------: |
+| `africastalking` | `SMS_AFRICA_TALKING_API_KEY=null`<br>`SMS_AFRICA_TALKING_USERNAME=null` | GLOBAL | :white_check_mark: |        :x:         |
+| `clickatell`     | `SMS_CLICKATELL_API_KEY=null`                                           | GLOBAL | :white_check_mark: |        :x:         |
+| `clicksend`      | `SMS_CLICKSEND_USERNAME=null`<br>`SMS_CLICKSEND_PASSWORD=null`          | GLOBAL | :white_check_mark: |        :x:         |
+| `infobip`        | `SMS_INFOBIP_API_TOKEN=null`                                            | GLOBAL | :white_check_mark: | :white_check_mark: |
+| `messagebird`    | `SMS_MESSAGE_BIRD_ACCESS_KEY=null`                                      | GLOBAL | :white_check_mark: |        :x:         |
+| `smsbroadcast`   | `SMS_SMSBROADCAST_USERNAME=null`<br>`SMS_SMSBROADCAST_PASSWORD=null`    | GLOBAL | :white_check_mark: |        :x:         |
+| `telnyx`         | `SMS_TELNYX_API_TOKEN=null`                                             | GLOBAL | :white_check_mark: |        :x:         |
+| `twilio`         | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`                | GLOBAL | :white_check_mark: |        :x:         |
+| `smsapi`         | `SMS_SMSAPI_API_TOKEN=null`                                             | GLOBAL | :white_check_mark: |        :x:         |
 
 
 ### Bangladesh only SMS API Providers
 
 | Driver            | Credentials                                                     | Region |     Configured     | Tested |
-|-------------------|-----------------------------------------------------------------|:------:|:------------------:|:------:|
+| ----------------- | --------------------------------------------------------------- | :----: | :----------------: | :----: |
 | `adn`             | `SMS_ADN_API_KEY=null`<br>`SMS_ADN_API_SECRET=null`             |  BAN   | :white_check_mark: |  :x:   |
 | `ajuratech`       | `SMS_AJURATECH_API_KEY=null`<br>`SMS_AJURATECH_SECRET_KEY=null` |  BAN   | :white_check_mark: |  :x:   |
 | `alpha`           | `SMS_TWILIO_USERNAME=null`<br>`SMS_TWILIO_PASSWORD=null`        |  BAN   |        :x:         |  :x:   |
