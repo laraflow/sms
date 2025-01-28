@@ -6,7 +6,7 @@ class Providers
 {
     //Logger
     public const LOGGER = 'log';
-    
+
     public const AFRICAS_TALKING = 'africastalking';
     public const CLICK_A_TELL = 'clickatell';
     public const CLICK_SEND = 'clicksend';
