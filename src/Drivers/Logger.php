@@ -36,10 +36,10 @@ class Logger extends SmsDriver
      */
     public function send(SmsMessage $message): Response
     {
-        return new Response(new class($message) {
+        return new Response(new class ($message) {
             public function __construct(public SmsMessage $message)
             {
-                
+
             }
             public function getStatusCode(): string
             {
