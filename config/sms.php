@@ -65,6 +65,16 @@ return [
     | Note: while adding prefix add closing ending slash '/'
     */
     'providers' => [
+     //Log
+            Providers::Logger => [
+            'driver' => \Laraflow\Sms\Drivers\Logger::class,
+            'live' => [
+                'throw' => false
+            ],
+            'sandbox' => [
+                'throw' => false
+            ],
+        ],
         //Global
         Providers::AFRICAS_TALKING => [
             'driver' => \Laraflow\Sms\Drivers\AfricasTalking::class,
