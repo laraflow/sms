@@ -36,7 +36,23 @@ class Logger extends SmsDriver
      */
     public function send(SmsMessage $message): Response
     {
-        return [];
-
+        return new Response(new class($message) {
+            public function __construct(public SmsMessage $message)
+            {
+                
+            }
+            public function getStatusCode(): string
+            {
+                return '200';
+            }
+            public function getBody(): string
+            {
+                return json_encode([
+                    'to' => $this->message->getReceiver(),
+                    'from' => $this->message->getSender(),
+                    'content' => $this->message->getContent(),
+                ]);
+            }
+        });
     }
 }
