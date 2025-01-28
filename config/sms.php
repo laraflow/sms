@@ -66,7 +66,7 @@ return [
     */
     'providers' => [
      //Log
-            Providers::Logger => [
+            Providers::LOGGER => [
             'driver' => \Laraflow\Sms\Drivers\Logger::class,
             'live' => [
                 'throw' => false
