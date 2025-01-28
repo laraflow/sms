@@ -12,7 +12,7 @@ class Logger extends SmsDriver
      * that may or may be needed in the configuration file
      *
      * @return string[]
-     */  
+     */
     protected function mergeConfig(): array
     {
         return [];
