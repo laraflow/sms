@@ -62,17 +62,9 @@ class SmsLogController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function download(string $date)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $date)
     {
         //
     }
